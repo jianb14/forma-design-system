@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hulmio Release"
+  short_description: "Prepare and verify Hulmio UI package releases"
+  default_prompt: "Use $hulmio-release to check Hulmio release readiness and report the verified artifact and remaining publication steps."

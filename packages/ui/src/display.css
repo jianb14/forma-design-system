@@ -1,0 +1,101 @@
+/* Reusable components; all selectors stay within the package boundary. */
+:where([data-hulmio-ui]) .h-visually-hidden,
+.h-visually-hidden:where([data-hulmio-ui]) { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+:where([data-hulmio-ui="badge"], [data-hulmio-ui="alert"], [data-hulmio-ui="toast"]) { --h-tone: var(--hulmio-text); --h-tone-bg: var(--hulmio-subtle); }
+:where([data-hulmio-ui])[data-tone="primary"] { --h-tone: var(--hulmio-primary); --h-tone-bg: var(--hulmio-soft); }
+:where([data-hulmio-ui])[data-tone="success"] { --h-tone: var(--hulmio-success); --h-tone-bg: var(--hulmio-success-bg); }
+:where([data-hulmio-ui])[data-tone="warning"] { --h-tone: var(--hulmio-warning); --h-tone-bg: var(--hulmio-warning-bg); }
+:where([data-hulmio-ui])[data-tone="danger"] { --h-tone: var(--hulmio-danger); --h-tone-bg: var(--hulmio-danger-bg); }
+:where([data-hulmio-ui])[data-tone="info"] { --h-tone: var(--hulmio-info); --h-tone-bg: var(--hulmio-info-bg); }
+.h-badge:where([data-hulmio-ui]) { display: inline-flex; align-items: center; gap: 6px; padding: 4px 9px; border: 1px solid transparent; border-radius: 6px; background: var(--h-tone-bg); color: var(--h-tone); font-size: 12px; font-weight: 600; line-height: 1.3; vertical-align: middle; }
+.h-badge-outline:where([data-hulmio-ui]) { border-color: currentColor; background: transparent; }
+:where([data-hulmio-ui="badge"]) .h-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.h-avatar:where([data-hulmio-ui]) { display: inline-flex; position: relative; width: var(--h-avatar-size); height: var(--h-avatar-size); flex: 0 0 auto; align-items: center; justify-content: center; border-radius: 50%; background: var(--hulmio-soft); color: var(--hulmio-primary); font-size: calc(var(--h-avatar-size) * .32); font-weight: 600; vertical-align: middle; }
+:where([data-hulmio-ui="avatar"]) img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+:where([data-hulmio-ui="avatar"]) .h-avatar-status { position: absolute; bottom: 0; right: 0; width: 25%; height: 25%; min-width: 8px; min-height: 8px; border: 2px solid var(--hulmio-surface); border-radius: 50%; background: var(--hulmio-muted); }
+:where([data-hulmio-ui="avatar"]) [data-status="online"] { background: var(--hulmio-success); }
+:where([data-hulmio-ui="avatar"]) [data-status="busy"] { background: var(--hulmio-danger); }
+:where([data-hulmio-ui="avatar"]) [data-status="away"] { background: var(--hulmio-warning); }
+.h-avatar-group:where([data-hulmio-ui]) { display: flex; align-items: center; padding-left: 8px; }
+:where([data-hulmio-ui="avatar-group"]) > * { margin-left: -8px; border: 2px solid var(--hulmio-surface); }
+:where([data-hulmio-ui="avatar-group"]) .h-avatar-overflow { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--hulmio-subtle); color: var(--hulmio-text); font-size: 13px; font-weight: 600; border-radius: 50%; }
+.h-card:where([data-hulmio-ui]) { min-width: 0; padding: 24px; border: 1px solid var(--hulmio-border); border-radius: 12px; background: var(--hulmio-surface); color: var(--hulmio-text); font-size: 15px; line-height: 1.65; }
+:where([data-hulmio-ui="card"]) .h-card-title { margin: 0 0 6px; font-size: 19px; font-weight: 600; line-height: 1.35; letter-spacing: -.025em; }
+:where([data-hulmio-ui="card"]) .h-card-description { margin: 0 0 18px; color: var(--hulmio-muted); font-size: 14px; line-height: 1.6; }
+.h-card-soft:where([data-hulmio-ui]) { border-color: transparent; background: var(--hulmio-soft); }
+.h-card-outlined:where([data-hulmio-ui]) { border-color: var(--hulmio-control-border); background: transparent; }
+.h-card-elevated:where([data-hulmio-ui]) { border-color: transparent; box-shadow: var(--hulmio-shadow), 0 10px 30px color-mix(in srgb, var(--hulmio-text) 8%, transparent); }
+.h-accordion:where([data-hulmio-ui]), .h-disclosure:where([data-hulmio-ui]) { width: 100%; color: var(--hulmio-text); font-size: 15px; line-height: 1.6; }
+:where([data-hulmio-ui="accordion"]) .h-disclosure, .h-disclosure:where([data-hulmio-ui]) { border-bottom: 1px solid var(--hulmio-border); }
+:where([data-hulmio-ui="accordion"], [data-hulmio-ui="collapsible"]) summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 0; font-weight: 550; list-style: none; cursor: pointer; }
+:where([data-hulmio-ui="accordion"], [data-hulmio-ui="collapsible"]) summary::-webkit-details-marker { display: none; }
+:where([data-hulmio-ui="accordion"], [data-hulmio-ui="collapsible"]) summary > span:last-child { font-size: 20px; transition: transform .15s; }
+:where([data-hulmio-ui="accordion"], [data-hulmio-ui="collapsible"]) details[open] > summary > span:last-child,
+:where([data-hulmio-ui="collapsible"])[open] > summary > span:last-child { transform: rotate(45deg); }
+:where([data-hulmio-ui="accordion"], [data-hulmio-ui="collapsible"]) .h-disclosure-content { padding: 0 0 20px; color: var(--hulmio-muted); }
+:where([data-hulmio-ui="accordion"]) [data-disabled] summary { opacity: .5; cursor: not-allowed; }
+.h-timeline:where([data-hulmio-ui]) { margin: 0; padding: 0; list-style: none; color: var(--hulmio-text); }
+:where([data-hulmio-ui="timeline"]) li { position: relative; display: flex; gap: 16px; padding: 0 0 26px; }
+:where([data-hulmio-ui="timeline"]) li:not(:last-child)::before { content: ""; position: absolute; left: 5px; top: 12px; bottom: 0; border-left: 1px solid var(--hulmio-border); }
+:where([data-hulmio-ui="timeline"]) .h-timeline-marker { position: relative; width: 11px; height: 11px; margin-top: 7px; border: 2px solid var(--hulmio-primary); border-radius: 50%; background: var(--hulmio-surface); flex: 0 0 auto; }
+:where([data-hulmio-ui="timeline"]) .h-timeline-title { font-size: 15px; font-weight: 550; line-height: 1.5; }
+:where([data-hulmio-ui="timeline"]) .h-timeline-date { display: block; margin-bottom: 4px; font-size: 12px; color: var(--hulmio-muted); }
+:where([data-hulmio-ui="timeline"]) p { margin: 6px 0 0; font-size: 14px; color: var(--hulmio-muted); line-height: 1.6; }
+.h-chart:where([data-hulmio-ui]) { width: 100%; min-width: 0; margin: 0; color: var(--hulmio-text); }
+:where([data-hulmio-ui="chart"]) figcaption { margin-bottom: 12px; font-size: 15px; font-weight: 600; }
+:where([data-hulmio-ui="chart"]) .h-chart-visual { display: block; width: 100%; max-height: 280px; overflow: visible; }
+:where([data-hulmio-ui="chart"]) .h-chart-axis { stroke: var(--hulmio-border); stroke-width: 1; }
+:where([data-hulmio-ui="chart"]) .h-chart-mark { fill: var(--hulmio-primary); }
+:where([data-hulmio-ui="chart"]) .h-chart-line-stroke { fill: none; stroke: var(--hulmio-primary); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+:where([data-hulmio-ui="chart"]) .h-chart-area-fill { fill: var(--hulmio-primary); opacity: .14; }
+:where([data-hulmio-ui="chart"]) .h-chart-color-0 { stroke: var(--hulmio-primary); }
+:where([data-hulmio-ui="chart"]) .h-chart-color-1 { stroke: var(--hulmio-success); }
+:where([data-hulmio-ui="chart"]) .h-chart-color-2 { stroke: var(--hulmio-info); }
+:where([data-hulmio-ui="chart"]) .h-chart-color-3 { stroke: var(--hulmio-warning); }
+:where([data-hulmio-ui="chart"]) .h-chart-color-4 { stroke: var(--hulmio-danger); }
+:where([data-hulmio-ui="chart"]) .h-chart-total { fill: var(--hulmio-text); font-family: var(--hulmio-font-family, inherit); font-size: 23px; font-weight: 600; }
+:where([data-hulmio-ui="chart"]) .h-chart-note { color: var(--hulmio-muted); font-size: 13px; line-height: 1.5; }
+:where([data-hulmio-ui="chart"]) .h-chart-data { font-size: 13px; }
+:where([data-hulmio-ui="chart"]) .h-chart-data th, :where([data-hulmio-ui="chart"]) .h-chart-data td { padding: 7px 12px; }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="chart"]) .h-table-scroll { width: 100%; overflow-x: auto; overscroll-behavior-x: contain; }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="chart"]) table { width: 100%; border-collapse: collapse; color: var(--hulmio-text); text-align: left; line-height: 1.5; }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="chart"]) th { font-weight: 550; }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="chart"]) :is(th,td) { border-bottom: 1px solid var(--hulmio-border); }
+.h-carousel:where([data-hulmio-ui]) { min-width: 0; color: var(--hulmio-text); }
+:where([data-hulmio-ui="carousel"]) .h-carousel-stage { padding: 24px; border: 1px solid var(--hulmio-border); border-radius: 12px; background: var(--hulmio-subtle); }
+:where([data-hulmio-ui="carousel"]) .h-carousel-controls { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; font-size: 13px; color: var(--hulmio-muted); }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="carousel"]) .h-small-button { display: inline-flex; align-items: center; justify-content: center; min-height: 34px; padding: 7px 12px; border: 1px solid var(--hulmio-control-border); border-radius: 6px; background: var(--hulmio-surface); color: var(--hulmio-text); font: inherit; font-size: 13px; line-height: 1.3; cursor: pointer; }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="carousel"]) .h-small-button:hover:not(:disabled) { background: var(--hulmio-subtle); }
+:where([data-hulmio-ui="data-table"], [data-hulmio-ui="carousel"]) .h-small-button:disabled { opacity: .45; cursor: not-allowed; }
+.h-data-table:where([data-hulmio-ui]) { min-width: 0; font-size: 14px; color: var(--hulmio-text); }
+:where([data-hulmio-ui="data-table"]) .h-table-tools { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding-bottom: 16px; }
+:where([data-hulmio-ui="data-table"]) .h-table-tools label { font-size: 13px; font-weight: 550; }
+:where([data-hulmio-ui="data-table"]) .h-table-tools input { min-width: 160px; min-height: 38px; max-width: 100%; padding: 8px 11px; border: 1px solid var(--hulmio-control-border); border-radius: 6px; background: var(--hulmio-surface); color: var(--hulmio-text); font: inherit; }
+:where([data-hulmio-ui="data-table"]) caption { padding: 0 0 12px; text-align: left; font-size: 15px; font-weight: 600; }
+:where([data-hulmio-ui="data-table"]) thead { background: var(--hulmio-subtle); }
+:where([data-hulmio-ui="data-table"]) :is(th,td) { padding: 12px 14px; white-space: nowrap; }
+:where([data-hulmio-ui="data-table"]) input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--hulmio-primary); cursor: pointer; }
+:where([data-hulmio-ui="data-table"]) .h-table-sort { padding: 0; border: 0; background: transparent; color: inherit; font: inherit; cursor: pointer; }
+:where([data-hulmio-ui="data-table"]) .h-table-edit { width: 100%; min-width: 90px; padding: 6px 7px; border: 1px solid transparent; border-radius: 4px; background: transparent; color: inherit; font: inherit; }
+:where([data-hulmio-ui="data-table"]) .h-table-edit:hover { border-color: var(--hulmio-control-border); }
+:where([data-hulmio-ui="data-table"]) .h-table-expanded { background: var(--hulmio-subtle); }
+:where([data-hulmio-ui="data-table"]) .h-table-expanded td { white-space: normal; }
+:where([data-hulmio-ui="data-table"]) .h-table-expanded dl { display: grid; grid-template-columns: max-content 1fr; gap: 8px 20px; margin: 4px 0; }
+:where([data-hulmio-ui="data-table"]) .h-table-expanded dd { margin: 0; }
+:where([data-hulmio-ui="data-table"]) .h-table-expanded dt { color: var(--hulmio-muted); }
+:where([data-hulmio-ui="data-table"]) .h-table-empty { padding: 30px 16px; text-align: center; color: var(--hulmio-muted); }
+:where([data-hulmio-ui="data-table"]) .h-table-pagination { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 16px; font-size: 12px; color: var(--hulmio-muted); }
+:where([data-hulmio-ui="data-table"]) .h-table-pagination > div { display: flex; gap: 6px; }
+.h-kanban:where([data-hulmio-ui]) { display: flex; align-items: stretch; gap: 16px; width: 100%; min-width: 0; overflow-x: auto; color: var(--hulmio-text); padding-bottom: 8px; }
+:where([data-hulmio-ui="kanban"]) .h-kanban-column { flex: 1 0 230px; min-width: 0; padding: 16px; border: 1px solid var(--hulmio-border); border-radius: 10px; background: var(--hulmio-subtle); }
+:where([data-hulmio-ui="kanban"]) .h-kanban-column > h3 { display: flex; justify-content: space-between; align-items: center; margin: 0 0 16px; font-size: 14px; font-weight: 600; }
+:where([data-hulmio-ui="kanban"]) .h-kanban-column > h3 span { padding: 2px 6px; border-radius: 5px; color: var(--hulmio-muted); background: var(--hulmio-surface); font-size: 12px; }
+:where([data-hulmio-ui="kanban"]) ul { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+:where([data-hulmio-ui="kanban"]) .h-kanban-item { padding: 16px; border: 1px solid var(--hulmio-border); border-radius: 8px; background: var(--hulmio-surface); box-shadow: var(--hulmio-shadow); }
+:where([data-hulmio-ui="kanban"]) h4 { margin: 0; font-size: 14px; font-weight: 550; line-height: 1.5; }
+:where([data-hulmio-ui="kanban"]) p { margin: 7px 0 0; color: var(--hulmio-muted); font-size: 13px; line-height: 1.6; }
+:where([data-hulmio-ui="kanban"]) label { display: grid; gap: 5px; margin-top: 16px; font-size: 12px; color: var(--hulmio-muted); }
+:where([data-hulmio-ui="kanban"]) select { width: 100%; min-height: 34px; padding: 6px 8px; border: 1px solid var(--hulmio-control-border); border-radius: 5px; background: var(--hulmio-surface); color: var(--hulmio-text); font: inherit; font-size: 13px; }
+:where([data-hulmio-ui="accordion"], [data-hulmio-ui="collapsible"], [data-hulmio-ui="data-table"], [data-hulmio-ui="carousel"], [data-hulmio-ui="kanban"]) :is(button,input,summary,select):focus-visible { outline: 2px solid var(--hulmio-focus); outline-offset: 3px; }
+@media (pointer: coarse) { :where([data-hulmio-ui="data-table"], [data-hulmio-ui="carousel"], [data-hulmio-ui="kanban"]) :is(button,select) { min-height: 44px; } }
+@media (max-width: 600px) { .h-card:where([data-hulmio-ui]) { padding: 20px; } :where([data-hulmio-ui="data-table"]) :is(th,td) { padding: 10px; } }

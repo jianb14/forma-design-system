@@ -1,0 +1,18 @@
+.h-select-trigger:where([data-hulmio-ui]) { display: inline-flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; min-width: 0; min-height: 42px; padding: 10px 12px; border: 1px solid var(--hulmio-control-border); border-radius: var(--hulmio-radius-md, 10px); background: var(--hulmio-surface); color: var(--hulmio-text); font: inherit; font-size: 14px; line-height: 1.45; text-align: left; cursor: pointer; transition: border-color .15s, background-color .15s; }
+.h-select-trigger:where([data-hulmio-ui]) > span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.h-select-trigger:where([data-hulmio-ui]) > svg { color: var(--hulmio-muted); }
+.h-select-trigger:where([data-hulmio-ui]):hover:not(:disabled):not([aria-invalid="true"]) { border-color: color-mix(in srgb, var(--hulmio-control-border) 60%, var(--hulmio-muted)); background: color-mix(in srgb, var(--hulmio-subtle) 40%, var(--hulmio-surface)); }
+.h-select-trigger:where([data-hulmio-ui]):is(:focus, :focus-visible, [data-state="open"]) { outline: none; box-shadow: none; border-color: var(--hulmio-focus); }
+.h-select-trigger:where([data-hulmio-ui])[aria-invalid="true"] { border-color: var(--hulmio-danger); }
+.h-select-trigger:where([data-hulmio-ui]):disabled { opacity: .5; cursor: not-allowed; }
+.h-select-trigger:where([data-hulmio-ui])[data-placeholder] { color: var(--hulmio-muted); }
+.h-select-content:where([data-hulmio-ui]) { z-index: 100; width: var(--radix-select-trigger-width); min-width: max(var(--radix-select-trigger-width), 160px); max-width: calc(100vw - 24px); max-height: min(320px, var(--radix-select-content-available-height)); overflow: hidden; padding: 4px; border: 1px solid var(--hulmio-border); border-radius: var(--hulmio-radius-md, 10px); background: var(--hulmio-surface); color: var(--hulmio-text); box-shadow: none; }
+:where([data-hulmio-ui="select-content"]) .h-select-option { display: flex; align-items: center; justify-content: space-between; gap: 12px; position: relative; min-height: 34px; padding: 7px 30px 7px 10px; border-radius: 6px; color: inherit; font-size: 14px; line-height: 1.4; cursor: pointer; outline: none; user-select: none; }
+:where([data-hulmio-ui="select-content"]) .h-select-option[data-highlighted] { background: var(--hulmio-subtle); }
+:where([data-hulmio-ui="select-content"]) .h-select-option:is(:focus, :focus-visible) { outline: none; box-shadow: none; }
+:where([data-hulmio-ui="select-content"]) .h-select-option[data-state="checked"] { color: var(--hulmio-primary); font-weight: 500; }
+:where([data-hulmio-ui="select-content"]) .h-select-option[data-disabled] { opacity: .45; cursor: not-allowed; }
+:where([data-hulmio-ui="select-content"]) .h-select-check { position: absolute; right: 9px; display: inline-flex; }
+:where([data-hulmio-ui="select-content"]) .h-select-scroll { display: flex; align-items: center; justify-content: center; min-height: 24px; color: var(--hulmio-muted); }
+@media (pointer: coarse) { .h-select-trigger:where([data-hulmio-ui]), :where([data-hulmio-ui="select-content"]) .h-select-option { min-height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .h-select-trigger:where([data-hulmio-ui]) { transition: none; } }

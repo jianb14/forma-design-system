@@ -1,20 +1,18 @@
-import { forwardRef, useId, useRef, useState } from "react";
+import { Button, Select as LibrarySelect } from "hulmio-ui";
+export { Button, Input, Modal, DialogClose } from "hulmio-ui";
+export type { ButtonProps, InputProps, ModalProps, Variant, Size } from "hulmio-ui";
+import { useId, useState } from "react";
 import type {
-  ButtonHTMLAttributes,
   InputHTMLAttributes,
   ReactNode,
 } from "react";
-import { cva } from "class-variance-authority";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import * as DialogPrimitive from "@radix-ui/react-dialog";
+import { brand } from "../lib/brand";
 import * as MenuPrimitive from "@radix-ui/react-dropdown-menu";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
 import {
   X,
-  LoaderCircle,
-  Eye,
-  EyeOff,
   ChevronDown,
   Check,
   Copy,
@@ -24,93 +22,7 @@ import {
   Trash2,
 } from "lucide-react";
 export const cn = (...values: Parameters<typeof clsx>) => twMerge(clsx(values));
-export type Variant =
-  | "primary"
-  | "secondary"
-  | "outline"
-  | "ghost"
-  | "link"
-  | "destructive"
-  | "soft"
-  | "success"
-  | "warning"
-  | "information";
-export type Size = "xs" | "sm" | "md" | "lg" | "xl";
-const buttonStyles = cva(
-  "f-button inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-colors disabled:pointer-events-none disabled:opacity-45",
-  {
-    variants: {
-      variant: {
-        primary: "button-primary",
-        secondary: "button-secondary",
-        outline: "button-outline",
-        ghost: "button-ghost",
-        link: "button-link",
-        destructive: "button-destructive",
-        soft: "button-soft",
-        success: "button-success",
-        warning: "button-warning",
-        information: "button-information",
-      },
-      size: {
-        xs: "button-xs",
-        sm: "button-sm",
-        md: "button-md",
-        lg: "button-lg",
-        xl: "button-xl",
-      },
-      shape: {
-        rounded: "rounded-lg",
-        pill: "rounded-full",
-        square: "rounded-none",
-        circle: "rounded-full aspect-square p-0",
-      },
-    },
-    defaultVariants: { variant: "primary", size: "md", shape: "rounded" },
-  },
-);
-export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: Variant;
-  size?: Size;
-  shape?: "rounded" | "pill" | "square" | "circle";
-  loading?: boolean;
-  fullWidth?: boolean;
-}
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  (
-    {
-      variant,
-      size,
-      shape,
-      loading,
-      fullWidth,
-      disabled,
-      className,
-      children,
-      type = "button",
-      ...props
-    },
-    ref,
-  ) => (
-    <button
-      ref={ref}
-      type={type}
-      className={cn(
-        buttonStyles({ variant, size, shape }),
-        fullWidth && "w-full",
-        className,
-      )}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      {...props}
-    >
-      {loading && <LoaderCircle className="animate-spin" size={15} />}
-      {children}
-    </button>
-  ),
-);
-Button.displayName = "Button";
-export function Flower({
+export function BrandMark({
   className,
   size = 32,
   ...props
@@ -129,7 +41,7 @@ export function Flower({
       aria-hidden="true"
       {...props}
     >
-      <path d="M32 32C4 32 4-2 23 7c9 4 9 18 9 25Zm0 0C32 4 66 4 57 23c-4 9-18 9-25 9Zm0 0c28 0 28 34 9 25-9-4-9-18-9-25Zm0 0C32 60-2 60 7 41c4-9 18-9 25-9Z" />
+      <path d={brand.markPath} />
     </svg>
   );
 }
@@ -144,140 +56,15 @@ export function Brand({
 }) {
   return (
     <span className={cn("brand", vertical && "brand-vertical", className)}>
-      <Flower size={34} />
+      <BrandMark size={34} />
       {!iconOnly && (
         <span>
-          forma<span className="brand-period">.</span>
+          {brand.wordmark}<span className="brand-period">.</span>
         </span>
       )}
     </span>
   );
 }
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  helper?: string;
-  error?: string;
-  leading?: ReactNode;
-  trailing?: ReactNode;
-  clearable?: boolean;
-}
-export const Input = forwardRef<HTMLInputElement, InputProps>(
-  (
-    {
-      label,
-      helper,
-      error,
-      leading,
-      trailing,
-      clearable,
-      type = "text",
-      id,
-      className,
-      value,
-      defaultValue,
-      onChange,
-      ...props
-    },
-    ref,
-  ) => {
-    const autoId = useId();
-    const inputId = id || autoId;
-    const [show, setShow] = useState(false);
-    const [inner, setInner] = useState(defaultValue ?? "");
-    const inputRef = useRef<HTMLInputElement | null>(null);
-    const current = value ?? inner;
-    return (
-      <div className={cn("field", className)}>
-        {label && (
-          <label htmlFor={inputId}>
-            {label}
-            {props.required && (
-              <span className="required" aria-hidden="true">
-                {" "}
-                *
-              </span>
-            )}
-          </label>
-        )}
-        <div
-          className={cn(
-            "input-shell",
-            error && "input-invalid",
-            props.disabled && "is-disabled",
-          )}
-        >
-          {leading && <span className="input-affix">{leading}</span>}
-          <input
-            {...props}
-            ref={(node) => {
-              inputRef.current = node;
-              if (typeof ref === "function") ref(node);
-              else if (ref) ref.current = node;
-            }}
-            id={inputId}
-            type={type === "password" && show ? "text" : type}
-            value={current}
-            onChange={(e) => {
-              setInner(e.target.value);
-              onChange?.(e);
-            }}
-            aria-invalid={error ? true : props["aria-invalid"]}
-            aria-describedby={
-              [
-                props["aria-describedby"],
-                error || helper ? `${inputId}-help` : null,
-              ]
-                .filter(Boolean)
-                .join(" ") || undefined
-            }
-          />
-          {clearable && current && !props.disabled && !props.readOnly && (
-            <button
-              type="button"
-              aria-label="Clear input"
-              className="input-action"
-              onClick={() => {
-                const input = inputRef.current;
-                if (!input) return;
-                Object.getOwnPropertyDescriptor(
-                  HTMLInputElement.prototype,
-                  "value",
-                )?.set?.call(input, "");
-                input.dispatchEvent(new Event("input", { bubbles: true }));
-                setInner("");
-                input.focus();
-              }}
-            >
-              <X size={14} />
-            </button>
-          )}
-          {type === "password" ? (
-            <button
-              type="button"
-              aria-label={show ? "Hide password" : "Show password"}
-              className="input-action"
-              disabled={props.disabled}
-              onClick={() => setShow(!show)}
-            >
-              {show ? <EyeOff size={16} /> : <Eye size={16} />}
-            </button>
-          ) : (
-            trailing && <span className="input-affix">{trailing}</span>
-          )}
-        </div>
-        {(error || helper) && (
-          <p
-            id={`${inputId}-help`}
-            className={error ? "field-error" : "field-helper"}
-          >
-            {error || helper}
-          </p>
-        )}
-      </div>
-    );
-  },
-);
-Input.displayName = "Input";
 export function Badge({
   children,
   tone = "default",
@@ -421,25 +208,7 @@ export function Select({
   disabled?: boolean;
   id?: string;
 }) {
-  const auto = useId();
-  return (
-    <div className="field">
-      <label htmlFor={id || auto}>{label}</label>
-      <div className="select-shell">
-        <select
-          id={id || auto}
-          value={value}
-          onChange={(e) => onChange?.(e.target.value)}
-          disabled={disabled}
-        >
-          {options.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-        <ChevronDown size={14} />
-      </div>
-    </div>
-  );
+  return <LibrarySelect label={label} id={id} value={value} onValueChange={onChange} disabled={disabled} options={options.map(value => ({ value, label: value }))} />;
 }
 export function Progress({
   value = 64,
@@ -616,67 +385,6 @@ export function Tooltip({
     </TooltipPrimitive.Provider>
   );
 }
-export function Modal({
-  trigger,
-  title,
-  description,
-  children,
-  drawer = false,
-  side = "right",
-  open,
-  onOpenChange,
-  nonModal = false,
-  fullscreen = false,
-}: {
-  trigger?: ReactNode;
-  title: string;
-  description?: string;
-  children: ReactNode;
-  drawer?: boolean;
-  side?: string;
-  open?: boolean;
-  onOpenChange?: (v: boolean) => void;
-  nonModal?: boolean;
-  fullscreen?: boolean;
-}) {
-  return (
-    <DialogPrimitive.Root
-      open={open}
-      onOpenChange={onOpenChange}
-      modal={!nonModal}
-    >
-      {trigger && (
-        <DialogPrimitive.Trigger asChild>{trigger}</DialogPrimitive.Trigger>
-      )}
-      <DialogPrimitive.Portal>
-        {!nonModal && <DialogPrimitive.Overlay className="dialog-overlay" />}
-        <DialogPrimitive.Content
-          className={cn(
-            "dialog-content",
-            drawer && `drawer drawer-${side}`,
-            nonModal && "popover-content",
-            fullscreen && "dialog-fullscreen",
-          )}
-        >
-          <DialogPrimitive.Title>{title}</DialogPrimitive.Title>
-          <DialogPrimitive.Description
-            className={description ? "dialog-description" : "sr-only"}
-          >
-            {description || `Details for ${title}`}
-          </DialogPrimitive.Description>
-          {children}
-          <DialogPrimitive.Close
-            className="dialog-close"
-            aria-label="Close dialog"
-          >
-            <X size={18} />
-          </DialogPrimitive.Close>
-        </DialogPrimitive.Content>
-      </DialogPrimitive.Portal>
-    </DialogPrimitive.Root>
-  );
-}
-export const DialogClose = DialogPrimitive.Close;
 export function Dropdown({
   onAction,
   trigger,
@@ -686,7 +394,7 @@ export function Dropdown({
 }) {
   return (
     <MenuPrimitive.Root>
-      <MenuPrimitive.Trigger asChild>
+      <MenuPrimitive.Trigger asChild className="h-dropdown-trigger">
         {trigger || (
           <Button variant="outline">
             Options <ChevronDown size={14} />
@@ -736,7 +444,6 @@ export function CodeBlock({
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
-      onCopy?.("Code copied to clipboard");
       setTimeout(() => setCopied(false), 2000);
     } catch {
       onCopy?.("Select the code to copy it manually");

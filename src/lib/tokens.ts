@@ -1,3 +1,5 @@
+import { themeTokens } from "hulmio-ui";
+
 export const tokens = {
   color: {
     brand: {
@@ -33,56 +35,30 @@ export const tokens = {
     info: "#436fa4",
     accent: "#e8ad8d",
   },
-  semantic: {
-    light: {
-      background: "#f8f9f5",
-      surface: "#ffffff",
-      text: "#252e23",
-      muted: "#727b6c",
-      border: "#e3e5dc",
-      primary: "#284c3f",
-      onPrimary: "#ffffff",
-      focus: "#637e32",
-      overlay: "#151b1480",
-      disabled: "#e3e5dc",
-    },
-    dark: {
-      background: "#161d19",
-      surface: "#1e2821",
-      text: "#eef2e8",
-      muted: "#a8b3a0",
-      border: "#354136",
-      primary: "#d9ed92",
-      onPrimary: "#20271e",
-      focus: "#d9ed92",
-      overlay: "#000000a0",
-      disabled: "#354136",
-    },
-    contrast: {
-      background: "#000000",
-      surface: "#101010",
-      text: "#ffffff",
-      muted: "#e0e0e0",
-      border: "#ffffff",
-      primary: "#e5ff78",
-      onPrimary: "#000000",
-      focus: "#e5ff78",
-      overlay: "#000000cc",
-      disabled: "#555555",
-    },
-  },
+  semantic: Object.fromEntries(Object.entries(themeTokens).map(([name, theme]) => [name, {
+    background: theme.background,
+    surface: theme.surface,
+    text: theme.text,
+    muted: theme.muted,
+    border: theme.border,
+    primary: theme.primary,
+    onPrimary: theme["on-primary"],
+    focus: theme.focus,
+    overlay: theme.overlay,
+    disabled: theme["control-border"],
+  }])),
   font: {
-    body: "DM Sans",
-    display: "DM Sans",
+    body: "Google Sans Flex",
+    display: "Google Sans Flex",
     editorial: "Instrument Serif",
     mono: "IBM Plex Mono",
     weights: [400, 450, 500, 550, 600, 650, 700],
     sizes: {
-      caption: 11,
-      small: 12,
-      label: 13,
-      body: 14,
-      large: 16,
+      caption: 12,
+      small: 14,
+      label: 14,
+      body: 16,
+      large: 18,
       h6: 18,
       h5: 20,
       h4: 24,
@@ -162,8 +138,7 @@ export const tokens = {
   },
 };
 export const palettes = Object.entries(tokens.color.brand);
-export const logoSvg = (color = "#284c3f") =>
-  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path d="M32 32C4 32 4-2 23 7c9 4 9 18 9 25Zm0 0C32 4 66 4 57 23c-4 9-18 9-25 9Zm0 0c28 0 28 34 9 25-9-4-9-18-9-25Zm0 0C32 60-2 60 7 41c4-9 18-9 25-9Z" fill="${color}"/></svg>`;
+export { logoSvg } from "./brand";
 export function downloadFile(
   name: string,
   content: string,

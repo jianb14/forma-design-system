@@ -1,266 +1,75 @@
 import { useState } from "react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  Check,
-  Circle,
-  Search,
-} from "lucide-react";
-import { Button, Input } from "../components/ui";
-import type { Size } from "../components/ui";
+import { ArrowRight, ArrowUpRight, RotateCcw, Search } from "lucide-react";
+import { Button, Input } from "hulmio-ui";
 import { ComponentCover, VisualPreview } from "../components/VisualPreview";
-import { categories, components } from "../lib/catalog";
+import { ButtonDesignExample, ExamplePreview, LibraryExample } from "../components/LibraryExamples";
+import { categories, components, newComponentIds } from "../lib/catalog";
 import type { ComponentEntry } from "../lib/catalog";
+import { buttonDesigns, libraryFamilies } from "../lib/distribution";
 import { PageIntro, SectionTitle } from "./Foundations";
 
 export function ComponentCatalog({ route }: { route: string }) {
-  const category =
-    new URLSearchParams(route.split("?")[1]).get("category") || "All";
+  const category = new URLSearchParams(route.split("?")[1]).get("category") || "All";
   const [query, setQuery] = useState("");
-  const filtered = components.filter(
-    (c) =>
-      (category === "All" || c.category === category) &&
-      `${c.name} ${c.description} ${c.variants.join(" ")}`
-        .toLowerCase()
-        .includes(query.toLowerCase()),
-  );
-  return (
-    <>
-      <PageIntro
-        eyebrow={
-          category === "All"
-            ? "THE COMPONENT COLLECTION"
-            : `THE COMPONENT COLLECTION / ${category.toUpperCase()}`
-        }
-        title={
-          category === "All" ? "Good parts. Better together." : `${category}.`
-        }
-        description={
-          category === "All"
-            ? "Explore the shapes, details, and little moments that bring a design together."
-            : category === "Actions"
-              ? "Every next step, in every shape. Browse buttons and the ways they work together."
-              : `A closer look at ${category.toLowerCase()} components, with their visual variants and states.`
-        }
-      />
-      <div className="catalog-search">
-        <Input
-          type="search"
-          aria-label="Search components"
-          placeholder="Find a component…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          leading={<Search size={17} />}
-          clearable
-        />
-        <span>
-          {filtered.length} component{filtered.length === 1 ? "" : "s"}
-        </span>
-      </div>
-      <nav className="category-filters" aria-label="Component categories">
-        {["All", ...categories].map((c) => (
-          <a
-            key={c}
-            href={`#/components${c === "All" ? "" : `?category=${c}`}`}
-            className={category === c ? "active" : ""}
-            aria-current={category === c ? "page" : undefined}
-          >
-            {c}
-            <span>
-              {c === "All"
-                ? components.length
-                : components.filter((i) => i.category === c).length}
-            </span>
-          </a>
-        ))}
-      </nav>
-      {filtered.length ? (
-        <div className="component-grid">
-          {filtered.map((c) => (
-            <a
-              className="component-catalog-card"
-              href={`#/components/${c.id}`}
-              key={c.id}
-            >
-              <ComponentCover id={c.id} category={c.category} />
-              <div className="catalog-card-info">
-                <div>
-                  <h3>{c.name}</h3>
-                  <ArrowUpRight size={16} />
-                </div>
-                <p>{c.description}</p>
-                <span>
-                  {c.category}
-                  <i />
-                  {c.variants.length} variants
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-      ) : (
-        <div className="empty-state catalog-empty">
-          <Search size={32} />
-          <h3>No components found.</h3>
-          <p>Try another name or category.</p>
-          <Button variant="outline" onClick={() => setQuery("")}>
-            Clear search
-          </Button>
-        </div>
-      )}
-    </>
-  );
+  const filtered = components.filter(component => {
+    const family = libraryFamilies[component.id];
+    return (category === "All" || component.category === category) &&
+      `${component.name} ${component.description} ${component.variants.join(" ")} ${family?.exports.join(" ")} ${family?.designs.map(d => d.name).join(" ")}`.toLowerCase().includes(query.toLowerCase());
+  });
+  return <div className="library-page">
+    <PageIntro title={category === "All" ? "Components" : category} description="Ready-to-use React components. Preview, copy, and make them yours." />
+    <div className="catalog-search">
+      <Input type="search" aria-label="Search components" placeholder="Search components or named imports…" value={query} onChange={event => setQuery(event.target.value)} leading={<Search size={18} />} clearable />
+      <span role="status" aria-live="polite">{filtered.length} component{filtered.length === 1 ? "" : "s"}</span>
+    </div>
+    <nav className="category-filters" aria-label="Component categories">{["All", ...categories].map(value => <a key={value} href={`#/components${value === "All" ? "" : `?category=${encodeURIComponent(value)}`}`} className={category === value ? "active" : ""} aria-current={category === value ? "page" : undefined}>{value}<span>{value === "All" ? components.length : components.filter(component => component.category === value).length}</span></a>)}</nav>
+    {filtered.length ? <div className="component-grid">{filtered.map(component => {
+      const family = libraryFamilies[component.id];
+      return <article className="component-catalog-card library-catalog-card" key={component.id}>
+        {newComponentIds.has(component.id) || ["button", "select"].includes(component.id) ? <div className="library-catalog-live" inert aria-hidden="true"><LibraryExample id={component.id} design={family?.designs[0]} /></div> : <ComponentCover id={component.id} category={component.category} />}
+        <a className="catalog-card-info library-catalog-link" href={`#/components/${component.id}`}>
+          <div><h3>{component.name}</h3><ArrowUpRight size={17} aria-hidden="true" /></div>
+          <p>{component.description}</p>
+        </a>
+      </article>;
+    })}</div> : <div className="empty-state catalog-empty"><Search size={32} /><h2>No components found.</h2><p>Try a component name, category or named export.</p><Button variant="outline" onClick={() => setQuery("")}>Clear search</Button></div>}
+  </div>;
 }
 
-const wideComponents = new Set(["table", "kanban", "form", "layout", "chart"]);
-const mediumComponents = new Set([
-  "input",
-  "textarea",
-  "card",
-  "upload",
-  "calendar",
-  "accordion",
-  "dialog",
-  "drawer",
-  "popover",
-  "command",
-  "timeline",
-  "carousel",
-  "empty-state",
-  "multi-select",
-  "tag-input",
-  "color-picker",
-]);
+const wideComponents = new Set(["table", "simple-table", "kanban", "form", "layout", "chart", "navbar", "toolbar"]);
+const mediumComponents = new Set(["input", "input-group", "item", "textarea", "card", "upload", "calendar", "accordion", "dialog", "drawer", "popover", "command", "timeline", "carousel", "empty-state", "multi-select", "tag-input", "color-picker"]);
 
-export function ComponentPage({
-  entry,
-  notify,
-  onCommand,
-}: {
-  entry: ComponentEntry;
-  notify: (text: string) => void;
-  onCommand: () => void;
-}) {
-  const [size, setSize] = useState<Size>("md");
-  const [shape, setShape] = useState<"rounded" | "pill" | "square">("rounded");
-  const buttonLike = entry.id === "button" || entry.id === "icon-button";
-  const width = wideComponents.has(entry.id)
-    ? "wide"
-    : mediumComponents.has(entry.id)
-      ? "medium"
-      : "compact";
+function ComponentDetail({ entry, onCommand }: { entry: ComponentEntry; onCommand: () => void }) {
   const [reset, setReset] = useState(0);
-  return (
-    <>
-      <a href={`#/components?category=${entry.category}`} className="back-link">
-        <ArrowLeft size={14} />
-        {entry.category} components
-      </a>
-      <PageIntro
-        eyebrow={`${entry.category.toUpperCase()} / VISUAL COLLECTION`}
-        title={`${entry.name}.`}
-        description={entry.description}
-      >
-        <span className="gallery-count">
-          <span className="live-dot" />
-          {entry.variants.length} variants
-        </span>
-      </PageIntro>
-      <div className="specimen-toolbar">
-        <span>Explore every variation</span>
-        <button onClick={() => setReset((v) => v + 1)}>
-          Reset previews <ArrowRight size={13} />
-        </button>
-      </div>
-      <div className={`variant-gallery variant-gallery-${width}`} key={reset}>
-        {entry.variants.map((variant, i) => (
-          <article
-            className={`specimen-card specimen-${entry.id}`}
-            key={variant}
-            data-variant={variant}
-            data-component={entry.id}
-            aria-labelledby={`variant-title-${i}`}
-          >
-            <div className="specimen-preview">
-              <VisualPreview
-                id={entry.id}
-                variant={variant}
-                size={size}
-                shape={shape}
-                notify={notify}
-                onCommand={onCommand}
-              />
-            </div>
-            <div className="specimen-caption">
-              <h2 id={`variant-title-${i}`}>{variant}</h2>
-              <span>{String(i + 1).padStart(2, "0")}</span>
-            </div>
-          </article>
-        ))}
-      </div>
-      {buttonLike && (
-        <>
-          <SectionTitle label="Every little interaction" />
-          <div className="interaction-states">
-            {[
-              "Default",
-              "Hover",
-              "Focus",
-              "Pressed",
-              "Disabled",
-              "Loading",
-            ].map((state) => (
-              <div key={state}>
-                <Button
-                  className={`state-${state.toLowerCase()}`}
-                  disabled={state === "Disabled"}
-                  loading={state === "Loading"}
-                  onClick={() => notify(`${state} button preview.`)}
-                >
-                  Get started <ArrowRight size={14} />
-                </Button>
-                <span>{state}</span>
-              </div>
-            ))}
-          </div>
-          <SectionTitle label="A size for every moment" />
-          <div className="size-comparison">
-            {(["xs", "sm", "md", "lg", "xl"] as const).map((s) => (
-              <div key={s}>
-                <Button size={s} onClick={() => setSize(s)}>
-                  Get started
-                  <ArrowRight size={14} />
-                </Button>
-                <span>{s.toUpperCase()}</span>
-              </div>
-            ))}
-          </div>
-          <SectionTitle label="A different shape. The same feeling." />
-          <div className="size-comparison shape-comparison">
-            {(["square", "rounded", "pill"] as const).map((s) => (
-              <div key={s}>
-                <Button shape={s} onClick={() => setShape(s)}>
-                  Something good <ArrowRight size={14} />
-                </Button>
-                <span>{s}</span>
-              </div>
-            ))}
-          </div>
-        </>
-      )}
-      <SectionTitle label="More in this collection" />
-      <div className="related-components">
-        {components
-          .filter((c) => c.category === entry.category && c.id !== entry.id)
-          .slice(0, 3)
-          .map((c) => (
-            <a href={`#/components/${c.id}`} key={c.id}>
-              <span>{c.name}</span>
-              <ArrowUpRight size={16} />
-            </a>
-          ))}
-      </div>
-    </>
-  );
+  const [referencesOpen, setReferencesOpen] = useState(false);
+  const family = libraryFamilies[entry.id];
+  const width = wideComponents.has(entry.id) ? "wide" : mediumComponents.has(entry.id) ? "medium" : "compact";
+  return <div className={`library-page library-component-${entry.id}`}>
+    <PageIntro title={entry.name} description={entry.description} />
+    <div className="library-page-tools"><a href="#/using-hulmio">Installation <ArrowUpRight size={14} /></a><button className="library-reset" type="button" onClick={() => setReset(value => value + 1)} aria-label="Reset examples"><RotateCcw size={14} />Reset</button></div>
+    <div key={reset} className={`library-design-grid ${entry.id === "button" ? "library-button-grid" : ""} ${wideComponents.has(entry.id) ? "library-design-grid-wide" : ""}`}>
+      {entry.id === "button" ? buttonDesigns.map(design => <ButtonDesignExample key={design.exportName} design={design} />) : family.designs.map(design => <article className="library-design" key={`${design.exportName}-${design.name}`} data-library-design={design.exportName}>
+        {family.designs.length > 1 && <header><h2>{design.name}</h2></header>}
+        <ExamplePreview code={design.code} label={design.name}>
+          <div className={`library-live-example library-live-${entry.id}`}><LibraryExample id={entry.id} design={design} /></div>
+        </ExamplePreview>
+      </article>)}
+    </div>
+    <details className="library-api"><summary>Usage & API</summary>
+    <div className="library-export-list"><span>Imports</span><div>{family.exports.map(name => <code key={name}>{name}</code>)}</div></div>
+    <p className="library-usage-note">{entry.notes}</p>
+    {family.limit && <p className="library-usage-note">{family.limit}</p>}
+    </details>
+    {!newComponentIds.has(entry.id) && <details className="library-references" onToggle={event => setReferencesOpen(event.currentTarget.open)}>
+      <summary><span>Reference compositions</span><span>{entry.variants.length} examples</span></summary>
+      <p>Additional compositions for inspiration. Use the code above for the reusable component API.</p>
+      {referencesOpen && <div className={`variant-gallery variant-gallery-${width}`} key={`references-${reset}`}>{entry.variants.map((variant, index) => <article className={`specimen-card specimen-${entry.id}`} key={variant} data-variant={variant} data-component={entry.id} aria-labelledby={`reference-${entry.id}-${index}`}><div className="specimen-preview"><VisualPreview id={entry.id} variant={variant} size="md" shape="rounded" onCommand={onCommand} /></div><div className="specimen-caption"><h3 id={`reference-${entry.id}-${index}`}>{variant}</h3></div></article>)}</div>}
+    </details>}
+    <SectionTitle label="Related components" />
+    <div className="related-components">{components.filter(component => component.category === entry.category && component.id !== entry.id).slice(0, 3).map(component => <a href={`#/components/${component.id}`} key={component.id}><span>{component.name}</span><ArrowRight size={16} /></a>)}</div>
+  </div>;
+}
+
+export function ComponentPage(props: { entry: ComponentEntry; onCommand: () => void }) {
+  return <ComponentDetail key={props.entry.id} {...props} />;
 }

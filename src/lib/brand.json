@@ -1,0 +1,7 @@
+{
+  "name": "Hulmio",
+  "wordmark": "hulmio",
+  "markPath": "M16 8a8 8 0 0 1 8 8v32a8 8 0 0 1-16 0V16a8 8 0 0 1 8-8Zm32 0a8 8 0 0 1 8 8v32a8 8 0 0 1-16 0V16a8 8 0 0 1 8-8ZM22 24h20v16H22z",
+  "faviconBackground": "#284c3f",
+  "faviconForeground": "#d9ed92"
+}

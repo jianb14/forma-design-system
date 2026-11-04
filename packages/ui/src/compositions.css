@@ -1,0 +1,35 @@
+.h-alert-dialog:where([data-hulmio-ui]) { max-width: min(480px, calc(100vw - 32px)); }
+.h-alert-dialog-actions { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.h-input-group:where([data-hulmio-ui]) { display: flex; align-items: center; width: 100%; min-height: 44px; border: 1px solid var(--hulmio-control-border); border-radius: var(--hulmio-radius-md, 10px); background: var(--hulmio-surface); color: var(--hulmio-text); transition: border-color .15s; }
+.h-input-group:where([data-hulmio-ui]):focus-within { outline: 2px solid var(--hulmio-focus); outline-offset: 0; border-color: var(--hulmio-focus); box-shadow: none; }
+.h-input-group:where([data-hulmio-ui]):hover:not(:focus-within):not([aria-invalid="true"]):not(:has([aria-invalid="true"], input:disabled)) { border-color: color-mix(in srgb, var(--hulmio-control-border) 60%, var(--hulmio-muted)); }
+.h-input-group:where([data-hulmio-ui]):has(input:disabled) { opacity: .5; }
+.h-input-group:where([data-hulmio-ui]):is([aria-invalid="true"], :has([aria-invalid="true"])) { border-color: var(--hulmio-danger); }
+.h-input-group:where([data-hulmio-ui]):is([aria-invalid="true"], :has([aria-invalid="true"])):focus-within { outline-color: var(--hulmio-danger); }
+.h-input-group-input:where([data-hulmio-ui]):is(:focus, :focus-visible) { outline: none; box-shadow: none; }
+.h-input-group-addon:where([data-hulmio-ui]) { display: flex; align-items: center; flex-shrink: 0; gap: 6px; padding-inline: 12px; color: var(--hulmio-muted); font-size: 14px; }
+.h-input-group-addon:where([data-hulmio-ui]):has(button) { padding-inline: 5px; }
+.h-input-group-input:where([data-hulmio-ui]) { width: 100%; min-width: 0; min-height: 44px; flex: 1; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; font-size: 15px; padding: 10px 12px; border-radius: inherit; }
+.h-input-group-addon + .h-input-group-input { padding-left: 0; }
+.h-input-group-input:where([data-hulmio-ui])::placeholder { color: var(--hulmio-muted); }
+.h-input-group-input:where([data-hulmio-ui]):disabled { cursor: not-allowed; }
+.h-item-group:where([data-hulmio-ui]) { display: grid; gap: 8px; margin: 0; padding: 0; width: 100%; list-style: none; }
+.h-item:where([data-hulmio-ui]) { display: flex; align-items: center; gap: 16px; margin: 0; padding: 16px; color: var(--hulmio-text); border: 1px solid transparent; border-radius: 8px; font-size: 15px; line-height: 1.5; }
+.h-item:where([data-hulmio-ui])[data-variant="outline"] { border-color: var(--hulmio-border); }
+.h-item:where([data-hulmio-ui])[data-variant="muted"] { background: var(--hulmio-subtle); }
+.h-item-content:where([data-hulmio-ui]) { flex: 1; min-width: 0; }
+.h-item-title:where([data-hulmio-ui]) { margin: 0; font-size: 15px; font-weight: 600; overflow-wrap: anywhere; }
+.h-item-description:where([data-hulmio-ui]) { margin: 4px 0 0; color: var(--hulmio-muted); font-size: 14px; overflow-wrap: anywhere; }
+.h-item-actions:where([data-hulmio-ui]) { display: flex; align-items: center; flex-shrink: 0; gap: 8px; }
+.h-table-container:where([data-hulmio-ui]) { width: 100%; overflow-x: auto; color: var(--hulmio-text); }
+.h-table-container:where([data-hulmio-ui]):focus-visible { outline: 2px solid var(--hulmio-focus); outline-offset: 3px; }
+.h-table:where([data-hulmio-ui]) { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.5; text-align: left; }
+.h-table:where([data-hulmio-ui]) :is(th, td) { padding: 13px 16px; border-bottom: 1px solid var(--hulmio-border); white-space: nowrap; }
+.h-table:where([data-hulmio-ui]) thead th { font-weight: 500; color: var(--hulmio-muted); }
+.h-table:where([data-hulmio-ui]) tbody th { font-weight: 500; }
+.h-table:where([data-hulmio-ui]) tfoot { font-weight: 600; }
+.h-table:where([data-hulmio-ui]) caption { caption-side: bottom; text-align: left; color: var(--hulmio-muted); padding: 16px; }
+@media (max-width: 480px) {
+  .h-item:where([data-hulmio-ui]) { gap: 10px; padding: 12px; }
+  .h-input-group-input:where([data-hulmio-ui]) { font-size: 16px; }
+}

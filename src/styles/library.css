@@ -1,0 +1,126 @@
+/* Gallery framing only. Public component visuals belong to packages/ui. */
+.library-page { font-size: 16px; line-height: 1.65; min-width: 0; }
+.library-page .page-intro { margin-bottom: 20px; }
+.library-page .page-title-row > div > p { font-size: 16px; line-height: 1.65; max-width: 650px; }
+.library-page .catalog-search > span, .library-page .category-filters > a { font-size: 14px; }
+.library-page .category-filters > a { min-height: 42px; }
+.library-page .catalog-search { margin-bottom: 24px; }
+.library-page .category-filters { margin-bottom: 30px; }
+.library-catalog-card { position: relative; }
+.library-catalog-link { display: block; text-decoration: none; color: inherit; }
+.library-catalog-link::after { content: ""; position: absolute; inset: 0; }
+.library-catalog-card:focus-within { outline: 2px solid var(--focus); outline-offset: 4px; }
+.library-page .catalog-card-info { padding: 22px; }
+.library-page .catalog-card-info h3 { font-size: 17px; }
+.library-page .catalog-card-info > p { font-size: 14px; line-height: 1.65; min-height: 44px; }
+.library-page .catalog-card-info > span { font-size: 13px; }
+.library-catalog-live { display: flex; align-items: center; justify-content: center; gap: 12px; height: 190px; padding: 24px; margin: 6px 6px 0; background: var(--subtle); color: var(--text); border-radius: 6px; overflow: hidden; pointer-events: none; }
+.library-catalog-live > * { max-width: 100%; min-width: 0; }
+.library-page .component-thumbnail { height: 190px; }
+.library-catalog-live .library-example-stack { width: 100%; }
+.library-catalog-live .library-ratio-content { min-height: 0; }
+.library-catalog-live :is(h3, p) { font-size: 15px; }
+.library-reset { flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 36px; color: var(--muted); font-size: 13px; background: transparent; border: 0; border-radius: 5px; padding: 6px 9px; cursor: pointer; }
+.library-reset:hover { background: var(--soft); }
+.library-design-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: start; }
+.library-design-grid:has(> :only-child), .library-design-grid-wide { grid-template-columns: minmax(0, 1fr); }
+.library-design { min-width: 0; border: 1px solid var(--border); border-radius: 9px; overflow: hidden; background: var(--surface); }
+.library-design > header { padding: 20px 22px; border-bottom: 1px solid var(--border); }
+.library-design > header h2 { margin: 0; font-size: 18px; line-height: 1.3; font-weight: 550; letter-spacing: -0.02em; }
+.library-design > header > p { font-size: 14px; line-height: 1.6; color: var(--muted); margin: 7px 0 0; min-height: 44px; }
+.library-button-stage { display: flex; align-items: center; justify-content: center; padding: 36px 25px; min-height: 174px; }
+.library-design-glass .library-button-stage { background: var(--soft); }
+.library-design-controls { display: grid; grid-template-columns: 1.3fr .8fr 1fr; gap: 10px; padding: 0 25px 25px; }
+.library-design-controls label { display: grid; gap: 7px; color: var(--muted); font-size: 13px; min-width: 0; }
+.library-design-controls .h-label { font-size: 13px; font-weight: 400; color: var(--muted); }
+.library-code { background: var(--subtle); min-width: 0; }
+.library-code pre { margin: 0; font-size: 13px; line-height: 1.85; padding: 24px; min-height: 280px; max-height: 420px; overflow: auto; color: var(--text); tab-size: 2; }
+.library-code code { font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Consolas, monospace; }
+.library-copy-help { margin: 0; padding: 12px 23px 0; color: var(--primary); font-size: 14px; }
+.library-live-example { display: flex; align-items: center; justify-content: center; min-height: 300px; padding: 40px 32px; overflow: auto; }
+.library-live-example > * { max-width: 100%; min-width: 0; }
+.library-live-example > :is(form, .library-example-stack) { width: 100%; max-width: 480px; }
+.library-live-example > [data-hulmio-ui="stepper"] { width: min(100%, 500px); }
+.library-live-stepper { min-height: 240px; }
+.library-live-example > [data-hulmio-ui="item-group"] { max-width: 520px; }
+.library-live-select > [data-hulmio-ui="field"] { width: 100%; max-width: 300px; }
+.library-live-example :is(output, .library-example-stack > p) { font-size: 14px; color: var(--muted); }
+.library-live-table, .library-live-chart, .library-live-kanban, .library-live-layout, .library-live-navbar { display: block; }
+.library-live-table { padding: 28px 24px; }
+.library-live-kanban { padding: 28px 20px; }
+.library-example-stack, .library-example-form { display: grid; gap: 17px; width: 100%; }
+.library-example-form > button { justify-self: start; }
+.library-example-row { display: flex; align-items: center; justify-content: center; gap: 13px; flex-wrap: wrap; }
+.library-native-input { display: block; width: 100%; border: 1px solid var(--control-border); border-radius: 6px; background: var(--surface); color: var(--text); font: inherit; font-size: 16px; padding: 10px 13px; min-height: 44px; }
+.library-ratio-content { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; height: 100%; width: 100%; color: var(--primary); background: var(--soft); }
+.library-ratio-content > span { font-size: 36px; letter-spacing: -0.05em; }
+.library-ratio-content > small { font-size: 14px; }
+.library-live-aspect-ratio > * { width: 100%; }
+.library-live-kbd { flex-wrap: wrap; }
+.library-carousel-item { padding: 26px; background: var(--soft); color: var(--primary); min-height: 210px; }
+.library-carousel-item > span { display: block; font-size: 14px; margin-bottom: 27px; }
+.library-carousel-item h3 { font-size: 25px; line-height: 1.3; max-width: 300px; }
+.library-carousel-item p { font-size: 16px; margin-top: 12px; max-width: 340px; }
+.library-export-list { display: flex; align-items: flex-start; gap: 20px; padding: 20px 0 0; }
+.library-export-list > span { flex-shrink: 0; color: var(--muted); font-size: 14px; }
+.library-export-list > div { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 15px; }
+.library-export-list code { font-size: 13px; color: var(--primary); overflow-wrap: anywhere; }
+.library-usage-note { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 16px 0 0; max-width: 800px; }
+.library-references { margin: 0 0 32px; border-bottom: 1px solid var(--border); padding: 0; }
+.library-references > summary { display: flex; align-items: baseline; gap: 15px; padding: 23px 0; cursor: pointer; color: var(--primary); list-style: none; }
+.library-references > summary::-webkit-details-marker { display: none; }
+.library-references > summary > span:first-child { font-size: 15px; font-weight: 500; letter-spacing: 0; }
+.library-references > summary > span:last-child { font-size: 14px; color: var(--muted); }
+.library-references > summary::after { content: "+"; margin-left: auto; font-size: 24px; }
+.library-references[open] > summary::after { content: "−"; }
+.library-references > p { color: var(--muted); font-size: 15px; line-height: 1.75; max-width: 760px; margin-bottom: 27px; }
+.library-references .specimen-caption h3 { font-size: 15px; }
+.library-page :is(.library-reset, .library-native-input, .library-references > summary):focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.library-page .library-code pre:focus-visible { outline: 2px solid var(--focus); outline-offset: -4px; }
+.library-page .related-components a { font-size: 16px; }
+.library-page-tools { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.library-page-tools > a { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--muted); }
+.library-page-tools > a:hover { color: var(--text); }
+.library-example-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; padding: 0 16px; border-bottom: 1px solid var(--border); }
+.library-example-tabs { display: flex; align-items: center; gap: 4px; }
+.library-example-tabs > button { font: inherit; font-size: 13px; padding: 6px 10px; min-height: 32px; border: 0; border-radius: 5px; background: transparent; color: var(--muted); cursor: pointer; }
+.library-example-tabs > button[aria-selected="true"] { color: var(--text); background: var(--subtle); font-weight: 500; }
+.library-example-tabs > button:hover { color: var(--text); }
+.library-copy-action { position: relative; }
+.library-copy-action > button { display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--muted); border: 0; border-radius: 5px; padding: 6px 8px; min-height: 32px; font: inherit; font-size: 13px; cursor: pointer; }
+.library-copy-action > button:hover { color: var(--text); background: var(--subtle); }
+.library-copy-action .library-copy-help { position: absolute; top: 100%; right: 0; width: 230px; padding: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; z-index: 2; font-size: 13px; }
+.library-example [hidden] { display: none; }
+.library-api { margin-top: 28px; border-bottom: 1px solid var(--border); }
+.library-api > summary { font-size: 15px; font-weight: 500; padding: 18px 0; cursor: pointer; }
+.library-api[open] { padding-bottom: 22px; }
+.library-centered-example { justify-items: center; }
+.library-live-simple-table { display: block; }
+.library-page :is(.library-example-tabs button, .library-copy-action button, .library-api summary):focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+.library-page .section-title h2 { font-size: 18px; }
+@media (max-width: 1050px) {
+  .library-design-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .library-page .page-title-row > div > p { font-size: 16px; }
+  .library-design > header { padding: 18px; }
+  .library-design > header h2 { font-size: 18px; }
+  .library-design > header > p { min-height: 0; }
+  .library-button-stage { min-height: 160px; }
+  .library-design-controls { padding-inline: 18px; gap: 8px; }
+  .library-design-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .library-design-controls > :first-child { grid-column: 1 / -1; }
+  .library-code pre { padding: 17px 16px; font-size: 12px; }
+  .library-live-example { padding: 28px 18px; min-height: 260px; }
+  .library-live-stepper { min-height: 240px; }
+  .library-example-bar { padding-inline: 10px; }
+  .library-example-tabs > button, .library-copy-action > button, .library-reset { min-height: 44px; }
+  .library-live-table, .library-live-kanban { padding: 22px 12px; }
+  .library-export-list { flex-direction: column; gap: 12px; }
+  .library-references > summary { flex-wrap: wrap; gap: 8px 15px; }
+  .library-page .catalog-card-info { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .library-catalog-card { transition: none; }
+  .library-catalog-card:hover { transform: none; }
+}

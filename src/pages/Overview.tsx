@@ -1,368 +1,70 @@
 import { useState } from "react";
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Blocks,
-  Check,
-  CheckCircle2,
-  Flower2,
-  Mail,
-  Plus,
-  Search,
-  Sun,
-} from "lucide-react";
-import {
-  Alert,
-  AvatarGroup,
-  Badge,
-  Brand,
-  Button,
-  Checkbox,
-  Flower,
-  Input,
-  Switch,
-  Tabs,
-} from "../components/ui";
-import { components, variantCount } from "../lib/catalog";
-export function Overview({ notify }: { notify: (text: string) => void }) {
-  const [tab, setTab] = useState("Buttons");
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, Copy, Layers, Plus, Sparkles } from "lucide-react";
+import { PillButton, BrutalistButton, GlassButton, SoftButton, Input, Checkbox, Switch, SoftCard, Badge, Progress, PillTabs, Select } from "hulmio-ui";
+import type { Variant } from "hulmio-ui";
+import { BrandMark } from "../components/ui";
+import { components } from "../lib/catalog";
+import { localPackage } from "../lib/distribution";
+
+const buttonDesigns = { PillButton, BrutalistButton, GlassButton };
+type HeroDesign = keyof typeof buttonDesigns;
+
+export function Overview() {
+  const [design, setDesign] = useState<HeroDesign>("PillButton");
+  const [variant, setVariant] = useState<Variant>("primary");
+  const [enabled, setEnabled] = useState(true);
   const [checked, setChecked] = useState(true);
+  const [email, setEmail] = useState("");
+  const [category, setCategory] = useState("All");
+  const [copiedExample, setCopiedExample] = useState("");
+  const [copyFailed, setCopyFailed] = useState(false);
+  const DesignButton = buttonDesigns[design];
+  const example = `import { ${design} } from "hulmio-ui";\nimport "hulmio-ui/styles.css";\n\n<${design} variant="${variant}">\n  Make something good\n</${design}>`;
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(example); setCopiedExample(example); setCopyFailed(false); }
+    catch { setCopyFailed(true); }
+  };
+  const cards = [
+    { category: "Actions", id: "button", name: "Buttons, with personality.", text: "One action. Eight different ways to say it.", content: <div className="home-button-cluster"><PillButton size="sm">Get started <ArrowUpRight size={15} /></PillButton><BrutalistButton size="sm" variant="secondary">Make it bold</BrutalistButton><SoftButton size="sm"><Plus size={16} /> Add new</SoftButton></div> },
+    { category: "Forms", id: "input", name: "A good place to begin.", text: "Real labels, helpful states, considered details.", content: <div className="home-form-preview"><Input label="Your email" type="email" placeholder="you@something.good" value={email} onChange={event => setEmail(event.target.value)} clearable /></div> },
+    { category: "Selection", id: "switch", name: "Small choices. Clear answers.", text: "Controls that work the way people expect.", content: <div className="home-selection-preview"><Switch label="A little possibility" checked={enabled} onCheckedChange={setEnabled} /><Checkbox label="Keep the good things" checked={checked} onChange={event => setChecked(event.target.checked)} /></div> },
+    { category: "Display", id: "card", name: "Make room for your content.", text: "Different surfaces. A shared design language.", content: <div className="home-card-preview"><SoftCard title="Something good is taking shape." description="A reusable card, ready for your own story."><Badge tone="success" dot>In the making</Badge></SoftCard></div> },
+    { category: "Navigation", id: "tabs", name: "A little change of perspective.", text: "Keyboard-friendly navigation, built right in.", content: <div className="home-tabs-preview"><PillTabs label="Preview perspective" defaultValue="design" items={[{ value: "design", label: "Design", content: <p>A good interface makes space for the work.</p> }, { value: "code", label: "Code", content: <code>import {"{ PillTabs }"} from "hulmio-ui";</code> }]} /></div> },
+    { category: "Feedback", id: "progress", name: "Every step, thoughtfully shown.", text: "Keep people informed, from start to done.", content: <div className="home-progress-preview"><span><Badge tone="success">Looking good</Badge><Badge tone="info" outline>In progress</Badge></span><Progress value={72} label="Your next good thing" /></div> },
+  ];
+  const shown = cards.filter(card => category === "All" || card.category === category);
+
   return (
-    <>
-      <div className="overview-heading">
-        <div className="flex items-center gap-2">
-          <span className="live-dot" />
-          <span className="overline">A COLLECTION OF GOOD DESIGN</span>
+    <div className="home-page">
+      <section className="home-hero" aria-labelledby="home-title">
+        <div className="home-hero-copy">
+          <h1 id="home-title">Good interfaces.<br /><em>Great little pieces.</em></h1>
+          <p>A collection of considered React components. Pick a design, choose your variant, and make something that feels like you.</p>
+          <div className="home-hero-actions"><a className="home-primary-link" href="#/components">Explore the components <ArrowRight size={18} /></a><a className="home-text-link" href="#/using-hulmio">Start building <ArrowUpRight size={16} /></a></div>
+          <div className="home-facts"><span><Layers size={15} /> {components.length} component families</span><span><Check size={15} /> Named React imports</span><span>Light, dark & contrast</span></div>
         </div>
-        <span className="gallery-edition">
-          The visual collection <Flower size={13} />
-        </span>
-      </div>
-      <section className="overview-hero">
-        <div className="hero-copy">
-          <h1>
-            A little structure.
-            <br />A lot of <em>possibility.</em>
-          </h1>
-          <p>
-            A considered collection of foundations, components, and patterns.
-            Everything you need to make something good.
-          </p>
-          <div className="hero-actions">
-            <a
-              href="#/components"
-              className="f-button button-primary button-md rounded-lg"
-            >
-              Explore components <ArrowRight size={15} />
-            </a>
-            <a href="#/branding" className="hero-guide-link">
-              Explore the brand <ArrowUpRight size={14} />
-            </a>
-          </div>
-          <div className="hero-meta">
-            <span>
-              <Blocks size={13} /> {components.length} components
-            </span>
-            <span>
-              <Sun size={14} /> Light & dark
-            </span>
-            <span>
-              <CheckCircle2 size={13} /> Variants & states
-            </span>
-          </div>
-        </div>
-        <div className="hero-art" aria-label="A preview of Forma components">
-          <span className="art-small-cross cross-one">+</span>
-          <span className="art-small-cross cross-two">+</span>
-          <span className="hero-orbit" />
-          <div className="hero-color-card">
-            <span className="overline">NATURALLY CONNECTED</span>
-            <div>
-              <i />
-              <i />
-              <i />
-              <i />
-            </div>
-            <span className="mono">A little color goes a long way.</span>
-          </div>
-          <div className="hero-preview-card">
-            <div className="flex items-center justify-between">
-              <span className="hero-mini-icon">
-                <Flower size={25} />
-              </span>
-              <Badge tone="success" dot>
-                Looking good
-              </Badge>
-            </div>
-            <h3>Make room for good ideas.</h3>
-            <p>Your next great thing starts here.</p>
-            <div className="flex items-center justify-between mt-5">
-              <AvatarGroup />
-              <Button
-                size="sm"
-                onClick={() =>
-                  notify("A little possibility, added to your day.")
-                }
-              >
-                <Plus size={14} /> Create
-              </Button>
-            </div>
-          </div>
-          <div className="hero-floating-tag">
-            <Check size={13} />
-            <span>Thoughtfully connected.</span>
-          </div>
-          <Flower size={80} className="hero-flower" />
+        <div className="home-workbench" data-ui="true" aria-label="Try a named button design">
+          <div className="home-workbench-top"><span>Button preview</span><Sparkles size={17} /></div>
+          <div className={`home-workbench-stage home-stage-${design}`}><DesignButton size="lg" variant={variant}>Make something good <ArrowUpRight size={19} /></DesignButton></div>
+          <div className="home-workbench-controls"><Select label="Design" aria-label="Button design" value={design} onValueChange={value => setDesign(value as HeroDesign)} options={Object.keys(buttonDesigns).map(value => ({ value, label: value }))} /><Select label="Variant" aria-label="Button variant" value={variant} onValueChange={value => setVariant(value as Variant)} options={["primary", "secondary", "outline", "destructive"].map(value => ({ value, label: value[0].toUpperCase() + value.slice(1) }))} /></div>
+          <div className="home-code-heading"><span>React / TypeScript</span><button onClick={() => void copy()} aria-label="Copy named component example">{copiedExample === example ? <Check size={14} /> : <Copy size={14} />}<span aria-live="polite">{copiedExample === example ? "Copied" : "Copy"}</span></button></div>
+          {copyFailed && <p className="home-copy-help" role="status">Select the code below to copy it.</p>}
+          <pre className="home-code"><code>{example}</code></pre>
+          <a className="home-workbench-more" href="#/components/button">Meet all eight button designs <ArrowRight size={15} /></a>
         </div>
       </section>
-      <div className="system-stats">
-        <div>
-          <strong>{components.length}</strong>
-          <span>Building blocks</span>
-        </div>
-        <div>
-          <strong>
-            {variantCount}
-            <span>+</span>
-          </strong>
-          <span>Ways to make it yours</span>
-        </div>
-        <div>
-          <strong>3</strong>
-          <span>Considered themes</span>
-        </div>
-        <div>
-          <span className="stats-infinity">∞</span>
-          <span>Good possibilities</span>
-        </div>
-        <a href="#/patterns">
-          See the full picture.
-          <ArrowUpRight size={15} />
-        </a>
-      </div>
-      <section className="start-section">
-        <div className="section-heading-row">
-          <div>
-            <span className="overline">A GOOD PLACE TO BEGIN</span>
-            <h2>Find your foundation.</h2>
-          </div>
-          <span className="section-aside">
-            From the big picture to the smallest detail.
-          </span>
-        </div>
-        <div className="foundation-cards">
-          <a className="foundation-card" href="#/branding">
-            <div className="foundation-visual branding-visual">
-              <div className="brand-ring" />
-              <Brand />
-              <span className="tiny-star star-one">✳</span>
-              <span className="tiny-star star-two">✳</span>
-              <span className="visual-caption">CONSIDERED BY NATURE.</span>
-            </div>
-            <div className="foundation-card-copy">
-              <span className="card-index">01</span>
-              <div>
-                <h3>Meet the brand</h3>
-                <p>The feeling behind the system.</p>
-              </div>
-              <ArrowUpRight size={18} />
-            </div>
-          </a>
-          <a className="foundation-card" href="#/colors">
-            <div className="foundation-visual tokens-visual">
-              <div className="mini-palette">
-                {["#284c3f", "#d9ed92", "#e8ad8d", "#ece8df", "#b8c7b2"].map(
-                  (c) => (
-                    <span key={c} style={{ background: c }} />
-                  ),
-                )}
-              </div>
-              <div className="token-type-row">
-                <span>Aa</span>
-                <div>
-                  <i />
-                  <i />
-                </div>
-                <span className="mono">4 · 8 · 16 · 24</span>
-              </div>
-            </div>
-            <div className="foundation-card-copy">
-              <span className="card-index">02</span>
-              <div>
-                <h3>Explore foundations</h3>
-                <p>Small details. A shared rhythm.</p>
-              </div>
-              <ArrowUpRight size={18} />
-            </div>
-          </a>
-          <a className="foundation-card" href="#/components">
-            <div className="foundation-visual components-visual">
-              <span className="mini-primary">
-                Let’s make it <ArrowRight size={13} />
-              </span>
-              <span className="mini-switch">
-                <i />
-              </span>
-              <div className="mini-input">
-                <Mail size={14} />
-                <span>you@something.good</span>
-              </div>
-              <span className="mini-badge">
-                <Check size={11} />
-                All set
-              </span>
-              <span className="mini-checkbox">
-                <Check size={12} />
-              </span>
-              <div className="mini-avatar">A</div>
-            </div>
-            <div className="foundation-card-copy">
-              <span className="card-index">03</span>
-              <div>
-                <h3>Pick your building blocks</h3>
-                <p>Good parts. Better together.</p>
-              </div>
-              <ArrowUpRight size={18} />
-            </div>
-          </a>
-        </div>
+      <div className="home-section-divider"><span>Build with Hulmio</span><a href="#home-collection" onClick={event => { event.preventDefault(); document.getElementById("home-collection")?.scrollIntoView({ behavior: "smooth" }); }}>Explore the collection <ArrowDown size={15} /></a></div>
+      <section className="home-collection" id="home-collection" aria-labelledby="home-collection-title">
+        <div className="home-section-heading"><h2 id="home-collection-title">A few good places to start.</h2><a className="home-text-link" href="#/components">Browse all {components.length} families <ArrowUpRight size={17} /></a></div>
+        <div className="home-filter" role="group" aria-label="Preview categories">{["All", "Actions", "Forms", "Selection", "Display", "Navigation", "Feedback"].map(name => <button key={name} aria-pressed={category === name} onClick={() => setCategory(name)}>{name}</button>)}</div>
+        <div className="home-component-grid">{shown.map(card => <article className="home-component-card" key={card.id}><div className={`home-component-preview home-preview-${card.id}`} data-ui="true">{card.content}</div><div className="home-component-info"><h3><a href={`#/components/${card.id}`}>{card.name}<ArrowUpRight size={17} /></a></h3><p>{card.text}</p></div></article>)}</div>
       </section>
-      <section className="essentials-section">
-        <div className="section-heading-row">
-          <div>
-            <span className="overline">LITTLE THINGS. BIG DIFFERENCE.</span>
-            <h2>A few of the essentials.</h2>
-          </div>
-          <a className="text-link" href="#/components">
-            View all components <ArrowRight size={14} />
-          </a>
-        </div>
-        <div className="overview-playground">
-          <div className="playground-toolbar">
-            <Tabs
-              items={["Buttons", "Inputs", "Selection", "Feedback"]}
-              value={tab}
-              onChange={setTab}
-              label="Essential component previews"
-              panelId="essentials-panel"
-            />
-          </div>
-          <div
-            className={`overview-demo demo-${tab.toLowerCase()}`}
-            role="tabpanel"
-            id="essentials-panel"
-            aria-label={tab}
-            tabIndex={0}
-          >
-            {tab === "Buttons" ? (
-              <>
-                {[
-                  {
-                    name: "Primary",
-                    variant: "primary",
-                    label: (
-                      <>
-                        Get started <ArrowRight size={14} />
-                      </>
-                    ),
-                  },
-                  {
-                    name: "Secondary",
-                    variant: "secondary",
-                    label: "A little softer",
-                  },
-                  {
-                    name: "Outline",
-                    variant: "outline",
-                    label: "Keep it simple",
-                  },
-                  {
-                    name: "Ghost",
-                    variant: "ghost",
-                    label: "Quietly useful",
-                  },
-                ].map((v) => (
-                  <div key={v.name}>
-                    <Button
-                      variant={v.variant as "primary"}
-                      onClick={() =>
-                        notify(
-                          `${v.name} button. A small step toward something good.`,
-                        )
-                      }
-                    >
-                      {v.label}
-                    </Button>
-                    <span>{v.name}</span>
-                  </div>
-                ))}
-              </>
-            ) : tab === "Inputs" ? (
-              <>
-                <Input
-                  label="Email address"
-                  type="email"
-                  leading={<Mail size={15} />}
-                  placeholder="you@example.com"
-                />
-                <Input
-                  label="Find something good"
-                  type="search"
-                  leading={<Search size={15} />}
-                  placeholder="Search the possibilities…"
-                  clearable
-                />
-              </>
-            ) : tab === "Selection" ? (
-              <>
-                <Checkbox label="Count me in" defaultChecked />
-                <Switch
-                  label="A little more possibility"
-                  checked={checked}
-                  onChange={setChecked}
-                />
-                <Badge tone="success" dot>
-                  All set
-                </Badge>
-              </>
-            ) : (
-              <>
-                <Alert title="Looking good." tone="success">
-                  Your changes are saved.
-                </Alert>
-                <Badge tone="success" dot>
-                  Published
-                </Badge>
-              </>
-            )}
-          </div>
-          <div className="playground-caption">
-            <span>
-              <span className="live-dot" />
-              Explore the details. Try the interactions.
-            </span>
-            <a
-              href={`#/components/${tab === "Inputs" ? "input" : tab === "Selection" ? "switch" : tab === "Feedback" ? "alert" : "button"}`}
-            >
-              See all variants <ArrowUpRight size={13} />
-            </a>
-          </div>
-        </div>
-      </section>
-      <section className="bottom-callout">
-        <span className="callout-flower">
-          <Flower size={36} />
-        </span>
-        <div>
-          <h3>The little details, all together.</h3>
-          <p>
-            Explore colors, shapes, and states. Find a design that feels right.
-          </p>
-        </div>
-        <a className="text-link" href="#/components">
-          Browse the collection <ArrowRight size={15} />
-        </a>
-      </section>
-    </>
+      <section className="home-process" aria-labelledby="home-process-title"><div className="home-section-heading"><h2 id="home-process-title">Find it. Import it. Make it yours.</h2><p>A clear path from the first preview to your next React app.</p></div><div className="home-process-grid">{[
+        ["01", "Pick your piece.", "Browse by component, then choose the design that fits. Every design has a name and a working preview."],
+        ["02", "Bring it into your app.", `Build the local ${localPackage.filename} package. Import the named components and one stylesheet.`],
+        ["03", "Put your ideas into it.", "Choose your variants, set your theme, add your content. The components take care of the little details."],
+      ].map(([number, title, description]) => <article key={number}><h3>{title}</h3><p>{description}</p></article>)}</div></section>
+      <section className="home-closing"><BrandMark size={66} /><h2>Your next good thing starts here.</h2><a className="home-primary-link" href="#/components">Find your building blocks <ArrowUpRight size={18} /></a></section>
+    </div>
   );
 }

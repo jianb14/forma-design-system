@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hulmio Components"
+  short_description: "Maintain Hulmio components, examples, and docs"
+  default_prompt: "Use $hulmio-components to update a Hulmio component and keep its gallery, package API, and documentation in sync."

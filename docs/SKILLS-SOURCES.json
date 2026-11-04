@@ -1,0 +1,551 @@
+{
+  "installed_on": "2026-11-04",
+  "timezone": "Asia/Manila",
+  "installation_kind": "User-scoped skill folders, downloaded with Codex skill-installer and then reviewed/adapted before copying",
+  "install_root": "$CODEX_HOME/skills (defaults to ~/.codex/skills)",
+  "new_skill_count": 26,
+  "existing_skills_preserved": [
+    "hulmio-components",
+    "hulmio-release",
+    "security-best-practices"
+  ],
+  "plugin_hooks_installed": false,
+  "application_code_changed": false,
+  "verification": {
+    "python_syntax_files": 19,
+    "node_syntax_files": 15,
+    "checks": [
+      {
+        "check": "ui-ux-search",
+        "exit_code": 0,
+        "matched_results": 1,
+        "source": "ux-guidelines.csv"
+      },
+      {
+        "check": "ui-ux-react",
+        "exit_code": 0,
+        "matched_results": 1,
+        "source": "stacks/react.csv"
+      },
+      {
+        "check": "taste-draw",
+        "exit_code": 0,
+        "direction_created": true
+      },
+      {
+        "check": "security-validators",
+        "exit_code": 1,
+        "summary": [
+          "\u2139 tests 65",
+          "\u2139 pass 46",
+          "\u2139 fail 7",
+          "\u2139 skipped 12"
+        ],
+        "limitation": "Windows lacks the OS no-follow and nonblocking input protections required by the upstream validator CLI. The unmodified suite reports 46 passed, 7 failed, 12 skipped. Full audit execution is not verified; guidance remains available. Use a suitably sandboxed compatible environment for a full audit."
+      }
+    ]
+  },
+  "skills": [
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/brainstorming",
+      "directory": "brainstorming",
+      "source_tree_sha256": "f87bf8d53f18b114edaae1cdb29b2ccc20b9dc4be5eefeb308687590c6d7bf2b",
+      "source_file_count": 8,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "brainstorming",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "f87bf8d53f18b114edaae1cdb29b2ccc20b9dc4be5eefeb308687590c6d7bf2b",
+      "installed_file_count": 8,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/diagnosing-superpowers",
+      "directory": "diagnosing-superpowers",
+      "source_tree_sha256": "d41bae387f200b3d357c80c18c227496ba5f29952b0db56151b20516ff9b1598",
+      "source_file_count": 20,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "diagnosing-superpowers",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "d41bae387f200b3d357c80c18c227496ba5f29952b0db56151b20516ff9b1598",
+      "installed_file_count": 20,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/dispatching-parallel-agents",
+      "directory": "dispatching-parallel-agents",
+      "source_tree_sha256": "a07f1c35d25cb21d078a48f42073d2da0df25d49ba034879f807ef5e686ff955",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "dispatching-parallel-agents",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "a07f1c35d25cb21d078a48f42073d2da0df25d49ba034879f807ef5e686ff955",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/executing-plans",
+      "directory": "executing-plans",
+      "source_tree_sha256": "bb6a9be61543f2cc410954e84920e7ba44ce383749d2edf93c1203eab36104be",
+      "source_file_count": 3,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "executing-plans",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "bb6a9be61543f2cc410954e84920e7ba44ce383749d2edf93c1203eab36104be",
+      "installed_file_count": 3,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/finishing-a-development-branch",
+      "directory": "finishing-a-development-branch",
+      "source_tree_sha256": "02db5c2ad9d5c3c3345dfbf04dc85b256fca6aa67a5af1dcd615483888cd2ab1",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "finishing-a-development-branch",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "02db5c2ad9d5c3c3345dfbf04dc85b256fca6aa67a5af1dcd615483888cd2ab1",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/receiving-code-review",
+      "directory": "receiving-code-review",
+      "source_tree_sha256": "9f9b9bf6d2d5c93c20c0fbda1b43b0c667ee7f628f7aaaa94bbc100bb9dcfd95",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "receiving-code-review",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "9f9b9bf6d2d5c93c20c0fbda1b43b0c667ee7f628f7aaaa94bbc100bb9dcfd95",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/requesting-code-review",
+      "directory": "requesting-code-review",
+      "source_tree_sha256": "fab03caaa26a6c49d744778d763cbc1a052066d456bd518aa024d6f14b14b6ca",
+      "source_file_count": 2,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "requesting-code-review",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "fab03caaa26a6c49d744778d763cbc1a052066d456bd518aa024d6f14b14b6ca",
+      "installed_file_count": 2,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/subagent-driven-development",
+      "directory": "subagent-driven-development",
+      "source_tree_sha256": "e016ad8e23c06a653bbac15a7a68166a82f08befe98ef2342ca4af5f47967cf2",
+      "source_file_count": 15,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "subagent-driven-development",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "e016ad8e23c06a653bbac15a7a68166a82f08befe98ef2342ca4af5f47967cf2",
+      "installed_file_count": 15,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/systematic-debugging",
+      "directory": "systematic-debugging",
+      "source_tree_sha256": "e63e8dc75d6ac4fb6013335b1b8a1e434d976884c45c3b5206bee07527fc7799",
+      "source_file_count": 6,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "systematic-debugging",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "e63e8dc75d6ac4fb6013335b1b8a1e434d976884c45c3b5206bee07527fc7799",
+      "installed_file_count": 6,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/test-driven-development",
+      "directory": "test-driven-development",
+      "source_tree_sha256": "acf361b1743f444028ed8123f1ccf2df6e1d4dcca65b3f982aedb42f4f68ec44",
+      "source_file_count": 2,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "test-driven-development",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "acf361b1743f444028ed8123f1ccf2df6e1d4dcca65b3f982aedb42f4f68ec44",
+      "installed_file_count": 2,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/using-git-worktrees",
+      "directory": "using-git-worktrees",
+      "source_tree_sha256": "97b924d20b46b90bb1bd3735c405f9228390553693f112caf3cfa055a5bb334b",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "using-git-worktrees",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "97b924d20b46b90bb1bd3735c405f9228390553693f112caf3cfa055a5bb334b",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/using-superpowers",
+      "directory": "using-superpowers",
+      "source_tree_sha256": "918e8664455bde6d9a8540a5c99685fb52f9fe07c7dfc48cc1e3281dc4d98c83",
+      "source_file_count": 8,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "using-superpowers",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "918e8664455bde6d9a8540a5c99685fb52f9fe07c7dfc48cc1e3281dc4d98c83",
+      "installed_file_count": 8,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/verification-before-completion",
+      "directory": "verification-before-completion",
+      "source_tree_sha256": "29d4bd654fdc57679501bf73b2821abf4ce035c536054a3e8e90ed7ed38644c7",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "verification-before-completion",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "29d4bd654fdc57679501bf73b2821abf4ce035c536054a3e8e90ed7ed38644c7",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/writing-plans",
+      "directory": "writing-plans",
+      "source_tree_sha256": "70aa13d73e96a9d810a3ef1c52f820686dfadd7755c9b9c57d6ef3e983328cb6",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "writing-plans",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "70aa13d73e96a9d810a3ef1c52f820686dfadd7755c9b9c57d6ef3e983328cb6",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "obra/superpowers",
+      "commit": "22f0b463e7a5e579904dd6211a520321035526f7",
+      "path": "skills/writing-skills",
+      "directory": "writing-skills",
+      "source_tree_sha256": "dd7ee99134df6519e78a9fc5c82370c41659e1d260e32d438189ea3ea39c8a7e",
+      "source_file_count": 10,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "writing-skills",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "dd7ee99134df6519e78a9fc5c82370c41659e1d260e32d438189ea3ea39c8a7e",
+      "installed_file_count": 10,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "DietrichGebert/ponytail",
+      "commit": "96608e078b2d5ea607c5c3b8b5a54d1c1fba6846",
+      "path": "skills/ponytail",
+      "directory": "ponytail",
+      "source_tree_sha256": "8c528dc79e2839e56beac2fefe7d7bdaac7ce165f46c9db1b1662ddd9667df46",
+      "source_file_count": 1,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": false,
+        "message": "Unexpected key(s) in SKILL.md frontmatter: argument-hint. Allowed properties are: allowed-tools, description, license, metadata, name"
+      },
+      "adaptations": [
+        "Moved unsupported argument-hint frontmatter to metadata.upstream-argument-hint"
+      ],
+      "name": "ponytail",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "9b7f268af8e4af4ee8056ffebdc74e35a902274f38d473795d0ce0c2e24c244b",
+      "installed_file_count": 1,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "cloudflare/security-audit-skill",
+      "commit": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "path": "skills/security-audit",
+      "directory": "security-audit",
+      "source_tree_sha256": "7de6865df004caa278b7579166d686a6940c5de98d8f78615ad2ca943db60d11",
+      "source_file_count": 20,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "security-audit",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "7de6865df004caa278b7579166d686a6940c5de98d8f78615ad2ca943db60d11",
+      "installed_file_count": 20,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "Leonxlnx/taste-skill",
+      "commit": "12af471f627f866411b4bd785b19646d3672784c",
+      "path": "skills/taste-skill",
+      "directory": "design-taste-frontend",
+      "source_tree_sha256": "99da8eadb2980799e0c4e111907266fec46257ad9d9bb423caf4cd67a018c4c4",
+      "source_file_count": 39,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "design-taste-frontend",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "99da8eadb2980799e0c4e111907266fec46257ad9d9bb423caf4cd67a018c4c4",
+      "installed_file_count": 39,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+      "commit": "713eef51b04efc98d6fa565323b495f7c9c89fd4",
+      "path": ".claude/skills/ui-ux-pro-max",
+      "directory": "ui-ux-pro-max",
+      "source_tree_sha256": "6bb57cf497824434407785044194cccd8ae3482749d195a3ff180f9276c652a5",
+      "source_file_count": 74,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [
+        "Resolved 11 Claude-plugin-only search paths relative to this installed skill directory"
+      ],
+      "name": "ui-ux-pro-max",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "bc266c9e2566ae88296f000e58325bd0fe675e32edf5b64b6558f158f422f562",
+      "installed_file_count": 74,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "path": "skills/react-best-practices",
+      "directory": "react-best-practices",
+      "source_tree_sha256": "1eac6c4db59291404dff537eb9607e125fd31ebdc17a5fbc0631e0ec0c5d1b05",
+      "source_file_count": 76,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "vercel-react-best-practices",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "1eac6c4db59291404dff537eb9607e125fd31ebdc17a5fbc0631e0ec0c5d1b05",
+      "installed_file_count": 76,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "commit": "1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62",
+      "path": "skills/composition-patterns",
+      "directory": "composition-patterns",
+      "source_tree_sha256": "3aedb52e074252062ec63bd345cba544d7dd97653421a7c182025ca40f35b9d4",
+      "source_file_count": 14,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "vercel-composition-patterns",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "3aedb52e074252062ec63bd345cba544d7dd97653421a7c182025ca40f35b9d4",
+      "installed_file_count": 14,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/diagnosing-bugs",
+      "directory": "diagnosing-bugs",
+      "source_tree_sha256": "e29cfd15c8bb03b5676d8ae9f7d5700915eebdc6cd930b140fb0d483a6408961",
+      "source_file_count": 3,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "diagnosing-bugs",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "e29cfd15c8bb03b5676d8ae9f7d5700915eebdc6cd930b140fb0d483a6408961",
+      "installed_file_count": 3,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/tdd",
+      "directory": "tdd",
+      "source_tree_sha256": "bff6c3d97a7bdc1ace887f479dbd8ee633fa83fdc5217b1dc0a289bcb1ef9eb5",
+      "source_file_count": 4,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "tdd",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "bff6c3d97a7bdc1ace887f479dbd8ee633fa83fdc5217b1dc0a289bcb1ef9eb5",
+      "installed_file_count": 4,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/code-review",
+      "directory": "code-review",
+      "source_tree_sha256": "0e13c7122849e7271b45cd90b533a2d87b3349a9e87d30c039ee3234429bb927",
+      "source_file_count": 2,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "code-review",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "0e13c7122849e7271b45cd90b533a2d87b3349a9e87d30c039ee3234429bb927",
+      "installed_file_count": 2,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/codebase-design",
+      "directory": "codebase-design",
+      "source_tree_sha256": "b2893106f5f5c22ecf99d00db3b834f2c34da7607dac13ac979aa8297889b22e",
+      "source_file_count": 4,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": true,
+        "message": "Skill is valid!"
+      },
+      "adaptations": [],
+      "name": "codebase-design",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "b2893106f5f5c22ecf99d00db3b834f2c34da7607dac13ac979aa8297889b22e",
+      "installed_file_count": 4,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    },
+    {
+      "repo": "mattpocock/skills",
+      "commit": "4ae2317ddb22b046e26455e4f9c9b3aaaf62212d",
+      "path": "skills/engineering/setup-matt-pocock-skills",
+      "directory": "setup-matt-pocock-skills",
+      "source_tree_sha256": "5a4ba54d5cf87d6dfc209c2a3f6787e02a055906f00975d4379d1904acaf0308",
+      "source_file_count": 7,
+      "source_integrity": "All files match pinned GitHub git-blob hashes",
+      "upstream_validation": {
+        "valid": false,
+        "message": "Unexpected key(s) in SKILL.md frontmatter: disable-model-invocation. Allowed properties are: allowed-tools, description, license, metadata, name"
+      },
+      "adaptations": [
+        "Preserved upstream explicit-only invocation in agents/openai.yaml",
+        "Moved unsupported disable-model-invocation frontmatter to metadata.upstream-disable-model-invocation"
+      ],
+      "name": "setup-matt-pocock-skills",
+      "validation": "Skill is valid!",
+      "installed_tree_sha256": "07f7a1fa5e9e10fdd76ca7daa4bbee7c18126d2a489ff77a533c22642da632f3",
+      "installed_file_count": 7,
+      "installed_verification": "Structure valid; all installed file hashes match reviewed prepared copy"
+    }
+  ]
+}

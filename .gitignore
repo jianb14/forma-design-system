@@ -5,3 +5,6 @@ playwright-report/
 .sites-local/
 *.local
 *.tsbuildinfo
+artifacts/
+.package-check/
+.npm-cache/

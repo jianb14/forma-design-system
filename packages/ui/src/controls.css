@@ -1,0 +1,80 @@
+.h-field:where([data-hulmio-ui]), .h-fieldset:where([data-hulmio-ui]) { min-width: 0; color: var(--hulmio-text); font-family: inherit; font-size: 16px; line-height: 1.5; }
+.h-form:where([data-hulmio-ui]) { display: grid; gap: 20px; min-width: 0; }
+.h-label:where([data-hulmio-ui]), :where([data-hulmio-ui]) .h-label { display: block; margin: 0 0 7px; padding: 0; color: var(--hulmio-text); font-size: 14px; font-weight: 550; line-height: 1.5; }
+:where([data-hulmio-ui]) .h-required { color: var(--hulmio-danger); }
+:where([data-hulmio-ui]) .h-hint, :where([data-hulmio-ui]) .h-error { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--hulmio-muted); }
+:where([data-hulmio-ui]) .h-error { color: var(--hulmio-danger); }
+.h-fieldset:where([data-hulmio-ui]) { margin: 0; padding: 0; border: 0; }
+.h-fieldset:where([data-hulmio-ui]) > legend { float: none; width: auto; }
+:where([data-hulmio-ui]) .h-control { display: block; width: 100%; min-width: 0; min-height: 42px; margin: 0; padding: 10px 12px; border: 1px solid var(--hulmio-control-border); border-radius: var(--hulmio-radius-md, 8px); background: var(--hulmio-surface); color: var(--hulmio-text); font: inherit; line-height: 1.45; transition: border-color .15s, box-shadow .15s; }
+:where([data-hulmio-ui]) .h-control::placeholder { color: var(--hulmio-muted); opacity: 1; }
+:where([data-hulmio-ui]) .h-control:focus { outline: 2px solid var(--hulmio-focus); outline-offset: 0; border-color: var(--hulmio-focus); box-shadow: none; }
+:where([data-hulmio-ui]) .h-control:hover:not(:focus):not(:disabled):not([aria-invalid="true"]) { border-color: color-mix(in srgb, var(--hulmio-control-border) 60%, var(--hulmio-muted)); }
+:where([data-hulmio-ui]) .h-control[aria-invalid="true"]:focus { outline-color: var(--hulmio-danger); border-color: var(--hulmio-danger); }
+:where([data-hulmio-ui]) .h-control[aria-invalid="true"], :where([data-hulmio-ui]) .h-tag-shell:has([aria-invalid="true"]) { border-color: var(--hulmio-danger); }
+:where([data-hulmio-ui]) .h-control:disabled, :where([data-hulmio-ui]) .h-disabled { opacity: .5; cursor: not-allowed; }
+.h-fieldset:where([data-hulmio-ui]):disabled { opacity: .55; }
+:where([data-hulmio-ui]) .h-textarea { resize: vertical; min-height: 110px; }
+:where([data-hulmio-ui]) .h-count { display: block; margin-top: 5px; color: var(--hulmio-muted); font-size: 12px; text-align: end; }
+.h-choice-field:where([data-hulmio-ui]) { color: var(--hulmio-text); font-family: inherit; font-size: 14px; }
+:where([data-hulmio-ui]) .h-choice { display: flex; align-items: center; gap: 9px; min-height: 28px; width: fit-content; margin: 0; font-size: 14px; line-height: 1.5; cursor: pointer; }
+:where([data-hulmio-ui]) .h-choice-input { flex-shrink: 0; width: 17px; height: 17px; margin: 0; accent-color: var(--hulmio-primary); cursor: pointer; }
+:where([data-hulmio-ui]) .h-choice-input:focus-visible { outline: 2px solid var(--hulmio-focus); outline-offset: 3px; }
+:where([data-hulmio-ui]) .h-choice:has(input:disabled) { opacity: .5; cursor: not-allowed; }
+:where([data-hulmio-ui]) .h-options { display: grid; gap: 7px; }
+:where([data-hulmio-ui]) .h-switch { position: relative; }
+:where([data-hulmio-ui]) .h-switch-input { position: absolute; left: 0; width: 38px; height: 24px; opacity: 0; margin: 0; cursor: pointer; }
+:where([data-hulmio-ui]) .h-switch-track { flex-shrink: 0; position: relative; width: 38px; height: 24px; border: 1px solid var(--hulmio-control-border); border-radius: 999px; background: var(--hulmio-subtle); pointer-events: none; transition: background .15s; }
+:where([data-hulmio-ui]) .h-switch-track::after { content: ""; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--hulmio-muted); transition: transform .15s, background .15s; }
+:where([data-hulmio-ui]) .h-switch-input:checked + .h-switch-track { background: var(--hulmio-primary); border-color: var(--hulmio-primary); }
+:where([data-hulmio-ui]) .h-switch-input:checked + .h-switch-track::after { transform: translateX(14px); background: var(--hulmio-on-primary); }
+:where([data-hulmio-ui]) .h-switch-input:focus-visible + .h-switch-track { outline: 2px solid var(--hulmio-focus); outline-offset: 3px; }
+:where([data-hulmio-ui]) .h-select { padding-inline-end: 30px; }
+:where([data-hulmio-ui]) .h-multi-select { min-height: 130px; padding: 5px; }
+:where([data-hulmio-ui]) .h-multi-select option { padding: 7px 9px; border-radius: 4px; }
+:where([data-hulmio-ui]) .h-slider-row { display: flex; align-items: center; gap: 12px; }
+:where([data-hulmio-ui]) .h-slider { display: block; flex: 1; width: 100%; min-width: 0; height: 26px; margin: 0; accent-color: var(--hulmio-primary); cursor: pointer; }
+:where([data-hulmio-ui]) .h-slider:focus-visible { outline: 2px solid var(--hulmio-focus); outline-offset: 4px; border-radius: 4px; }
+:where([data-hulmio-ui]) .h-slider:disabled { opacity: .5; cursor: not-allowed; }
+:where([data-hulmio-ui]) .h-slider-value { min-width: 3ch; color: var(--hulmio-text); text-align: end; font-variant-numeric: tabular-nums; }
+:where([data-hulmio-ui]) .h-rating { display: flex; flex-wrap: wrap; gap: 4px; }
+:where([data-hulmio-ui]) .h-rating-option { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 36px; border-radius: 4px; color: var(--hulmio-control-border); font-size: 30px; line-height: 1; cursor: pointer; }
+:where([data-hulmio-ui]) .h-rating-option[data-filled] { color: var(--hulmio-warning); }
+:where([data-hulmio-ui]) .h-rating-option input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: inherit; }
+:where([data-hulmio-ui]) .h-rating-option:has(input:focus-visible) { outline: 2px solid var(--hulmio-focus); outline-offset: 2px; }
+:where([data-hulmio-ui]) .h-rating-option:has(input[aria-readonly="true"]) { cursor: default; }
+:where([data-hulmio-ui]) .h-otp-input { width: min(100%, 24ch); min-height: 52px; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 22px; letter-spacing: .35em; text-align: center; }
+:where([data-hulmio-ui]) .h-tag-shell { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 44px; padding: 6px 8px; border: 1px solid var(--hulmio-control-border); border-radius: var(--hulmio-radius-md, 8px); background: var(--hulmio-surface); }
+:where([data-hulmio-ui]) .h-tag-shell:focus-within { border-color: var(--hulmio-focus); outline: 2px solid var(--hulmio-focus); outline-offset: 0; box-shadow: none; }
+:where([data-hulmio-ui]) .h-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 5px 3px 8px; border-radius: 5px; background: var(--hulmio-soft); color: var(--hulmio-primary); font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+:where([data-hulmio-ui]) .h-tag button { display: inline-flex; align-items: center; justify-content: center; width: 23px; height: 23px; margin: 0; padding: 0; border: 0; border-radius: 3px; background: transparent; color: inherit; font: inherit; font-size: 18px; cursor: pointer; }
+:where([data-hulmio-ui]) .h-tag button:hover { background: color-mix(in srgb, var(--hulmio-primary) 12%, transparent); }
+:where([data-hulmio-ui]) .h-tag button:focus-visible { outline: 2px solid var(--hulmio-focus); outline-offset: 1px; }
+:where([data-hulmio-ui]) .h-tag-entry { flex: 1; min-width: min(100%, 8rem); width: 8rem; min-height: 28px; margin: 0; padding: 0 3px; border: 0; background: transparent; color: var(--hulmio-text); font: inherit; outline: none; }
+:where([data-hulmio-ui]) .h-tag-entry:is(:focus, :focus-visible) { outline: none; box-shadow: none; }
+:where([data-hulmio-ui]) .h-color-picker { width: 64px; height: 44px; padding: 4px; cursor: pointer; }
+:where([data-hulmio-ui]) .h-date-range { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+:where([data-hulmio-ui]) .h-file-upload { padding: 7px; font-size: 13px; }
+:where([data-hulmio-ui]) .h-file-upload::file-selector-button { min-height: 30px; margin-inline-end: 10px; padding: 5px 10px; border: 0; border-radius: 4px; background: var(--hulmio-soft); color: var(--hulmio-primary); font: inherit; cursor: pointer; }
+/* Input presets keep the existing Input API and share its focus/error states. */
+:where([data-hulmio-ui="input"]).field > label { font-size: 14px; line-height: 1.5; }
+:where([data-hulmio-ui="input"]) .input-shell input { height: 42px; font-size: 16px; }
+:where([data-hulmio-ui="input"]) :is(.field-helper, .field-error) { font-size: 13px; line-height: 1.5; }
+:where([data-hulmio-ui="input"]).h-input-outline .input-shell { border-width: 1px; border-radius: var(--hulmio-radius-md, 10px); }
+:where([data-hulmio-ui="input"]).h-input-filled .input-shell { background: var(--hulmio-subtle); border-color: transparent; border-radius: 10px; }
+:where([data-hulmio-ui="input"]).h-input-filled .input-shell:focus-within { border-color: var(--hulmio-focus); }
+:where([data-hulmio-ui="input"]).h-input-underline .input-shell { border: 0; border-bottom: 1.5px solid var(--hulmio-control-border); border-radius: 0; background: transparent; }
+:where([data-hulmio-ui="input"]).h-input-underline .input-shell:focus-within { border-color: var(--hulmio-focus); box-shadow: none; }
+:where([data-hulmio-ui="input"]).h-input-filled .input-invalid,
+:where([data-hulmio-ui="input"]).h-input-underline .input-invalid { border-color: var(--hulmio-danger); }
+:where([data-hulmio-ui="input"]).h-input-filled .input-invalid:focus-within,
+:where([data-hulmio-ui="input"]).h-input-underline .input-invalid:focus-within { border-color: var(--hulmio-danger); }
+[data-hulmio-ui="input"] .input-shell:is(.input-invalid, :has([aria-invalid="true"])) { border-color: var(--hulmio-danger); outline-color: var(--hulmio-danger); }
+[data-hulmio-ui="input"] .input-shell:is(.input-invalid, :has([aria-invalid="true"])):focus-within { outline-color: var(--hulmio-danger); }
+[data-hulmio-ui="field"]:has(> .h-error) :is(.input-shell, .h-control, .h-tag-shell, .h-select-trigger) { border-color: var(--hulmio-danger); }
+[data-hulmio-ui="field"]:has(> .h-error) :is(.input-shell, .h-control, .h-tag-shell):focus-within { outline-color: var(--hulmio-danger); }
+[data-hulmio-ui="field"] > .h-error { color: var(--hulmio-danger); }
+:where([data-hulmio-ui]) .h-select:is(:focus, :focus-visible) { outline: none; border-color: var(--hulmio-focus); box-shadow: none; }
+@media (max-width: 420px) { :where([data-hulmio-ui]) .h-date-range { grid-template-columns: minmax(0, 1fr); } }
+@media (pointer: coarse) { :where([data-hulmio-ui]) .h-control { min-height: 44px; font-size: 16px; } :where([data-hulmio-ui="input"]) .input-shell input { min-height: 44px; font-size: 16px; } :where([data-hulmio-ui]) .h-rating-option { width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { :where([data-hulmio-ui]) :is(.h-control, .h-switch-track, .h-switch-track::after) { transition: none; } }

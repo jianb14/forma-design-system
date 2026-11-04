@@ -1,0 +1,282 @@
+/* Shared component rules. Gallery layout belongs in src/styles.css. */
+
+.field:where([data-hulmio-ui]) {
+  min-width: 0;
+}
+.field:where([data-hulmio-ui]) > label,
+.field:where([data-hulmio-ui]) > legend {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
+.f-button:where([data-hulmio-ui]) {
+  border: 1px solid transparent;
+  letter-spacing: -0.01em;
+  text-decoration: none !important;
+  line-height: 1.25;
+  flex-shrink: 0;
+}
+.f-button:where([data-hulmio-ui]):active:not(:disabled) {
+  transform: scale(.97);
+}
+.button-xs:where([data-hulmio-ui]) {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 10px;
+  gap: 6px;
+}
+.button-sm:where([data-hulmio-ui]) {
+  height: 33px;
+  padding: 0 12px;
+  font-size: 11px;
+  gap: 7px;
+}
+.button-md:where([data-hulmio-ui]) {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 12px;
+}
+.button-lg:where([data-hulmio-ui]) {
+  min-height: 48px;
+  padding: 0 21px;
+  font-size: 14px;
+}
+.button-xl:where([data-hulmio-ui]) {
+  min-height: 56px;
+  padding: 0 26px;
+  font-size: 16px;
+}
+.button-primary:where([data-hulmio-ui]) {
+  background: var(--hulmio-primary);
+  color: var(--hulmio-on-primary);
+}
+.button-primary:where([data-hulmio-ui]):hover {
+  background: var(--hulmio-primary-hover);
+}
+.button-secondary:where([data-hulmio-ui]) {
+  background: var(--hulmio-lime);
+  color: var(--hulmio-on-lime);
+}
+.button-secondary:where([data-hulmio-ui]):hover {
+  background: #cce580;
+}
+.button-outline:where([data-hulmio-ui]) {
+  background: var(--hulmio-surface);
+  border-color: var(--hulmio-control-border);
+  color: var(--hulmio-text);
+}
+.button-outline:where([data-hulmio-ui]):hover {
+  background: var(--hulmio-subtle);
+  border-color: var(--hulmio-muted);
+}
+.button-ghost:where([data-hulmio-ui]) {
+  background: transparent;
+  color: var(--hulmio-text);
+}
+.button-ghost:where([data-hulmio-ui]):hover {
+  background: var(--hulmio-subtle);
+}
+.button-link:where([data-hulmio-ui]) {
+  background: transparent;
+  color: var(--hulmio-primary);
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+}
+.button-soft:where([data-hulmio-ui]) {
+  background: var(--hulmio-soft);
+  color: var(--hulmio-primary);
+}
+.button-soft:where([data-hulmio-ui]):hover {
+  filter: brightness(0.96);
+}
+.button-destructive:where([data-hulmio-ui]) {
+  background: #b4473b;
+  color: #fff;
+}
+.button-destructive:where([data-hulmio-ui]):hover {
+  background: #99382e;
+}
+.button-success:where([data-hulmio-ui]) {
+  background: var(--hulmio-success-bg);
+  color: var(--hulmio-success);
+}
+.button-warning:where([data-hulmio-ui]) {
+  background: var(--hulmio-warning-bg);
+  color: var(--hulmio-warning);
+}
+.button-information:where([data-hulmio-ui]) {
+  background: var(--hulmio-info-bg);
+  color: var(--hulmio-info);
+}
+
+:where([data-hulmio-ui="input"]) .input-shell {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--hulmio-control-border);
+  background: var(--hulmio-surface);
+  border-radius: var(--hulmio-radius-md, 10px);
+  overflow: hidden;
+  transition:
+    border-color 0.15s,
+    outline-color 0.15s;
+}
+:where([data-hulmio-ui="input"]) .input-shell:focus-within {
+  border-color: var(--hulmio-focus);
+  outline: 2px solid var(--hulmio-focus);
+  outline-offset: 0;
+  box-shadow: none;
+}
+:where([data-hulmio-ui="input"]) .input-shell:hover:not(:focus-within):not(.is-disabled):not(.input-invalid):not(:has([aria-invalid="true"])) { border-color: color-mix(in srgb, var(--hulmio-control-border) 60%, var(--hulmio-muted)); }
+:where([data-hulmio-ui="input"]) .input-shell > input:focus-visible { outline: none; box-shadow: none; }
+:where([data-hulmio-ui="input"]) .input-shell input {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  background: transparent;
+  border: 0;
+  padding: 0 12px;
+  color: var(--hulmio-text);
+  outline: none;
+  font-size: 12px;
+}
+:where([data-hulmio-ui="input"]) input::placeholder,
+:where([data-hulmio-ui="input"]) textarea::placeholder {
+  color: var(--hulmio-muted);
+  opacity: 0.8;
+}
+:where([data-hulmio-ui="input"]) .input-shell:has(.input-affix:first-child) input {
+  padding-left: 9px;
+}
+:where([data-hulmio-ui="input"]) .input-affix {
+  display: inline-flex;
+  align-items: center;
+  color: var(--hulmio-muted);
+  padding: 0 11px;
+  font-size: 12px;
+}
+:where([data-hulmio-ui="input"]) .input-affix:first-child {
+  padding-right: 0;
+}
+:where([data-hulmio-ui="input"]) .input-affix:last-child {
+  padding-left: 0;
+}
+:where([data-hulmio-ui="input"]) .input-action {
+  width: 36px;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--hulmio-muted);
+  flex-shrink: 0;
+}
+:where([data-hulmio-ui="input"]) .input-action:hover {
+  color: var(--hulmio-text);
+  background: var(--hulmio-subtle);
+}
+:where([data-hulmio-ui="input"]) .input-invalid {
+  border-color: var(--hulmio-danger);
+}
+:where([data-hulmio-ui="input"]) .field-helper,
+:where([data-hulmio-ui="input"]) .field-error {
+  font-size: 10px;
+  margin-top: 6px;
+  color: var(--hulmio-muted);
+  line-height: 1.6;
+}
+[data-hulmio-ui="input"] .field-error {
+  color: var(--hulmio-danger);
+}
+
+.dialog-overlay:where([data-hulmio-ui]) {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: var(--hulmio-overlay);
+  backdrop-filter: blur(4px);
+  animation: hulmio-fade-in 0.15s ease-out;
+}
+.dialog-content:where([data-hulmio-ui]) {
+  position: fixed;
+  z-index: 60;
+  width: calc(100% - 40px);
+  max-width: 490px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border: 1px solid var(--hulmio-border);
+  border-radius: 16px;
+  background: var(--hulmio-surface);
+  box-shadow: 0 24px 90px #0002;
+  max-height: 90dvh;
+  overflow-y: auto;
+  animation: hulmio-modal-in 0.2s ease-out;
+}
+.dialog-content:where([data-hulmio-ui]) > h2 {
+  font-size: 23px;
+  margin-right: 18px;
+  font-weight: 550;
+}
+:where([data-hulmio-ui="modal"]) .dialog-description {
+  color: var(--hulmio-muted);
+  font-size: 12px;
+  margin-top: 10px;
+  margin-bottom: 25px;
+}
+:where([data-hulmio-ui="modal"]) .dialog-close {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 15px;
+  top: 16px;
+  color: var(--hulmio-muted);
+  border-radius: 6px;
+}
+:where([data-hulmio-ui="modal"]) .dialog-close:hover {
+  background: var(--hulmio-subtle);
+}
+
+.drawer:where([data-hulmio-ui]) {
+  border-radius: 0;
+  top: 0;
+  right: 0;
+  left: auto;
+  bottom: 0;
+  transform: none;
+  width: 380px;
+  max-width: 90vw;
+  max-height: 100dvh;
+  animation: hulmio-drawer-in 0.25s ease-out;
+  padding-top: 50px;
+}
+.drawer-left:where([data-hulmio-ui]) {
+  left: 0;
+  right: auto;
+}
+.drawer-bottom:where([data-hulmio-ui]) {
+  left: 0;
+  top: auto;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  max-height: 85dvh;
+  border-radius: 18px 18px 0 0;
+}
+.popover-content:where([data-hulmio-ui]) {
+  max-width: 360px;
+  padding: 25px;
+}
+
+.dialog-content:where([data-hulmio-ui]).dialog-fullscreen {
+  inset: 20px;
+  max-width: none;
+  width: auto;
+  transform: none;
+  max-height: calc(100dvh - 40px);
+  padding: 45px;
+}

@@ -36,7 +36,7 @@ import {
   Checkbox,
   DialogClose,
   Dropdown,
-  Flower,
+  BrandMark,
   Input,
   Modal,
   Progress,
@@ -669,7 +669,7 @@ export function ComponentDemo({
         return (
           <div className="demo-card">
             <div className="product-art">
-              <Flower size={75} />
+              <BrandMark size={75} />
             </div>
             <div className="flex items-center justify-between mt-5">
               <h3 className="!mt-0">The everyday journal</h3>
@@ -691,7 +691,7 @@ export function ComponentDemo({
             className="demo-card interactive-card"
             onClick={() => notify("Your project is open. Make it yours.")}
           >
-            <Flower size={30} />
+            <BrandMark size={30} />
             <h3>A space for your next idea.</h3>
             <p>Open your project and make something good.</p>
             <span className="text-link mt-5">
@@ -703,7 +703,7 @@ export function ComponentDemo({
         <div className="demo-card">
           <div className="flex justify-between items-center">
             <span className="mono overline">YOUR WORKSPACE</span>
-            <Flower size={24} />
+            <BrandMark size={24} />
           </div>
           <h3>Room for good ideas.</h3>
           <p>A shared space to create something worth caring about.</p>
@@ -739,7 +739,7 @@ export function ComponentDemo({
             disabled={lower === "disabled"}
             items={[
               {
-                title: "What is Forma?",
+                title: "What is Hulmio?",
                 content:
                   "A shared space for your projects, your team, and the ideas you have yet to make.",
               },
@@ -817,7 +817,7 @@ export function ComponentDemo({
       return (
         <div className="carousel">
           <div className={`carousel-slide slide-${page % 3}`}>
-            <Flower size={70} />
+            <BrandMark size={70} />
             <span className="overline">PRINCIPLE 0{page}</span>
             <h3>
               {
@@ -982,9 +982,9 @@ export function ComponentDemo({
           onAction={(action) => {
             if (action === "Export")
               downloadFile(
-                "forma-project.json",
+                "hulmio-project.json",
                 JSON.stringify(
-                  { name: "My Forma project", version: "1.0.0" },
+                  { name: "My Hulmio project", version: "1.0.0" },
                   null,
                   2,
                 ),
@@ -1085,7 +1085,7 @@ export function ComponentDemo({
               variant="ghost"
               onClick={() => {
                 downloadFile(
-                  "forma-sample.json",
+                  "hulmio-sample.json",
                   JSON.stringify({ message: "Something good." }, null, 2),
                 );
                 setText("Your download is ready.");
@@ -1294,7 +1294,7 @@ export function ComponentDemo({
             <Avatar name="Alex Morgan" size="lg" status />
             <div>
               <strong>Alex Morgan</strong>
-              <p className="muted">Product designer · Forma</p>
+              <p className="muted">Product designer · Hulmio</p>
             </div>
           </div>
         </Modal>
@@ -1312,7 +1312,7 @@ export function ComponentDemo({
     case "kanban":
       return <Kanban />;
     default:
-      return <Flower size={48} />;
+      return <BrandMark size={48} />;
   }
 }
 function Otp({ masked, length = 6 }: { masked: boolean; length?: number }) {
@@ -1723,7 +1723,7 @@ function TableRow({
       {expanded && (
         <tr>
           <td colSpan={5}>
-            Member of the Forma workspace. Updates are enabled.
+            Member of the Hulmio workspace. Updates are enabled.
           </td>
         </tr>
       )}

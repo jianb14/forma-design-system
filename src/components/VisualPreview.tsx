@@ -19,7 +19,7 @@ import {
   AvatarGroup,
   Badge,
   Button,
-  Flower,
+  BrandMark,
   Input,
   Progress,
   cn,
@@ -59,7 +59,7 @@ export function VisualPreview({
         <div className="inline-dialog">
           <div className="inline-dialog-top">
             <span className="specimen-symbol">
-              <Flower size={22} />
+              <BrandMark size={22} />
             </span>
             <button
               aria-label="Preview close action"
@@ -123,7 +123,7 @@ export function VisualPreview({
         </div>
         <div className="inline-drawer">
           <span className="drawer-handle" />
-          <Flower size={22} />
+          <BrandMark size={22} />
           <h3>A little more detail.</h3>
           <p>Your workspace, your way.</p>
           <div className="drawer-faux-field" />
@@ -257,7 +257,7 @@ export function VisualPreview({
                   }
                 >
                   <span>
-                    {i === 0 ? <Plus size={14} /> : <Flower size={14} />}
+                    {i === 0 ? <Plus size={14} /> : <BrandMark size={14} />}
                     {text}
                   </span>
                   {lower === "keyboard" ? (
@@ -451,7 +451,7 @@ export function ComponentCover({
         ].includes(id) ? (
         <div className={`cover-overlay cover-${id}`}>
           <span className="cover-overlay-heading">
-            <Flower size={14} />
+            <BrandMark size={14} />
             <i />
           </span>
           {id === "dropdown" || id === "command" ? (
@@ -551,13 +551,13 @@ export function ComponentCover({
         </div>
       ) : id === "empty-state" ? (
         <div className="cover-empty">
-          <Flower size={30} />
+          <BrandMark size={30} />
           <span>Room for possibility.</span>
         </div>
       ) : (
         <div className="cover-content-card">
           <div className="cover-card-art">
-            <Flower size={28} />
+            <BrandMark size={28} />
           </div>
           <strong>
             {id === "carousel"

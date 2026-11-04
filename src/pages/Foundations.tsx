@@ -15,22 +15,19 @@ import {
   MousePointer2,
   Sparkles,
 } from "lucide-react";
-import { Alert, Badge, Brand, Button, Flower, Tabs } from "../components/ui";
+import { Alert, Badge, Brand, Button, BrandMark, Tabs } from "../components/ui";
 import { downloadFile, logoSvg, palettes, tokens } from "../lib/tokens";
 export function PageIntro({
-  eyebrow,
   title,
   description,
   children,
 }: {
-  eyebrow: string;
   title: string;
   description: string;
   children?: React.ReactNode;
 }) {
   return (
     <div className="page-intro">
-      <span className="overline">{eyebrow}</span>
       <div className="page-title-row">
         <div>
           <h1>{title}</h1>
@@ -113,7 +110,6 @@ export function ColorPage({ notify }: { notify: (t: string) => void }) {
   return (
     <>
       <PageIntro
-        eyebrow="FOUNDATIONS / 01"
         title="A considered palette."
         description="A grounded green. A little warmth. Plenty of room for your ideas."
       />
@@ -172,7 +168,7 @@ export function ColorPage({ notify }: { notify: (t: string) => void }) {
         ))}
       </div>
       <div className="principle-note mt-10">
-        <Flower size={28} />
+        <BrandMark size={28} />
         <p>
           <strong>Use color with intention.</strong> Brand green anchors the
           interface. Lime highlights moments of possibility. Semantic colors
@@ -188,7 +184,6 @@ export function TypographyPage() {
   return (
     <>
       <PageIntro
-        eyebrow="FOUNDATIONS / 02"
         title="Words, with a little character."
         description="An expressive voice. An easy read. Typography that feels like a person."
       />
@@ -196,9 +191,9 @@ export function TypographyPage() {
         <article>
           <span className="overline">OUR EVERYDAY VOICE</span>
           <span className="font-specimen">Aa</span>
-          <h2>DM Sans</h2>
+          <h2>Google Sans Flex</h2>
           <p>
-            Clear, warm, and quietly confident. Our workhorse for interfaces,
+            Our primary variable typeface. Clear and comfortable for interfaces,
             headings, and everyday reading.
           </p>
           <div className="font-weights">
@@ -283,7 +278,6 @@ export function SpacingPage() {
   return (
     <>
       <PageIntro
-        eyebrow="FOUNDATIONS / 03"
         title="A little room makes a difference."
         description="Consistent rhythm, flexible structure. A 4px base that keeps everything connected."
       />
@@ -356,7 +350,6 @@ export function EffectsPage() {
   return (
     <>
       <PageIntro
-        eyebrow="FOUNDATIONS / 04"
         title="Details that make it feel right."
         description="Soft edges, quiet depth, and motion with a purpose."
       />
@@ -401,7 +394,7 @@ export function EffectsPage() {
       />
       <div className="motion-demo">
         <div className={`motion-track ${motion ? "motion-active" : ""}`}>
-          <Flower size={44} />
+          <BrandMark size={44} />
         </div>
         <Button variant="outline" onClick={() => setMotion(!motion)}>
           Try the transition <ArrowRight size={14} />
@@ -430,7 +423,7 @@ export function EffectsPage() {
         ].map(({ name, opacity, blur }) => (
           <div className="surface-study" key={name}>
             <div className="surface-study-art">
-              <Flower size={60} />
+              <BrandMark size={60} />
               <span style={{ opacity, backdropFilter: `blur(${blur}px)` }} />
             </div>
             <h3>{name}</h3>
@@ -442,7 +435,7 @@ export function EffectsPage() {
         {Object.entries(tokens.aspectRatio).map(([name, ratio]) => (
           <div key={name}>
             <div style={{ aspectRatio: ratio }}>
-              <Flower size={24} />
+              <BrandMark size={24} />
             </div>
             <span>{name}</span>
             <small>{ratio}</small>
@@ -457,14 +450,13 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
   return (
     <>
       <PageIntro
-        eyebrow="THE BRAND"
-        title="Good design has a human side."
-        description="Meet Forma. A little structure for a world of possibility."
+        title="Give good ideas a shape."
+        description="Meet Hulmio. A little structure for a world of possibility."
       >
         <Button
           variant="outline"
           onClick={() => {
-            downloadFile("forma-brand-mark.svg", logoSvg(), "image/svg+xml");
+            downloadFile("hulmio-brand-mark.svg", logoSvg(), "image/svg+xml");
             notify("SVG brand mark downloaded");
           }}
         >
@@ -479,8 +471,8 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
           <br />
           <em>A distinctly human feeling.</em>
         </p>
-        <Flower size={200} className="brand-hero-flower" />
-        <span className="overline">CONSIDERED BY NATURE. OPEN BY DESIGN.</span>
+        <BrandMark size={200} className="brand-hero-mark" />
+        <span className="overline">GOOD PARTS. GIVEN A SHAPE.</span>
       </div>
       <Tabs
         items={[
@@ -518,34 +510,30 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
                 <span>SECONDARY / VERTICAL</span>
               </div>
               <div className="logo-box">
-                <Flower size={80} />
+                <BrandMark size={80} />
                 <span>ICON ONLY / MONOCHROME</span>
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-6 mt-6">
               <article className="token-card">
                 <span className="overline">THE MARK</span>
-                <h3>A little shape with a lot to say.</h3>
+                <h3>Good parts. One shared shape.</h3>
                 <p>
-                  Four soft leaves meet in the middle. Structure and growth.
-                  Individual parts, a shared whole. It is a small reminder of
-                  what a system can make possible.
+                  Two rounded pillars and a connecting block form an H. Each
+                  part has a clear role; together they become something useful.
+                  A mark inspired by hulma: giving your ideas a shape.
                 </p>
               </article>
               <article className="token-card">
                 <span className="overline">SMALL BUT RECOGNIZABLE</span>
                 <div className="flex gap-6 items-end mt-5 mb-4">
-                  <div className="app-icon">
-                    <Flower size={36} />
-                  </div>
-                  <div className="app-icon app-icon-small">
-                    <Flower size={20} />
-                  </div>
-                  <Flower size={16} />
+                  <img src="/hulmio-icon.svg" alt="Hulmio application icon" width={64} height={64} />
+                  <img src="/hulmio-icon.svg" alt="Hulmio favicon at 36 pixels" width={36} height={36} />
+                  <img src="/hulmio-icon.svg" alt="Hulmio favicon at 16 pixels" width={16} height={16} />
                 </div>
                 <p>
-                  Application icon · favicon · compact mark. Keep the icon above
-                  16px, and the full wordmark above 96px.
+                  Application icon · favicon · compact mark. Use the H at 16px
+                  or larger, and the full wordmark at 96px or larger.
                 </p>
               </article>
             </div>
@@ -568,7 +556,7 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
                 ],
               ].map(([a, b]) => (
                 <article className="token-card" key={a}>
-                  <Flower size={25} />
+                  <BrandMark size={25} />
                   <h3>{a}</h3>
                   <p>{b}</p>
                 </article>
@@ -592,7 +580,7 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
           <>
             <div className="art-direction">
               <div className="art-graphic">
-                <Flower size={140} />
+                <BrandMark size={140} />
                 <span className="art-circle" />
               </div>
               <div>
@@ -641,7 +629,7 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
             </div>
             <SectionTitle label="Give the logo a little room" />
             <p className="body-copy">
-              Keep a clear space equal to one leaf of the mark on all sides. Use
+              Keep a clear space equal to one pillar of the H on all sides. Use
               the dark mark on light surfaces and the light mark on dark
               surfaces. Preserve its original proportions.
             </p>
@@ -667,10 +655,10 @@ export function BrandingPage({ notify }: { notify: (t: string) => void }) {
         )}
       </div>
       <div className="principle-note mt-10">
-        <Flower size={28} />
+        <BrandMark size={28} />
         <p>
-          <strong>Make it yours, thoughtfully.</strong> Forma is an example
-          identity. The soft mark, grounded palette, and warm typography give
+          <strong>Make it yours, thoughtfully.</strong> Hulmio brings good parts
+          together. The modular H, grounded palette, and warm typography give
           every design a familiar feeling.
         </p>
       </div>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -24,26 +24,29 @@ import {
   Check,
   SlidersHorizontal,
   Copy,
-  Flower2,
+  Shapes,
   Layers,
   Component,
+  BookOpen,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { Brand, Flower, Modal, Tooltip, cn } from "./components/ui";
-import { components, navGroups } from "./lib/catalog";
-import {
-  BrandingPage,
-  ColorPage,
-  EffectsPage,
-  SpacingPage,
-  TypographyPage,
-} from "./pages/Foundations";
-import { PatternsPage } from "./pages/Patterns";
+import { Brand, BrandMark, Modal, Tooltip, cn } from "./components/ui";
+import { components, navGroups, categories } from "./lib/catalog";
 import { Overview } from "./pages/Overview";
-import { ComponentCatalog, ComponentPage } from "./pages/ComponentGallery";
+import { readPreference } from "./lib/preferences";
+import { libraryFamilies } from "./lib/distribution";
+const BrandingPage = lazy(() => import("./pages/Foundations").then(page => ({ default: page.BrandingPage })));
+const ColorPage = lazy(() => import("./pages/Foundations").then(page => ({ default: page.ColorPage })));
+const EffectsPage = lazy(() => import("./pages/Foundations").then(page => ({ default: page.EffectsPage })));
+const SpacingPage = lazy(() => import("./pages/Foundations").then(page => ({ default: page.SpacingPage })));
+const TypographyPage = lazy(() => import("./pages/Foundations").then(page => ({ default: page.TypographyPage })));
+const PatternsPage = lazy(() => import("./pages/Patterns").then(page => ({ default: page.PatternsPage })));
+const ComponentCatalog = lazy(() => import("./pages/ComponentGallery").then(page => ({ default: page.ComponentCatalog })));
+const ComponentPage = lazy(() => import("./pages/ComponentGallery").then(page => ({ default: page.ComponentPage })));
+const UsingHulmio = lazy(() => import("./pages/UsingHulmio").then(page => ({ default: page.UsingHulmio })));
 const icons: Record<string, LucideIcon> = {
   home: Home,
-  flower: Flower2,
+  brand: Shapes,
   palette: Palette,
   type: Type,
   grid: Grid2X2,
@@ -58,6 +61,7 @@ const icons: Record<string, LucideIcon> = {
   selection: SlidersHorizontal,
   overlays: Copy,
   layers: Layers,
+  book: BookOpen,
 };
 type Theme = "light" | "dark" | "system" | "contrast";
 function useRoute() {
@@ -74,6 +78,7 @@ function useRoute() {
 export default function App() {
   const route = useRoute();
   const base = route.split("?")[0];
+  const library = base !== "overview";
   const [mobile, setMobile] = useState(false);
   const [isMobile, setIsMobile] = useState(
     () => window.matchMedia("(max-width: 900px)").matches,
@@ -83,7 +88,7 @@ export default function App() {
   const [toast, setToast] = useState("");
   const [themeOpen, setThemeOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>(() => {
-    const stored = localStorage.getItem("forma-theme");
+    const stored = readPreference("theme");
     return ["light", "dark", "system", "contrast"].includes(stored || "")
       ? (stored as Theme)
       : "light";
@@ -137,13 +142,13 @@ export default function App() {
   useEffect(() => () => clearTimeout(timer.current), []);
   useEffect(() => {
     const media = window.matchMedia("(prefers-color-scheme: dark)");
-    const apply = () =>
-      document.documentElement.setAttribute(
-        "data-theme",
-        theme === "system" ? (media.matches ? "dark" : "light") : theme,
-      );
+    const apply = () => {
+      const resolved = theme === "system" ? (media.matches ? "dark" : "light") : theme;
+      document.documentElement.setAttribute("data-theme", resolved);
+      document.documentElement.setAttribute("data-hulmio-theme", resolved);
+    };
     apply();
-    localStorage.setItem("forma-theme", theme);
+    localStorage.setItem("hulmio-theme", theme);
     media.addEventListener("change", apply);
     return () => media.removeEventListener("change", apply);
   }, [theme]);
@@ -178,8 +183,8 @@ export default function App() {
         ?.label ||
       navGroups.flatMap((g) => g.links).find((link) => link.id === base)
         ?.label ||
-      "Forma";
-    document.title = `${title} — Forma Design Gallery`;
+      "Hulmio";
+    document.title = `${title} — Hulmio UI Library`;
   }, [route, base]);
   useEffect(() => {
     document.body.style.overflow = mobile ? "hidden" : "";
@@ -187,11 +192,6 @@ export default function App() {
       document.body.style.overflow = "";
     };
   }, [mobile]);
-  const pageName =
-    components.find((c) => base === `components/${c.id}`)?.name ||
-    navGroups.flatMap((g) => g.links).find((l) => l.id === route)?.label ||
-    navGroups.flatMap((g) => g.links).find((l) => l.id === base)?.label ||
-    "Overview";
   const ThemeIcon =
     theme === "dark"
       ? Moon
@@ -201,7 +201,7 @@ export default function App() {
           ? Monitor
           : Sun;
   let page;
-  if (base === "overview") page = <Overview notify={notify} />;
+  if (base === "overview") page = <Overview />;
   else if (base === "branding") page = <BrandingPage notify={notify} />;
   else if (base === "colors") page = <ColorPage notify={notify} />;
   else if (base === "typography") page = <TypographyPage />;
@@ -214,16 +214,16 @@ export default function App() {
       <ComponentPage
         key={entry.id}
         entry={entry}
-        notify={notify}
         onCommand={() => setCommand(true)}
       />
     ) : (
       <NotFound />
     );
   } else if (base === "patterns") page = <PatternsPage notify={notify} />;
+  else if (base === "using-hulmio") page = <UsingHulmio notify={notify} />;
   else page = <NotFound />;
   return (
-    <div className="app-shell">
+    <div className={cn("app-shell site-shell", !library && "site-shell-home")}>
       <a
         className="skip-link"
         href="#main"
@@ -234,108 +234,18 @@ export default function App() {
       >
         Skip to content
       </a>
-      {mobile && (
-        <button
-          className="mobile-backdrop"
-          onClick={() => setMobile(false)}
-          aria-label="Close navigation"
-        />
-      )}
-      <aside
-        ref={sidebarRef}
-        inert={isMobile && !mobile}
-        role={isMobile ? "dialog" : undefined}
-        aria-modal={isMobile && mobile ? true : undefined}
-        className={cn("sidebar", mobile && "sidebar-open")}
-        aria-label="Main navigation"
-      >
-        <div className="sidebar-brand">
-          <a href="#/overview" aria-label="Forma home">
-            <Brand />
-          </a>
-          <span className="version-badge">Gallery</span>
-          <button
-            className="mobile-close"
-            onClick={() => setMobile(false)}
-            aria-label="Close navigation"
-          >
-            <X size={20} />
-          </button>
-        </div>
-        <button
-          className="sidebar-search"
-          onClick={() => {
-            setMobile(false);
-            setCommand(true);
-          }}
-        >
-          <Search size={15} />
-          <span>Find something…</span>
-          <kbd>⌘ K</kbd>
-        </button>
-        <nav className="sidebar-nav">
-          {navGroups.map((group) => (
-            <div className="nav-group" key={group.label}>
-              <p>{group.label}</p>
-              {group.links.map((link) => {
-                const Icon = icons[link.icon];
-                const active =
-                  link.id === route ||
-                  (link.id === "components" && base.startsWith("components/"));
-                return (
-                  <a
-                    key={link.id}
-                    href={`#/${link.id}`}
-                    className={cn("nav-link", active && "nav-link-active")}
-                    aria-current={active ? "page" : undefined}
-                  >
-                    <Icon size={16} strokeWidth={1.6} />
-                    <span>{link.label}</span>
-                    {link.id === "components" ? (
-                      <span className="nav-count">{components.length}</span>
-                    ) : (
-                      active && <span className="nav-active-dot" />
-                    )}
-                  </a>
-                );
-              })}
-            </div>
-          ))}
-        </nav>
-        <div className="sidebar-bottom">
-          <div>
-            <Flower size={24} />
-            <span>
-              Made to be
-              <br />
-              <strong>made yours.</strong>
-            </span>
-            <a href="#/components" aria-label="Explore the design collection">
-              <ArrowUpRight size={19} />
-            </a>
-          </div>
-          <p>A little structure. A lot of possibility.</p>
-        </div>
-      </aside>
-      <div className="app-body" inert={isMobile && mobile}>
-        <header className="topbar">
-          <div className="flex items-center gap-3">
-            <button
-              className="mobile-menu"
-              aria-label="Open navigation"
-              onClick={() => setMobile(true)}
-            >
-              <Menu size={20} />
-            </button>
-            <span className="topbar-system">Design gallery</span>
-            <span className="topbar-divider">/</span>
-            <span className="topbar-page">{pageName}</span>
-          </div>
-          <div className="topbar-actions">
-            <span className="gallery-mode">
-              <span className="live-dot" />
-              Visual gallery
-            </span>{" "}
+      <header className="site-navbar" inert={isMobile && mobile}>
+        <div className="site-navbar-inner">
+          <a href="#/overview" className="site-wordmark" aria-label="Hulmio home"><Brand /></a>
+          <nav className="site-primary-nav" aria-label="Primary navigation">
+            <a href="#/components" aria-current={base.startsWith("components") ? "page" : undefined}>Components</a>
+            <a href="#/branding" aria-current={["branding", "colors", "typography", "spacing", "effects"].includes(base) ? "page" : undefined}>Foundations</a>
+            <a href="#/patterns" aria-current={base === "patterns" ? "page" : undefined}>Patterns</a>
+            <a href="#/using-hulmio" aria-current={base === "using-hulmio" ? "page" : undefined}>Documentation</a>
+          </nav>
+          <div className="site-navbar-actions">
+            <button className="site-search" onClick={() => setCommand(true)} aria-label="Search components"><Search size={18} /><span>Search</span><kbd>⌘ K</kbd></button>
+            <a className="site-github" href="https://github.com/jianb14/hulmio-design-system" target="_blank" rel="noreferrer">GitHub <ArrowUpRight size={14} /></a>
             <div className="theme-control" ref={themeRef}>
               <Tooltip content="Choose your theme">
                 <button
@@ -402,18 +312,71 @@ export default function App() {
                 </div>
               )}
             </div>
+            <button className="mobile-menu" aria-label="Open navigation" aria-expanded={mobile} aria-controls={library || isMobile ? "library-navigation" : undefined} onClick={() => { setThemeOpen(false); setMobile(true); }}><Menu size={23} /></button>
           </div>
-        </header>
+        </div>
+      </header>
+      {mobile && (
+        <button
+          className="mobile-backdrop"
+          onClick={() => setMobile(false)}
+          aria-label="Close navigation"
+        />
+      )}
+      {(library || isMobile) && <aside
+        id="library-navigation"
+        ref={sidebarRef}
+        inert={isMobile && !mobile}
+        role={isMobile ? "dialog" : undefined}
+        aria-modal={isMobile && mobile ? true : undefined}
+        className={cn("sidebar", mobile && "sidebar-open")}
+        aria-label="Main navigation"
+      >
+        <div className="sidebar-brand">
+          <a href="#/components" className="library-heading">Navigation</a>
+          <button className="mobile-close" onClick={() => setMobile(false)} aria-label="Close navigation"><X size={20} /></button>
+        </div>
+        <nav className="sidebar-nav" aria-label="Library navigation">
+          <div className="nav-group"><p>Getting started</p>
+            <a className={cn("nav-link", base === "using-hulmio" && "nav-link-active")} href="#/using-hulmio"><BookOpen size={16} /><span>Using Hulmio</span></a>
+            <a className={cn("nav-link", base === "components" && "nav-link-active")} href="#/components"><Blocks size={16} /><span>All components</span><span className="nav-count">{components.length}</span></a>
+          </div>
+          {categories.map(category => <div className="nav-group component-nav-group" key={category}>
+            <a className="nav-category" href={`#/components?category=${category}`}>{category}</a>
+            {components.filter(entry => entry.category === category).map(entry => <a className={cn("nav-link component-nav-link", base === `components/${entry.id}` && "nav-link-active")} href={`#/components/${entry.id}`} key={entry.id} aria-current={base === `components/${entry.id}` ? "page" : undefined}><span>{entry.name}</span>{base === `components/${entry.id}` && <span className="nav-active-dot" />}</a>)}
+          </div>)}
+          <div className="nav-group"><p>Foundations</p>{navGroups.find(g => g.label === "THE FOUNDATIONS")?.links.map(link => {
+            const Icon = icons[link.icon];
+            return <a className={cn("nav-link", base === link.id && "nav-link-active")} key={link.id} href={`#/${link.id}`} aria-current={base === link.id ? "page" : undefined}><Icon size={16} /><span>{link.label}</span></a>;
+          })}</div>
+          <div className="nav-group"><a className="nav-link" href="#/patterns"><LayoutTemplate size={16} /><span>Patterns & templates</span></a></div>
+        </nav>
+        <div className="sidebar-bottom">
+          <div>
+            <BrandMark size={24} />
+            <span>
+              Made to be
+              <br />
+              <strong>made yours.</strong>
+            </span>
+            <a href="#/components" aria-label="Explore the design collection">
+              <ArrowUpRight size={19} />
+            </a>
+          </div>
+          <p>A little structure. A lot of possibility.</p>
+        </div>
+      </aside>}
+      <div className="app-body" inert={isMobile && mobile}>
         <main id="main" tabIndex={-1}>
           <div className="page-content" key={base}>
-            {page}
+            <Suspense fallback={<div className="page-loading" role="status">Loading the collection…</div>}>{page}</Suspense>
             <footer className="page-footer">
               <a href="#/overview">
-                <Flower size={18} />
+                <BrandMark size={18} />
                 Thoughtfully connected.
               </a>
               <span>
-                Forma <span className="mx-2">·</span> Design collection
+                Hulmio <span className="mx-2">·</span> Design collection
               </span>
             </footer>
           </div>
@@ -460,11 +423,10 @@ function CommandSearch({ onSelect }: { onSelect: () => void }) {
         .flatMap((g) => g.links)
         .filter((l) => !l.id.includes("?"))
         .map((l) => ({ name: l.label, href: l.id, category: "Page" })),
-      ...components.map((c) => ({
-        name: c.name,
-        href: `components/${c.id}`,
-        category: c.category,
-      })),
+      ...components.flatMap((c) => [
+        { name: c.name, href: `components/${c.id}`, category: c.category },
+        ...(libraryFamilies[c.id]?.exports || []).filter(name => name !== c.name).map(name => ({ name, href: `components/${c.id}`, category: c.category })),
+      ]),
     ],
     [],
   );
@@ -529,7 +491,7 @@ function CommandSearch({ onSelect }: { onSelect: () => void }) {
             id={`${searchId}-${i}`}
             className={i === index ? "selected" : ""}
             href={`#/${r.href}`}
-            key={r.href}
+            key={`${r.href}:${r.name}`}
             onMouseEnter={() => setIndex(i)}
             onClick={onSelect}
           >
@@ -573,7 +535,7 @@ function CommandSearch({ onSelect }: { onSelect: () => void }) {
 function NotFound() {
   return (
     <div className="empty-state py-24">
-      <Flower size={70} />
+      <BrandMark size={70} />
       <h1>A little off the beaten path.</h1>
       <p>Let’s find you a familiar place.</p>
       <a

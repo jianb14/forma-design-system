@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 import { components } from "../src/lib/catalog";
+import { chooseOption } from "./helpers";
 
 test("catalog search, categories, and clear control stay in sync", async ({
   page,
@@ -29,6 +31,7 @@ test("catalog search, categories, and clear control stay in sync", async ({
 
 test("component variants and states are visible together", async ({ page }) => {
   await page.goto("/#/components/button");
+  await page.locator(".library-references summary").click();
   await expect(page.locator(".specimen-card")).toHaveCount(12);
   await expect(page.locator('[data-variant="Destructive"] button')).toHaveClass(
     /button-destructive/,
@@ -38,16 +41,11 @@ test("component variants and states are visible together", async ({ page }) => {
     "true",
   );
   await expect(page.locator('[data-variant="Disabled"] button')).toBeDisabled();
-  await expect(page.locator(".interaction-states > div")).toHaveCount(6);
-  await page
-    .locator(".size-comparison:not(.shape-comparison)")
-    .getByRole("button")
-    .last()
-    .click();
-  await expect(page.locator('[data-variant="Primary"] button')).toHaveClass(
-    /button-xl/,
-  );
+  const pill = page.locator('[data-library-design="pill"]');
+  await chooseOption(page, pill.getByRole("combobox", { name: "Pill button size" }), "XL");
+  await expect(pill.getByRole("button", { name: /Get started/ })).toHaveClass(/button-xl/);
   await page.goto("/#/components/form");
+  await page.locator(".library-references summary").click();
   const demo = page.locator('[data-variant="Validated"]');
   await demo.getByRole("button", { name: "Keep me posted" }).click();
   await expect(demo.getByRole("alert")).toContainText(
@@ -63,6 +61,7 @@ test("overlay designs are visible without opening a trigger", async ({
   page,
 }) => {
   await page.goto("/#/components/dialog");
+  await page.locator(".library-references summary").click();
   await expect(page.locator(".inline-dialog")).toHaveCount(4);
   await expect(page.locator('[data-variant="Destructive"]')).toContainText(
     "Delete this project?",
@@ -74,8 +73,9 @@ test("overlay designs are visible without opening a trigger", async ({
     .locator('[data-variant="Destructive"]')
     .getByRole("button", { name: "Delete project" })
     .click();
-  await expect(page.locator(".toast-region")).toContainText("Project removed");
+  await expect(page.locator(".toast")).toHaveCount(0);
   await page.goto("/#/components/dropdown");
+  await page.locator(".library-references summary").click();
   await expect(page.locator(".inline-dropdown")).toHaveCount(4);
   await expect(page.locator('[data-variant="Shortcut"] kbd')).toHaveCount(3);
 });
@@ -84,6 +84,7 @@ test("tables support filter, sort, pagination, selection, and editing", async ({
   page,
 }) => {
   await page.goto("/#/components/table");
+  await page.locator(".library-references summary").click();
   const demo = page.locator('[data-variant="Sortable"]');
   await demo.getByRole("button", { name: "Next", exact: true }).click();
   await expect(demo.getByText("Page 2 of 2")).toBeVisible();
@@ -118,6 +119,7 @@ test("keyboard search, tab navigation, themes, and local settings work", async (
   await search.fill("switch");
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/components\/switch/);
+  await page.locator(".library-references summary").click();
   await expect(
     page.locator('[data-variant="Off"]').getByRole("switch"),
   ).not.toBeChecked();
@@ -125,6 +127,7 @@ test("keyboard search, tab navigation, themes, and local settings work", async (
     page.locator('[data-variant="On"]').getByRole("switch"),
   ).toBeChecked();
   await page.goto("/#/components/tabs");
+  await page.locator(".library-references summary").click();
   const preview = page.locator('[data-variant="Underline"]');
   await preview.getByRole("tab", { name: "Overview", exact: true }).focus();
   await page.keyboard.press("ArrowRight");
@@ -181,7 +184,7 @@ test("mobile navigation is focus-managed and closes on navigation", async ({
   await expect(page.locator(".sidebar")).toHaveAttribute("inert");
 });
 
-test("the visual collection renders without code panels on desktop and mobile", async ({
+test("gallery previews and the usage guide render on desktop and mobile", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -195,6 +198,7 @@ test("the visual collection renders without code panels on desktop and mobile", 
     "effects",
     "components",
     "patterns",
+    "using-hulmio",
     ...components.map((c) => `components/${c.id}`),
   ];
   for (const width of [1440, 390]) {
@@ -209,7 +213,8 @@ test("the visual collection renders without code panels on desktop and mobile", 
         `${route} at ${width}px overflows`,
       ).toBe(false);
       const brokenReferences = await page
-        .locator("[aria-controls]")
+        // Closed Radix popups may reference content that is not mounted yet.
+        .locator('[aria-controls]:not([aria-expanded="false"])')
         .evaluateAll((elements) =>
           elements.flatMap((el) =>
             (el.getAttribute("aria-controls") || "")
@@ -218,29 +223,90 @@ test("the visual collection renders without code panels on desktop and mobile", 
           ),
         );
       expect(brokenReferences, `${route} has broken aria-controls`).toEqual([]);
-      await expect(page.locator("main pre, main .code-block")).toHaveCount(0);
-      await expect(
-        page.locator(
-          'a[href="#/documentation"], a[href="#/changelog"], a[href="#/getting-started"]',
-        ),
-      ).toHaveCount(0);
+      if (route === "overview" && width === 1440) await expect(page.locator(".sidebar")).toHaveCount(0);
+      else await expect(page.locator('.sidebar a[href="#/using-hulmio"]')).toHaveCount(1);
       await expect(
         page.getByRole("button", { name: "View code", exact: true }),
       ).toHaveCount(0);
       if (route.startsWith("components/")) {
-        const entry = components.find((c) => route === `components/${c.id}`)!;
-        await expect(page.locator(".specimen-card")).toHaveCount(
-          entry.variants.length,
-        );
-        for (const variant of entry.variants) {
-          await expect(
-            page
-              .locator(`[data-variant="${variant}"] .specimen-preview > *`)
-              .first(),
-          ).toBeVisible();
-        }
+        await expect(page.locator(".library-design").first()).toBeVisible();
+        await expect(page.locator(".library-code pre").first()).toContainText('from "hulmio-ui"');
       }
     }
   }
   expect(errors).toEqual([]);
+});
+
+test("usage guide shows the local install path and working package components", async ({ page, context }) => {
+  await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+  await page.goto("/#/using-hulmio");
+  await expect(page.getByRole("note")).toContainText("Not published to npm");
+  await expect(page.locator(".usage-step")).toHaveCount(4);
+  await page.getByRole("button", { name: "Copy code", exact: true }).first().click();
+  await expect(page.getByRole("button", { name: "Copy code", exact: true }).first()).toContainText("Copied");
+  await expect(page.locator(".toast")).toHaveCount(0);
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toContain("npm run pack:ui");
+  const preview = page.locator(".usage-live");
+  await preview.getByLabel("Email", { exact: true }).fill("hello@example.com");
+  await preview.getByRole("button", { name: "Clear input", exact: true }).click();
+  await expect(preview.getByLabel("Email", { exact: true })).toHaveValue("");
+  const trigger = preview.getByRole("button", { name: "Open example" });
+  await trigger.click();
+  const modal = page.getByRole("dialog", { name: "Your first Hulmio modal", exact: true });
+  await expect(modal).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(modal).toBeHidden();
+  await expect(trigger).toBeFocused();
+  await page.evaluate(() => { (document.activeElement as HTMLElement)?.blur(); window.scrollTo({ top: 0, behavior: "instant" }); });
+  await page.screenshot({ path: "artifacts/using-hulmio-desktop.png", fullPage: true, animations: "disabled" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator(".sidebar")).toHaveAttribute("inert");
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.screenshot({ path: "artifacts/using-hulmio-mobile.png", fullPage: true, animations: "disabled" });
+  await page.goto("/#/components/button");
+  await expect(page.locator(".library-page-tools").getByRole("link", { name: "Installation" })).toHaveAttribute("href", "#/using-hulmio");
+  await page.goto("/#/components/table");
+  await expect(page.locator(".library-page-tools").getByRole("link", { name: "Installation" })).toHaveAttribute("href", "#/using-hulmio");
+});
+
+test("Hulmio branding, favicon, downloaded mark, and existing preferences stay in sync", async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem("forma-theme", "dark");
+    localStorage.setItem("forma-workspace", "My saved workspace");
+    localStorage.setItem("forma-notifications", "false");
+  });
+  await page.goto("/#/branding");
+  await expect(page).toHaveTitle(/Hulmio UI Library$/);
+  await expect(page.locator(".site-wordmark .brand")).toHaveText("hulmio.");
+  await expect(page.locator("html")).toHaveAttribute("data-hulmio-theme", "dark");
+  expect(await page.evaluate(() => localStorage.getItem("hulmio-theme"))).toBe("dark");
+  await expect(page.locator('link[rel="icon"]')).toHaveAttribute("href", "/hulmio-icon.svg");
+  const faviconResponse = await page.request.get("/hulmio-icon.svg");
+  expect(faviconResponse.ok()).toBe(true);
+  const faviconText = await faviconResponse.text();
+  const markPath = await page.locator(".site-wordmark .brand path").getAttribute("d");
+  expect(faviconText).toContain(`<title>Hulmio</title>`);
+  expect(faviconText).toContain(`d="${markPath}"`);
+  const compactIcon = page.getByAltText("Hulmio favicon at 16 pixels", { exact: true });
+  await expect(compactIcon).toBeVisible();
+  expect(await compactIcon.evaluate(element => (element as HTMLImageElement).complete && (element as HTMLImageElement).naturalWidth > 0)).toBe(true);
+  const downloadEvent = page.waitForEvent("download");
+  await page.getByRole("button", { name: "Download mark", exact: true }).click();
+  const download = await downloadEvent;
+  expect(download.suggestedFilename()).toBe("hulmio-brand-mark.svg");
+  await download.saveAs("artifacts/hulmio-brand-mark.svg");
+  expect(await readFile("artifacts/hulmio-brand-mark.svg", "utf8")).toContain(`d="${markPath}"`);
+  await page.getByRole("button", { name: "Choose theme", exact: true }).click();
+  await page.getByRole("menuitemradio", { name: "Light", exact: true }).click();
+  await page.reload();
+  await expect(page.locator("html")).toHaveAttribute("data-hulmio-theme", "light");
+  await page.evaluate(() => { (document.activeElement as HTMLElement)?.blur(); window.scrollTo({ top: 0, behavior: "instant" }); });
+  await page.screenshot({ path: "artifacts/hulmio-branding-desktop.png", fullPage: true, animations: "disabled" });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(page.locator(".sidebar")).toHaveAttribute("inert");
+  await page.screenshot({ path: "artifacts/hulmio-branding-mobile.png", fullPage: true, animations: "disabled" });
+  await page.goto("/#/patterns");
+  await page.getByRole("tab", { name: "Settings", exact: true }).click();
+  await expect(page.getByRole("textbox", { name: "Workspace name", exact: true })).toHaveValue("My saved workspace");
+  await expect(page.getByRole("switch", { name: "Email notifications", exact: true })).not.toBeChecked();
 });

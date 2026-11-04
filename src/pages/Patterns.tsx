@@ -5,20 +5,20 @@ import {
   Brand,
   Button,
   Checkbox,
-  Flower,
+  BrandMark,
   Input,
   Switch,
   Tabs,
 } from "../components/ui";
 import { ComponentDemo } from "../components/demos";
 import { PageIntro } from "./Foundations";
+import { readPreference } from "../lib/preferences";
 export function PatternsPage({ notify }: { notify: (t: string) => void }) {
   const [active, setActive] = useState("Authentication");
   const [success, setSuccess] = useState(false);
   return (
     <>
       <PageIntro
-        eyebrow="PUTTING IT TOGETHER"
         title="Familiar patterns. Fresh possibilities."
         description="Useful starting points for the moments your product needs most."
       />
@@ -125,7 +125,7 @@ export function PatternsPage({ notify }: { notify: (t: string) => void }) {
         ) : (
           <div className="system-page">
             <span className="error-number">404</span>
-            <Flower size={55} />
+            <BrandMark size={55} />
             <h2>A little off the beaten path.</h2>
             <p>The page you are looking for seems to have wandered.</p>
             <a
@@ -142,18 +142,18 @@ export function PatternsPage({ notify }: { notify: (t: string) => void }) {
 }
 function SettingsPattern({ notify }: { notify: (t: string) => void }) {
   const [email, setEmail] = useState(
-    () => localStorage.getItem("forma-notifications") !== "false",
+    () => readPreference("notifications") !== "false",
   );
   const [name, setName] = useState(
-    () => localStorage.getItem("forma-workspace") || "My good workspace",
+    () => readPreference("workspace") || "My good workspace",
   );
   return (
     <form
       className="settings-pattern"
       onSubmit={(e) => {
         e.preventDefault();
-        localStorage.setItem("forma-notifications", String(email));
-        localStorage.setItem("forma-workspace", name);
+        localStorage.setItem("hulmio-notifications", String(email));
+        localStorage.setItem("hulmio-workspace", name);
         notify("Workspace settings saved on this device.");
       }}
     >
@@ -167,7 +167,7 @@ function SettingsPattern({ notify }: { notify: (t: string) => void }) {
       />
       <Input
         label="Workspace URL"
-        leading="forma.design/"
+        leading="hulmio.local/"
         placeholder="my-workspace"
       />
       <hr />

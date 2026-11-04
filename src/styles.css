@@ -1,5 +1,53 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap");
 @import "tailwindcss";
+
+/* The usage guide follows the gallery's type, palette, and spacing. */
+.package-status { display: flex; align-items: center; gap: 17px; padding: 23px 25px; background: var(--soft); border: 1px solid var(--border); border-radius: 12px; }
+.package-mark { display: flex; color: var(--primary); }
+.package-status strong { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 17px; color: var(--primary); }
+.package-status strong .mono { font-size: 12px; font-weight: 400; }
+.package-status p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.package-stage { margin-left: auto; flex-shrink: 0; padding: 5px 9px; border: 1px solid var(--control-border); border-radius: 5px; font-size: 12px; color: var(--primary); }
+.usage-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 50px; margin-top: 45px; align-items: start; }
+.usage-main { min-width: 0; }
+.usage-step { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 19px; padding-bottom: 35px; margin-bottom: 35px; border-bottom: 1px solid var(--border); scroll-margin-top: 90px; }
+.usage-step:last-child { border-bottom: 0; }
+.usage-number { display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: var(--subtle); border: 1px solid var(--border); border-radius: 50%; color: var(--primary); font-family: "IBM Plex Mono", monospace; font-size: 12px; }
+.usage-step h2 { font-size: 25px; margin: 9px 0 13px; }
+.usage-step p { font-size: 14px; color: var(--muted); line-height: 1.85; }
+.usage-step p code, .usage-aside p code { color: var(--primary); overflow-wrap: anywhere; }
+.usage-step .code-block { margin: 18px 0 13px; }
+.usage-step .code-block pre { font-size: 13px; padding: 18px; max-height: 560px; }
+.usage-step p.usage-caption { font-size: 12px; }
+.usage-live { display: grid; gap: 16px; padding: 23px; margin-top: 24px; border: 1px solid var(--border); border-radius: 9px; background: var(--surface); }
+.usage-live > .f-button { justify-self: start; }
+.usage-aside { position: sticky; top: 105px; min-width: 0; }
+.usage-aside > section { padding-bottom: 24px; margin-bottom: 24px; border-bottom: 1px solid var(--border); }
+.usage-aside h2 { font-size: 20px; line-height: 1.3; margin: 10px 0 19px; }
+.usage-aside p { font-size: 13px; color: var(--muted); line-height: 1.9; margin-top: 15px; }
+.usage-component { display: flex; align-items: center; gap: 11px; padding: 12px 0; border-top: 1px solid var(--border); color: var(--primary); font-size: 14px; }
+.usage-component svg:last-child { margin-left: auto; }
+.usage-component:hover span { text-decoration: underline; text-underline-offset: 4px; }
+.usage-checks { list-style: none; padding: 0; display: grid; gap: 13px; margin-top: 17px; }
+.usage-checks li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: var(--muted); }
+.usage-checks svg { margin-top: 3px; flex-shrink: 0; color: var(--primary); }
+.usage-security > svg { color: var(--primary); }
+.package-availability { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 15px; font-size: 13px; color: var(--muted); padding: 14px 0; margin-top: 12px; border-bottom: 1px solid var(--border); }
+.package-availability > span { color: var(--primary); font-size: 12px; background: var(--soft); border: 1px solid var(--border); padding: 4px 8px; border-radius: 5px; }
+.package-availability > svg { margin-left: auto; }
+@media (max-width: 1180px) { .usage-layout { grid-template-columns: minmax(0, 1fr) 220px; gap: 28px; } }
+@media (max-width: 1050px) { .usage-layout { grid-template-columns: minmax(0, 1fr); } .usage-aside { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px; } }
+@media (max-width: 600px) {
+  .package-status { padding: 18px; flex-wrap: wrap; gap: 12px; }
+  .package-status > div { flex: 1; min-width: 0; }
+  .package-stage { margin-left: 35px; }
+  .usage-layout { margin-top: 30px; }
+  .usage-step { grid-template-columns: minmax(0, 1fr); gap: 13px; margin-bottom: 25px; padding-bottom: 25px; }
+  .usage-step h2 { font-size: 24px; }
+  .usage-aside { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .usage-step .code-block pre { font-size: 12px; padding: 15px; }
+  .package-availability { align-items: flex-start; }
+  .package-availability > svg { display: none; }
+}
 
 .interaction-states {
   display: grid;
@@ -18,7 +66,7 @@
 }
 .interaction-states > div > span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .interaction-states .state-hover {
@@ -34,7 +82,7 @@
   box-shadow: inset 0 2px 3px #0002;
 }
 .elevation-label {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 @media (max-width: 540px) {
@@ -44,7 +92,7 @@
     padding: 30px 15px;
   }
   .interaction-states .f-button {
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 12px;
   }
 }
@@ -57,10 +105,10 @@
   align-items: center;
   gap: 8px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 .gallery-edition {
-  font-size: 9px;
+  font-size: 12px;
 }
 .gallery-mode {
   padding-right: 12px;
@@ -81,13 +129,13 @@
   padding: 0 0 17px;
   margin-top: 35px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   border-bottom: 1px solid var(--border);
   margin-bottom: 22px;
 }
 .specimen-toolbar > span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: 12px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -95,7 +143,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .specimen-toolbar > button:hover {
   color: var(--primary);
@@ -143,14 +191,14 @@
   background: var(--surface);
 }
 .specimen-caption > h2 {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
 .specimen-caption > span {
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: 12px;
 }
 .size-comparison {
   display: flex;
@@ -172,7 +220,7 @@
 .size-comparison > div > span {
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
+  font-size: 12px;
   text-transform: capitalize;
 }
 .inline-overlay-scene {
@@ -210,7 +258,7 @@
 }
 .inline-dialog > p {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 9px;
   line-height: 1.8;
   margin-bottom: 20px;
@@ -286,7 +334,7 @@
   font-size: 18px;
 }
 .inline-drawer p {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
   margin-bottom: 20px;
@@ -348,7 +396,7 @@
   box-shadow: var(--shadow);
 }
 .inline-menu-label {
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.08em;
   font-family: "IBM Plex Mono", monospace;
   display: block;
@@ -361,7 +409,7 @@
   gap: 10px;
   padding: 9px 10px;
   border-radius: 5px;
-  font-size: 11px;
+  font-size: 13px;
   width: 100%;
   text-align: left;
 }
@@ -391,7 +439,7 @@
   background: var(--text);
   color: var(--background);
   border-radius: 5px;
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
 }
 .visible-tooltip::after {
@@ -436,11 +484,11 @@
   padding: 20px 10px;
 }
 .specimen-tooltip .f-button {
-  font-size: 10px;
+  font-size: 12px;
   padding: 0 10px;
 }
 .specimen-tooltip .visible-tooltip {
-  font-size: 9px;
+  font-size: 12px;
   padding: 7px 9px;
 }
 .inline-popover {
@@ -453,18 +501,18 @@
   box-shadow: var(--shadow);
 }
 .inline-popover h3 {
-  font-size: 14px;
+  font-size: 16px;
 }
 .inline-popover .flex > div > span {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 .inline-popover .badge {
   margin-left: auto;
-  font-size: 8px;
+  font-size: 12px;
 }
 .inline-popover > p {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
   margin: 18px 0;
 }
@@ -473,7 +521,7 @@
   gap: 25px;
   padding-top: 17px;
   border-top: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .popover-meta strong {
@@ -503,7 +551,7 @@
   min-width: 0;
   outline: none;
   background: transparent;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text);
 }
 .inline-command > label:focus-within {
@@ -520,7 +568,7 @@
   width: 100%;
   border-radius: 5px;
   padding: 9px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .inline-command-results > button:first-child,
 .inline-command-results > button:hover {
@@ -533,7 +581,7 @@
 }
 .inline-command-footer {
   padding: 11px 16px;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   border-top: 1px solid var(--border);
 }
@@ -546,10 +594,10 @@
   color: var(--muted);
 }
 .inline-command-empty p {
-  font-size: 12px;
+  font-size: 14px;
 }
 .inline-command-empty > span {
-  font-size: 10px;
+  font-size: 12px;
 }
 .visible-toast {
   display: flex;
@@ -571,11 +619,11 @@
   border-radius: 50%;
 }
 .visible-toast strong {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 550;
 }
 .visible-toast p {
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 4px;
   color: var(--muted);
 }
@@ -623,7 +671,7 @@
   overflow: hidden;
 }
 .cover-button-group > span {
-  font-size: 9px;
+  font-size: 12px;
   padding: 8px 14px;
   border-right: 1px solid var(--control-border);
 }
@@ -643,7 +691,7 @@
   display: flex;
   gap: 8px;
   align-items: center;
-  font-size: 9px;
+  font-size: 12px;
 }
 .cover-choices i {
   background: var(--primary);
@@ -689,10 +737,10 @@
   align-items: center;
   padding: 7px 11px;
   border-bottom: 1px solid var(--border);
-  font-size: 7px;
+  font-size: 12px;
 }
 .cover-table > div:first-child {
-  font-size: 6px;
+  font-size: 12px;
   color: var(--muted);
   background: var(--subtle);
 }
@@ -726,7 +774,7 @@
   display: flex;
   align-items: center;
   gap: 13px;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
 }
 .cover-navigation > span.active {
@@ -785,7 +833,7 @@
   border-radius: 3px;
 }
 .cover-overlay > strong {
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 500;
 }
 .cover-mini-action {
@@ -793,7 +841,7 @@
   color: var(--on-primary);
   background: var(--primary);
   border-radius: 3px;
-  font-size: 6px;
+  font-size: 12px;
   align-self: flex-start;
 }
 .cover-menu-row {
@@ -841,7 +889,7 @@
   border-radius: 6px;
   padding: 10px 12px;
   background: var(--surface);
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
 }
 .cover-field-textarea {
@@ -880,7 +928,7 @@
   background: var(--surface);
   border: 1px solid var(--control-border);
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 14px;
   font-family: "IBM Plex Mono", monospace;
 }
 .cover-accordion {
@@ -889,7 +937,7 @@
 .cover-accordion > span {
   border-bottom: 1px solid var(--control-border);
   padding: 9px 0;
-  font-size: 8px;
+  font-size: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -904,7 +952,7 @@
   display: flex;
   gap: 10px;
   align-items: center;
-  font-size: 8px;
+  font-size: 12px;
 }
 .cover-timeline i {
   width: 6px;
@@ -945,7 +993,7 @@
   flex-direction: column;
   gap: 12px;
   color: var(--primary);
-  font-size: 9px;
+  font-size: 12px;
 }
 .cover-content-card {
   width: 160px;
@@ -965,7 +1013,7 @@
 }
 .cover-content-card > strong {
   display: block;
-  font-size: 8px;
+  font-size: 12px;
   padding: 8px 3px;
   font-weight: 500;
 }
@@ -1014,7 +1062,7 @@
   border-radius: 8px;
 }
 .surface-study h3 {
-  font-size: 12px;
+  font-size: 14px;
   padding: 18px;
 }
 .ratio-studies {
@@ -1035,11 +1083,11 @@
 .ratio-studies span {
   display: block;
   margin-top: 12px;
-  font-size: 11px;
+  font-size: 13px;
   text-transform: capitalize;
 }
 .ratio-studies small {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 @media (max-width: 1200px) {
@@ -1093,7 +1141,7 @@
     gap: 12px;
   }
   .surface-study h3 {
-    font-size: 10px;
+    font-size: 12px;
     padding: 14px;
   }
   .surface-study-art {
@@ -1105,12 +1153,12 @@
 }
 @media (max-width: 540px) {
   .gallery-mode {
-    font-size: 9px;
+    font-size: 12px;
     padding-right: 5px;
     border-right: 0;
   }
   .gallery-edition {
-    font-size: 8px;
+    font-size: 12px;
     gap: 5px;
   }
   .overview-heading > .gallery-edition {
@@ -1137,16 +1185,16 @@
     padding: 13px 16px;
   }
   .specimen-caption > h2 {
-    font-size: 12px;
+    font-size: 14px;
   }
   .specimen-toolbar {
     margin-top: 25px;
   }
   .specimen-toolbar > span {
-    font-size: 8px;
+    font-size: 12px;
   }
   .specimen-toolbar > button {
-    font-size: 9px;
+    font-size: 12px;
   }
   .size-comparison {
     gap: 26px 20px;
@@ -1171,7 +1219,7 @@
     gap: 7px;
   }
   .inline-dialog-actions > .f-button {
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 10px;
   }
   .inline-drawer {
@@ -1197,10 +1245,10 @@
   }
   .cover-button-group > span {
     padding: 6px 9px;
-    font-size: 7px;
+    font-size: 12px;
   }
   .cover-choices > span {
-    font-size: 7px;
+    font-size: 12px;
     gap: 6px;
   }
   .cover-choices i {
@@ -1208,7 +1256,7 @@
     height: 13px;
   }
   .cover-table > div {
-    font-size: 6px;
+    font-size: 12px;
     padding: 6px 8px;
   }
   .cover-chart {
@@ -1217,7 +1265,7 @@
   }
   .cover-navigation {
     gap: 8px;
-    font-size: 6px;
+    font-size: 12px;
   }
   .cover-breadcrumbs > span:not(:last-child)::after {
     margin-left: 8px;
@@ -1227,14 +1275,14 @@
     gap: 8px;
   }
   .cover-overlay strong {
-    font-size: 7px;
+    font-size: 12px;
   }
   .cover-mini-action {
-    font-size: 5px;
+    font-size: 12px;
   }
   .cover-field {
     padding: 9px 8px;
-    font-size: 6px;
+    font-size: 12px;
     gap: 7px;
   }
   .cover-otp {
@@ -1243,23 +1291,23 @@
   .cover-otp > span {
     width: 24px;
     height: 30px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .cover-accordion > span {
-    font-size: 6px;
+    font-size: 12px;
   }
   .cover-layout {
     gap: 5px;
     height: 60px;
   }
   .cover-empty {
-    font-size: 7px;
+    font-size: 12px;
   }
   .cover-content-card {
     padding: 6px;
   }
   .cover-content-card > strong {
-    font-size: 6px;
+    font-size: 12px;
   }
   .surface-studies {
     grid-template-columns: 1fr;
@@ -1268,15 +1316,15 @@
     min-height: 160px;
   }
   .surface-study h3 {
-    font-size: 12px;
+    font-size: 14px;
     padding: 18px;
   }
   .bottom-callout > a {
     margin-left: 47px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .page-title-row .gallery-count {
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 
@@ -1427,14 +1475,6 @@
   opacity: 0.4;
   cursor: not-allowed;
 }
-.dialog-content.dialog-fullscreen {
-  inset: 20px;
-  max-width: none;
-  width: auto;
-  transform: none;
-  max-height: calc(100dvh - 40px);
-  padding: 45px;
-}
 @media (pointer: coarse) {
   .f-button.button-xs,
   .f-button.button-sm,
@@ -1462,7 +1502,7 @@
 }
 
 @theme inline {
-  --font-sans: "DM Sans", sans-serif;
+  --font-sans: "Google Sans Flex", sans-serif;
   --font-mono: "IBM Plex Mono", monospace;
   --color-primary: var(--primary);
   --color-on-primary: var(--on-primary);
@@ -1474,94 +1514,41 @@
   --color-danger: var(--danger);
 }
 :root {
-  font-family: "DM Sans", sans-serif;
-  color: #283326;
-  background: #f8f9f5;
-  --background: #f8f9f5;
-  --surface: #fff;
-  --sidebar: #fcfcfa;
-  --text: #283326;
-  --muted: #737b6d;
-  --border: #e3e6dc;
-  --control-border: #bdc5b4;
-  --subtle: #f0f2eb;
-  --primary: #284c3f;
-  --primary-hover: #1d3a2f;
-  --on-primary: #fff;
-  --lime: #d9ed92;
-  --on-lime: #28412c;
-  --soft: #edf2e4;
-  --focus: #6a843d;
-  --success: #347552;
-  --warning: #916018;
-  --danger: #b4473b;
-  --info: #436fa4;
-  --overlay: #17251c66;
-  --success-bg: #edf5ed;
-  --warning-bg: #faf2e1;
-  --danger-bg: #fcf0ed;
-  --info-bg: #eff3f8;
-  --radius-md: 8px;
-  --shadow: 0 4px 24px #25362108;
+  font-family: "Google Sans Flex", sans-serif;
+  --hulmio-font-family: "Google Sans Flex", sans-serif;
+  color: var(--text);
+  background: var(--background);
+  --background: var(--hulmio-background);
+  --surface: var(--hulmio-surface);
+  --sidebar: var(--hulmio-sidebar);
+  --text: var(--hulmio-text);
+  --muted: var(--hulmio-muted);
+  --border: var(--hulmio-border);
+  --control-border: var(--hulmio-control-border);
+  --subtle: var(--hulmio-subtle);
+  --primary: var(--hulmio-primary);
+  --primary-hover: var(--hulmio-primary-hover);
+  --on-primary: var(--hulmio-on-primary);
+  --lime: var(--hulmio-lime);
+  --on-lime: var(--hulmio-on-lime);
+  --soft: var(--hulmio-soft);
+  --focus: var(--hulmio-focus);
+  --success: var(--hulmio-success);
+  --warning: var(--hulmio-warning);
+  --danger: var(--hulmio-danger);
+  --info: var(--hulmio-info);
+  --overlay: var(--hulmio-overlay);
+  --success-bg: var(--hulmio-success-bg);
+  --warning-bg: var(--hulmio-warning-bg);
+  --danger-bg: var(--hulmio-danger-bg);
+  --info-bg: var(--hulmio-info-bg);
+  --radius-md: var(--hulmio-radius-md);
+  --shadow: var(--hulmio-shadow);
   --sidebar-width: 238px;
   color-scheme: light;
 }
-[data-theme="dark"] {
-  --background: #161d19;
-  --surface: #1e2821;
-  --sidebar: #19211b;
-  --text: #eef2e8;
-  --muted: #a8b3a0;
-  --border: #354136;
-  --control-border: #697961;
-  --subtle: #263129;
-  --primary: #d9ed92;
-  --primary-hover: #c7dc7e;
-  --on-primary: #20271e;
-  --lime: #d9ed92;
-  --on-lime: #28412c;
-  --soft: #303e28;
-  --focus: #d9ed92;
-  --success: #9cd5a8;
-  --warning: #e6c581;
-  --danger: #f2a293;
-  --info: #abc9ed;
-  --overlay: #0009;
-  --success-bg: #233b2e;
-  --warning-bg: #3c3423;
-  --danger-bg: #3e2c2a;
-  --info-bg: #263749;
-  --shadow: 0 4px 24px #0002;
-  color-scheme: dark;
-}
-[data-theme="contrast"] {
-  --background: #000;
-  --surface: #101010;
-  --sidebar: #080808;
-  --text: #fff;
-  --muted: #e0e0e0;
-  --border: #b8b8b8;
-  --control-border: #fff;
-  --subtle: #252525;
-  --primary: #e5ff78;
-  --primary-hover: #d9f26c;
-  --on-primary: #000;
-  --lime: #e5ff78;
-  --on-lime: #000;
-  --soft: #2c351c;
-  --focus: #e5ff78;
-  --success: #b3ffbb;
-  --warning: #ffe8a0;
-  --danger: #ffb3a8;
-  --info: #b9ddff;
-  --overlay: #000c;
-  --success-bg: #162819;
-  --warning-bg: #302a14;
-  --danger-bg: #301c19;
-  --info-bg: #182735;
-  --shadow: none;
-  color-scheme: dark;
-}
+[data-theme="dark"], [data-theme="contrast"] { color-scheme: dark; }
+
 * {
   box-sizing: border-box;
 }
@@ -1571,7 +1558,7 @@ html {
 }
 body {
   margin: 0;
-  font-size: 13px;
+  font-size: 16px;
   background: var(--background);
   color: var(--text);
   line-height: 1.6;
@@ -1615,11 +1602,11 @@ input,
 select,
 textarea,
 summary {
-  outline-offset: 4px;
+  outline-offset: 1px;
 }
 :focus-visible {
   outline: 2px solid var(--focus);
-  outline-offset: 4px;
+  outline-offset: 1px;
 }
 ::selection {
   background: var(--lime);
@@ -1664,10 +1651,11 @@ code {
   color: var(--muted);
 }
 .overline {
+  text-decoration: none;
   font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   letter-spacing: 0.09em;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.5;
   color: var(--muted);
 }
@@ -1678,7 +1666,7 @@ code {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 550;
   color: var(--primary);
 }
@@ -1731,105 +1719,6 @@ code {
 .icon-control:hover {
   background: var(--subtle);
 }
-.f-button {
-  border: 1px solid transparent;
-  letter-spacing: -0.01em;
-  text-decoration: none !important;
-  line-height: 1.25;
-  flex-shrink: 0;
-}
-.f-button:active:not(:disabled) {
-  transform: translateY(1px);
-}
-.button-xs {
-  height: 28px;
-  padding: 0 10px;
-  font-size: 10px;
-  gap: 6px;
-}
-.button-sm {
-  height: 33px;
-  padding: 0 12px;
-  font-size: 11px;
-  gap: 7px;
-}
-.button-md {
-  min-height: 40px;
-  padding: 0 16px;
-  font-size: 12px;
-}
-.button-lg {
-  min-height: 48px;
-  padding: 0 21px;
-  font-size: 14px;
-}
-.button-xl {
-  min-height: 56px;
-  padding: 0 26px;
-  font-size: 16px;
-}
-.button-primary {
-  background: var(--primary);
-  color: var(--on-primary);
-}
-.button-primary:hover {
-  background: var(--primary-hover);
-}
-.button-secondary {
-  background: var(--lime);
-  color: var(--on-lime);
-}
-.button-secondary:hover {
-  background: #cce580;
-}
-.button-outline {
-  background: var(--surface);
-  border-color: var(--control-border);
-  color: var(--text);
-}
-.button-outline:hover {
-  background: var(--subtle);
-  border-color: var(--muted);
-}
-.button-ghost {
-  background: transparent;
-  color: var(--text);
-}
-.button-ghost:hover {
-  background: var(--subtle);
-}
-.button-link {
-  background: transparent;
-  color: var(--primary);
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
-}
-.button-soft {
-  background: var(--soft);
-  color: var(--primary);
-}
-.button-soft:hover {
-  filter: brightness(0.96);
-}
-.button-destructive {
-  background: #b4473b;
-  color: #fff;
-}
-.button-destructive:hover {
-  background: #99382e;
-}
-.button-success {
-  background: var(--success-bg);
-  color: var(--success);
-}
-.button-warning {
-  background: var(--warning-bg);
-  color: var(--warning);
-}
-.button-information {
-  background: var(--info-bg);
-  color: var(--info);
-}
 .icon-button {
   width: 44px;
   min-height: 44px;
@@ -1858,7 +1747,7 @@ kbd {
   padding: 1px 4px;
   border-radius: 3px;
   font-family: inherit;
-  font-size: 9px;
+  font-size: 12px;
   background: var(--surface);
   color: var(--muted);
   line-height: 1.4;
@@ -1869,84 +1758,11 @@ kbd {
 .field > label,
 .field > legend {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   margin-bottom: 7px;
 }
 .required {
-  color: var(--danger);
-}
-.input-shell {
-  display: flex;
-  align-items: center;
-  border: 1px solid var(--control-border);
-  background: var(--surface);
-  border-radius: 7px;
-  overflow: hidden;
-  transition:
-    border-color 0.15s,
-    box-shadow 0.15s;
-}
-.input-shell:focus-within {
-  border-color: var(--focus);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 14%, transparent);
-}
-.input-shell input {
-  width: 100%;
-  min-width: 0;
-  height: 40px;
-  background: transparent;
-  border: 0;
-  padding: 0 12px;
-  color: var(--text);
-  outline: none;
-  font-size: 12px;
-}
-input::placeholder,
-textarea::placeholder {
-  color: var(--muted);
-  opacity: 0.8;
-}
-.input-shell:has(.input-affix:first-child) input {
-  padding-left: 9px;
-}
-.input-affix {
-  display: inline-flex;
-  align-items: center;
-  color: var(--muted);
-  padding: 0 11px;
-  font-size: 12px;
-}
-.input-affix:first-child {
-  padding-right: 0;
-}
-.input-affix:last-child {
-  padding-left: 0;
-}
-.input-action {
-  width: 36px;
-  align-self: stretch;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  flex-shrink: 0;
-}
-.input-action:hover {
-  color: var(--text);
-  background: var(--subtle);
-}
-.input-invalid {
-  border-color: var(--danger);
-}
-.field-helper,
-.field-error {
-  font-size: 10px;
-  margin-top: 6px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-.field-error {
   color: var(--danger);
 }
 .is-disabled {
@@ -1962,7 +1778,7 @@ textarea::placeholder {
   min-height: 40px;
   padding: 10px 12px;
   width: 100%;
-  font-size: 12px;
+  font-size: 14px;
 }
 .field textarea {
   resize: vertical;
@@ -1993,7 +1809,7 @@ textarea::placeholder {
   color: var(--text);
   border-radius: 7px;
   padding: 0 34px 0 12px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .select-shell svg {
   position: absolute;
@@ -2008,7 +1824,7 @@ textarea::placeholder {
   justify-content: center;
   gap: 5px;
   padding: 3px 8px;
-  font-size: 9px;
+  font-size: 12px;
   line-height: 1.4;
   border-radius: 5px;
   white-space: nowrap;
@@ -2057,17 +1873,17 @@ textarea::placeholder {
 .avatar-sm {
   width: 25px;
   height: 25px;
-  font-size: 9px;
+  font-size: 12px;
 }
 .avatar-md {
   width: 31px;
   height: 31px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .avatar-lg {
   width: 45px;
   height: 45px;
-  font-size: 14px;
+  font-size: 16px;
 }
 .avatar-color-1 {
   background: #e5cabb;
@@ -2105,14 +1921,14 @@ textarea::placeholder {
 .avatar-extra {
   background: var(--subtle);
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
 }
 .switch-label {
   position: relative;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   min-height: 28px;
 }
@@ -2172,7 +1988,7 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
   min-height: 23px;
 }
@@ -2200,7 +2016,7 @@ textarea::placeholder {
 }
 .tabs > button {
   padding: 12px 0 13px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   position: relative;
   white-space: nowrap;
@@ -2264,11 +2080,11 @@ textarea::placeholder {
   text-align: left;
 }
 .alert strong {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 550;
 }
 .alert p {
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 3px;
   opacity: 0.9;
   line-height: 1.6;
@@ -2281,7 +2097,7 @@ textarea::placeholder {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
+  font-size: 14px;
   flex-shrink: 0;
   margin-top: 1px;
 }
@@ -2305,7 +2121,7 @@ textarea::placeholder {
   color: var(--background);
   padding: 7px 10px;
   border-radius: 5px;
-  font-size: 10px;
+  font-size: 12px;
   max-width: 250px;
   z-index: 90;
   animation: pop-in 0.15s ease-out;
@@ -2314,7 +2130,7 @@ textarea::placeholder {
   fill: var(--text);
 }
 .progress-wrap {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
 }
 progress {
@@ -2383,92 +2199,11 @@ progress:indeterminate {
   align-items: center;
   font-family: "IBM Plex Mono", monospace;
 }
-.dialog-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background: var(--overlay);
-  backdrop-filter: blur(4px);
-  animation: fade-in 0.15s ease-out;
-}
-.dialog-content {
-  position: fixed;
-  z-index: 60;
-  width: calc(100% - 40px);
-  max-width: 490px;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 30px;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  background: var(--surface);
-  box-shadow: 0 24px 90px #0002;
-  max-height: 90dvh;
-  overflow-y: auto;
-  animation: modal-in 0.2s ease-out;
-}
-.dialog-content > h2 {
-  font-size: 23px;
-  margin-right: 18px;
-  font-weight: 550;
-}
-.dialog-description {
-  color: var(--muted);
-  font-size: 12px;
-  margin-top: 10px;
-  margin-bottom: 25px;
-}
-.dialog-close {
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  right: 15px;
-  top: 16px;
-  color: var(--muted);
-  border-radius: 6px;
-}
-.dialog-close:hover {
-  background: var(--subtle);
-}
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
   margin-top: 25px;
-}
-.drawer {
-  border-radius: 0;
-  top: 0;
-  right: 0;
-  left: auto;
-  bottom: 0;
-  transform: none;
-  width: 380px;
-  max-width: 90vw;
-  max-height: 100dvh;
-  animation: drawer-in 0.25s ease-out;
-  padding-top: 50px;
-}
-.drawer-left {
-  left: 0;
-  right: auto;
-}
-.drawer-bottom {
-  left: 0;
-  top: auto;
-  right: 0;
-  width: 100%;
-  max-width: 100%;
-  max-height: 85dvh;
-  border-radius: 18px 18px 0 0;
-}
-.popover-content {
-  max-width: 360px;
-  padding: 25px;
 }
 .dropdown-menu {
   z-index: 70;
@@ -2486,7 +2221,7 @@ progress:indeterminate {
   align-items: center;
   padding: 9px;
   border-radius: 5px;
-  font-size: 11px;
+  font-size: 13px;
   outline: none;
   cursor: pointer;
 }
@@ -2496,10 +2231,10 @@ progress:indeterminate {
 .dropdown-menu > [data-radix-dropdown-menu-label] {
   padding: 8px 9px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 .dropdown-menu > div:not([role]) {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   padding: 6px 9px;
 }
@@ -2520,7 +2255,7 @@ progress:indeterminate {
   align-items: center;
   justify-content: space-between;
   padding: 9px 15px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   border-bottom: 1px solid var(--border);
   background: var(--subtle);
@@ -2538,7 +2273,7 @@ progress:indeterminate {
   margin: 0;
   padding: 22px;
   overflow: auto;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--primary);
   line-height: 1.9;
   max-height: 480px;
@@ -2555,7 +2290,7 @@ progress:indeterminate {
   justify-content: space-between;
   padding: 18px 0;
   list-style: none;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   gap: 15px;
 }
@@ -2567,7 +2302,7 @@ progress:indeterminate {
 }
 .accordion details > div {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   padding-bottom: 20px;
   line-height: 1.8;
 }
@@ -2605,7 +2340,7 @@ progress:indeterminate {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 8px;
+  font-size: 12px;
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 3px 5px;
@@ -2626,11 +2361,11 @@ progress:indeterminate {
   text-align: left;
 }
 .sidebar-search > span {
-  font-size: 10px;
+  font-size: 12px;
 }
 .sidebar-search > kbd {
   margin-left: auto;
-  font-size: 8px;
+  font-size: 12px;
   padding: 1px 3px;
 }
 .sidebar-search:hover {
@@ -2647,7 +2382,7 @@ progress:indeterminate {
 }
 .nav-group > p {
   padding: 0 12px;
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.09em;
   color: var(--muted);
   margin-bottom: 9px;
@@ -2661,7 +2396,7 @@ progress:indeterminate {
   padding: 0 12px;
   border-radius: 6px;
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   position: relative;
   margin-bottom: 2px;
   transition:
@@ -2680,7 +2415,7 @@ progress:indeterminate {
 .nav-count {
   margin-left: auto;
   font-family: "IBM Plex Mono", monospace;
-  font-size: 8px;
+  font-size: 12px;
   padding: 0 5px;
   background: var(--subtle);
   border-radius: 3px;
@@ -2708,7 +2443,7 @@ progress:indeterminate {
   color: var(--primary);
 }
 .sidebar-bottom > div > span {
-  font-size: 11px;
+  font-size: 13px;
   line-height: 1.45;
 }
 .sidebar-bottom > div > span strong {
@@ -2718,7 +2453,7 @@ progress:indeterminate {
   margin-left: auto;
 }
 .sidebar-bottom > p {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   text-align: center;
   margin-top: 13px;
@@ -2740,7 +2475,7 @@ progress:indeterminate {
   z-index: 20;
 }
 .topbar-system {
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
 }
 .topbar-divider {
@@ -2749,7 +2484,7 @@ progress:indeterminate {
   margin: 0 2px;
 }
 .topbar-page {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
 }
 .topbar-actions {
@@ -2761,7 +2496,7 @@ progress:indeterminate {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .topbar-doc-link:hover {
@@ -2774,7 +2509,7 @@ progress:indeterminate {
   margin-left: 4px;
 }
 .topbar .export-button {
-  font-size: 10px;
+  font-size: 12px;
   height: 30px;
   background: var(--surface);
   border-color: var(--border);
@@ -2803,7 +2538,7 @@ progress:indeterminate {
   width: 100%;
   padding: 8px;
   border-radius: 4px;
-  font-size: 11px;
+  font-size: 13px;
 }
 .theme-menu button:hover,
 .theme-menu button[aria-checked="true"] {
@@ -2825,7 +2560,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .page-footer > a {
@@ -2860,19 +2595,19 @@ main {
   justify-content: space-between;
 }
 .overview-heading .overline {
-  font-size: 8px;
+  font-size: 12px;
   letter-spacing: 0.1em;
 }
 .release-link {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .release-link .badge {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 8px;
+  font-size: 12px;
   padding: 2px 5px;
   border: 1px solid var(--border);
   background: var(--surface);
@@ -2906,7 +2641,7 @@ main {
 .hero-copy > p {
   max-width: 365px;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.85;
   margin-top: 18px;
 }
@@ -2922,14 +2657,14 @@ main {
   justify-content: center;
   gap: 12px;
   height: 39px;
-  font-size: 11px;
+  font-size: 13px;
   padding: 0 14px;
 }
 .hero-guide-link {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
 }
 .hero-guide-link:hover {
@@ -2941,7 +2676,7 @@ main {
   display: flex;
   gap: 15px;
   margin-top: 24px;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   flex-wrap: wrap;
 }
@@ -2990,7 +2725,7 @@ main {
 }
 .hero-color-card > .overline {
   color: #717d61;
-  font-size: 7px;
+  font-size: 12px;
 }
 .hero-color-card > div {
   display: flex;
@@ -3013,7 +2748,7 @@ main {
   background: #d6cfe4;
 }
 .hero-color-card > .mono {
-  font-size: 6px;
+  font-size: 12px;
   color: #727b6c;
 }
 .hero-preview-card {
@@ -3040,7 +2775,7 @@ main {
   color: var(--primary);
 }
 .hero-preview-card .badge {
-  font-size: 7px;
+  font-size: 12px;
   padding: 3px 6px;
 }
 .hero-preview-card h3 {
@@ -3049,19 +2784,19 @@ main {
   font-weight: 550;
 }
 .hero-preview-card p {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 7px;
 }
 .hero-preview-card .button-sm {
   height: 30px;
-  font-size: 9px;
+  font-size: 12px;
   padding: 0 10px;
 }
 .hero-preview-card .avatar {
   width: 27px;
   height: 27px;
-  font-size: 8px;
+  font-size: 12px;
 }
 .hero-floating-tag {
   display: flex;
@@ -3075,7 +2810,7 @@ main {
   border-radius: 6px;
   background: var(--surface);
   color: var(--primary);
-  font-size: 8px;
+  font-size: 12px;
   transform: rotate(5deg);
   box-shadow: 0 3px 10px #25362108;
   z-index: 3;
@@ -3085,12 +2820,12 @@ main {
   padding: 2px;
   background: var(--soft);
 }
-.hero-flower {
+.hero-mark {
   color: var(--lime);
   position: absolute;
   bottom: 42px;
   right: 12px;
-  transform: rotate(13deg);
+  transform: none;
   z-index: 1;
   filter: drop-shadow(0 1px 0 #b9ce7b);
 }
@@ -3109,7 +2844,7 @@ main {
 .cross-two {
   bottom: 2px;
   left: 91px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .system-stats {
   display: flex;
@@ -3149,7 +2884,7 @@ main {
 }
 .system-stats div > span:last-child {
   max-width: 85px;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   line-height: 1.5;
 }
@@ -3157,7 +2892,7 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   margin-left: 15px;
   white-space: nowrap;
@@ -3174,7 +2909,7 @@ main {
   margin-bottom: 17px;
 }
 .section-heading-row .overline {
-  font-size: 7px;
+  font-size: 12px;
 }
 .section-heading-row h2 {
   font-size: 24px;
@@ -3183,11 +2918,11 @@ main {
 }
 .section-aside {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   padding-bottom: 3px;
 }
 .section-heading-row > .text-link {
-  font-size: 10px;
+  font-size: 12px;
   padding-bottom: 3px;
 }
 .foundation-cards {
@@ -3264,7 +2999,7 @@ main {
 .star-two {
   right: 28px;
   bottom: 28px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .visual-caption {
   position: absolute;
@@ -3272,7 +3007,7 @@ main {
   left: 0;
   right: 0;
   text-align: center;
-  font-size: 6px;
+  font-size: 12px;
   font-family: "IBM Plex Mono", monospace;
   letter-spacing: 0.2em;
   color: #73815e;
@@ -3322,7 +3057,7 @@ main {
 }
 .token-type-row > .mono {
   color: #777b69;
-  font-size: 7px;
+  font-size: 12px;
   margin-left: auto;
 }
 .components-visual {
@@ -3338,7 +3073,7 @@ main {
   color: #fff;
   border-radius: 5px;
   height: 29px;
-  font-size: 9px;
+  font-size: 12px;
   padding: 0 11px;
   white-space: nowrap;
 }
@@ -3372,7 +3107,7 @@ main {
   border: 1px solid #d9ded0;
   border-radius: 5px;
   padding: 8px 10px;
-  font-size: 8px;
+  font-size: 12px;
   color: #7b826f;
   margin-top: 10px;
 }
@@ -3383,7 +3118,7 @@ main {
   display: flex;
   gap: 4px;
   align-items: center;
-  font-size: 7px;
+  font-size: 12px;
   color: #396d43;
   background: #e0ead4;
   padding: 3px 6px;
@@ -3406,7 +3141,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 9px;
+  font-size: 12px;
   background: #e8cbb8;
   color: #805844;
   border-radius: 50%;
@@ -3425,16 +3160,16 @@ main {
 .card-index {
   font-family: "IBM Plex Mono", monospace;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
   align-self: flex-start;
   margin-top: 2px;
 }
 .foundation-card-copy h3 {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 550;
 }
 .foundation-card-copy p {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 5px;
 }
@@ -3465,14 +3200,14 @@ main {
   gap: 24px;
 }
 .playground-toolbar .tabs > button {
-  font-size: 10px;
+  font-size: 12px;
   padding: 13px 0;
 }
 .code-toggle {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   padding: 5px 7px;
   border: 1px solid transparent;
@@ -3500,14 +3235,14 @@ main {
   gap: 15px;
 }
 .demo-buttons > div > span {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
 }
 .demo-buttons .button-md {
   height: 36px;
   min-height: 36px;
-  font-size: 10px;
+  font-size: 12px;
   padding: 0 14px;
 }
 .demo-inputs > * {
@@ -3524,7 +3259,7 @@ main {
   justify-content: space-between;
   gap: 15px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
 }
 .playground-caption > span,
 .playground-caption > a {
@@ -3546,27 +3281,27 @@ main {
   gap: 16px;
   padding: 22px 25px;
 }
-.callout-flower {
+.callout-mark {
   color: var(--primary);
 }
 .bottom-callout h3 {
-  font-size: 14px;
+  font-size: 16px;
 }
 .bottom-callout p {
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 5px;
   color: var(--muted);
 }
 .bottom-callout > button {
   margin-left: auto;
-  font-size: 10px;
+  font-size: 12px;
 }
 /* Foundation pages */
 .page-intro {
   margin-bottom: 30px;
 }
 .page-intro > .overline {
-  font-size: 9px;
+  font-size: 12px;
 }
 .page-title-row {
   display: flex;
@@ -3582,13 +3317,13 @@ main {
 }
 .page-title-row p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 15px;
   max-width: 570px;
   line-height: 1.8;
 }
 .page-title-row > .f-button {
-  font-size: 10px;
+  font-size: 12px;
 }
 .section-title {
   display: flex;
@@ -3601,7 +3336,7 @@ main {
   font-size: 20px;
 }
 .section-title > span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .palette-grid {
@@ -3645,10 +3380,10 @@ main {
 }
 .color-swatch > strong {
   font-weight: 500;
-  font-size: 10px;
+  font-size: 12px;
 }
 .color-swatch > code {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 4px;
   letter-spacing: -0.03em;
@@ -3667,7 +3402,7 @@ main {
   color: var(--primary);
 }
 .principle-note > p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.8;
 }
 .principle-note strong {
@@ -3699,14 +3434,14 @@ main {
 }
 .font-pair p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 12px;
   max-width: 320px;
 }
 .font-weights {
   display: flex;
   gap: 18px;
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 28px;
 }
 .editorial-font .font-specimen,
@@ -3731,7 +3466,7 @@ main {
   background: var(--surface);
 }
 .sample-input > span {
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
   white-space: nowrap;
@@ -3760,11 +3495,11 @@ main {
 }
 .type-scale strong {
   text-transform: capitalize;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
 }
 .type-scale code {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .type-scale > div > span {
@@ -3788,7 +3523,7 @@ main {
 }
 .token-card p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 12px;
   line-height: 1.8;
 }
@@ -3838,7 +3573,7 @@ main {
   background: var(--soft);
   border: 1px dashed var(--control-border);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   font-family: "IBM Plex Mono", monospace;
 }
 .data-list {
@@ -3854,7 +3589,7 @@ main {
   align-items: center;
   padding: 16px 20px;
   border-bottom: 1px solid var(--border);
-  font-size: 11px;
+  font-size: 13px;
 }
 .data-list > div:last-child {
   border: 0;
@@ -3869,7 +3604,7 @@ main {
   font-weight: 500;
 }
 .data-list code {
-  font-size: 10px;
+  font-size: 12px;
   overflow-wrap: anywhere;
 }
 .effect-grid {
@@ -3889,12 +3624,12 @@ main {
 }
 .effect-item > strong {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
 }
 .effect-item code {
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 .shadow-example {
   min-height: 160px;
@@ -3908,7 +3643,7 @@ main {
   margin: 15px 0;
 }
 .shadow-example code {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .motion-demo {
@@ -3965,14 +3700,14 @@ main {
 .brand-hero > .overline {
   display: block;
   margin-top: 35px;
-  font-size: 8px;
+  font-size: 12px;
   color: #6e7f57;
 }
-.brand-hero-flower {
+.brand-hero-mark {
   position: absolute;
   right: 65px;
   top: 57px;
-  transform: rotate(10deg);
+  transform: none;
   color: #b8ce8d;
 }
 .logo-grid {
@@ -4002,7 +3737,7 @@ main {
   position: absolute;
   bottom: 19px;
   left: 22px;
-  font-size: 8px;
+  font-size: 12px;
   font-family: "IBM Plex Mono", monospace;
   letter-spacing: 0.08em;
   color: var(--muted);
@@ -4072,7 +3807,7 @@ main {
 }
 .do-dont p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 10px;
 }
 .art-direction {
@@ -4094,7 +3829,7 @@ main {
 .art-graphic > svg {
   color: #284c3f;
   z-index: 1;
-  transform: rotate(15deg);
+  transform: none;
 }
 .art-circle {
   height: 180px;
@@ -4116,7 +3851,7 @@ main {
 }
 .art-direction p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.9;
   margin-top: 20px;
 }
@@ -4141,14 +3876,14 @@ main {
   position: absolute;
   top: 8px;
   right: 10px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   font-family: "IBM Plex Mono", monospace;
 }
 .body-copy {
   max-width: 720px;
   color: var(--muted);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.9;
   margin-bottom: 25px;
 }
@@ -4165,7 +3900,7 @@ main {
   max-width: 75%;
 }
 .catalog-search > span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   white-space: nowrap;
 }
@@ -4183,12 +3918,12 @@ main {
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .category-filters > a span {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 8px;
+  font-size: 12px;
   opacity: 0.65;
 }
 .category-filters > a.active {
@@ -4245,13 +3980,13 @@ main {
   justify-content: space-between;
 }
 .catalog-card-info h3 {
-  font-size: 15px;
+  font-size: 17px;
 }
 .catalog-card-info > div > svg {
   color: var(--muted);
 }
 .catalog-card-info > p {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
   min-height: 32px;
@@ -4260,7 +3995,7 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 17px;
 }
@@ -4323,7 +4058,7 @@ main {
   width: 200px;
   background: var(--surface);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
 }
 .thumbnail-input > span {
   color: var(--primary);
@@ -4341,7 +4076,7 @@ main {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11px;
+  font-size: 13px;
 }
 .thumbnail-checkbox > svg {
   background: var(--primary);
@@ -4408,7 +4143,7 @@ main {
   align-items: center;
   gap: 7px;
   color: var(--muted);
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 22px;
 }
 .back-link:hover {
@@ -4440,7 +4175,7 @@ main {
   gap: 24px;
 }
 .component-stage-bar .tabs > button {
-  font-size: 11px;
+  font-size: 13px;
   padding: 14px 0;
 }
 .component-preview {
@@ -4462,10 +4197,10 @@ main {
   gap: 7px;
   padding: 10px 15px;
   color: var(--muted);
-  font-size: 8px;
+  font-size: 12px;
 }
 .component-stage-footer > .mono {
-  font-size: 8px;
+  font-size: 12px;
 }
 .variant-panel {
   border: 1px solid var(--border);
@@ -4481,25 +4216,25 @@ main {
   margin-bottom: 22px;
 }
 .variant-panel-heading h3 {
-  font-size: 12px;
+  font-size: 14px;
 }
 .variant-panel > .field {
   margin-bottom: 17px;
 }
 .variant-panel .select-shell select {
-  font-size: 11px;
+  font-size: 13px;
   height: 35px;
 }
 .variant-panel .select-shell > svg {
   top: 11px;
 }
 .variant-panel label {
-  font-size: 10px;
+  font-size: 12px;
 }
 .variant-panel > .switch-label {
   display: flex;
   margin-top: 10px;
-  font-size: 11px;
+  font-size: 13px;
 }
 .variant-panel hr {
   border: 0;
@@ -4509,7 +4244,7 @@ main {
 .variant-panel-note {
   border-top: 1px solid var(--border);
   color: var(--muted);
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 23px;
   padding-top: 17px;
   line-height: 1.8;
@@ -4530,7 +4265,7 @@ main {
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--surface);
-  font-size: 10px;
+  font-size: 12px;
   padding: 7px 11px;
   color: var(--muted);
 }
@@ -4552,7 +4287,7 @@ main {
   background: var(--surface);
   border-radius: 8px;
   padding: 20px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .related-components > a:hover {
   background: var(--soft);
@@ -4563,7 +4298,7 @@ main {
   max-width: 330px;
 }
 .demo-legend {
-  font-size: 12px;
+  font-size: 14px;
   margin-bottom: 17px;
   font-weight: 500;
 }
@@ -4575,7 +4310,7 @@ main {
 }
 .multi-select legend {
   font-weight: 500;
-  font-size: 12px;
+  font-size: 14px;
   padding: 0 4px;
 }
 .multi-select .check-label {
@@ -4601,7 +4336,7 @@ main {
   border-radius: 4px;
 }
 .rating > span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   margin-left: 10px;
 }
@@ -4619,7 +4354,7 @@ main {
   margin-top: 23px;
 }
 .demo-card p {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   line-height: 1.8;
   margin-top: 12px;
@@ -4634,7 +4369,7 @@ main {
   padding: 0;
 }
 .otp-fields legend {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   margin-bottom: 15px;
 }
@@ -4667,7 +4402,7 @@ main {
   border: 0;
   outline: none;
   padding: 3px;
-  font-size: 11px;
+  font-size: 13px;
 }
 .tag-input:focus-within {
   outline: 2px solid var(--focus);
@@ -4680,7 +4415,7 @@ main {
   background: var(--soft);
   padding: 3px 7px;
   border-radius: 4px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .removable-tag button {
   display: flex;
@@ -4710,11 +4445,11 @@ main {
 }
 .upload-zone strong {
   font-weight: 500;
-  font-size: 13px;
+  font-size: 15px;
 }
 .upload-zone > span {
   color: var(--muted);
-  font-size: 11px;
+  font-size: 13px;
   margin-top: 5px;
 }
 .upload-zone u {
@@ -4722,13 +4457,13 @@ main {
   text-underline-offset: 3px;
 }
 .upload-zone small {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 16px;
 }
 .upload-zone > input {
   width: 100%;
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 15px;
 }
 .upload-zone.dragging {
@@ -4743,7 +4478,7 @@ main {
   border: 1px solid var(--border);
   border-radius: 7px;
   margin-top: 8px;
-  font-size: 10px;
+  font-size: 12px;
   background: var(--surface);
 }
 .uploaded-file > span {
@@ -4773,7 +4508,7 @@ main {
 }
 .table-toolbar input {
   height: 32px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .table-scroll {
   overflow-x: auto;
@@ -4789,7 +4524,7 @@ main {
 .table-demo td {
   padding: 12px 14px;
   border-bottom: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
   white-space: nowrap;
 }
 .table-demo th {
@@ -4809,7 +4544,7 @@ main {
   font-weight: 500;
 }
 .table-demo .badge {
-  font-size: 8px;
+  font-size: 12px;
 }
 .table-demo .check-label {
   min-height: 15px;
@@ -4823,7 +4558,7 @@ main {
   align-items: center;
   justify-content: space-between;
   padding: 12px 14px;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
 }
 .table-edit {
@@ -4832,7 +4567,7 @@ main {
   padding: 4px;
   width: 90px;
   border-radius: 3px;
-  font-size: 10px;
+  font-size: 12px;
 }
 .api-table {
   background: var(--surface);
@@ -4843,7 +4578,7 @@ main {
 .api-table td {
   padding: 14px;
   border-bottom: 1px solid var(--border);
-  font-size: 11px;
+  font-size: 13px;
 }
 .api-table th {
   color: var(--muted);
@@ -4891,17 +4626,17 @@ main {
   border-color: var(--primary);
 }
 .timeline strong {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
 }
 .timeline time {
   display: block;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 3px;
 }
 .timeline p {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 8px;
 }
@@ -4951,7 +4686,7 @@ main {
   top: -19px;
   width: 100%;
   text-align: center;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
   font-weight: 400;
   opacity: 0;
@@ -4962,7 +4697,7 @@ main {
 .bar-chart small {
   position: absolute;
   bottom: 0;
-  font-size: 8px;
+  font-size: 12px;
   color: var(--muted);
 }
 .line-chart {
@@ -4997,7 +4732,7 @@ main {
   letter-spacing: -0.05em;
 }
 .donut-chart small {
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   letter-spacing: 0;
 }
@@ -5015,7 +4750,7 @@ main {
 }
 .chart-data {
   width: 100%;
-  font-size: 9px;
+  font-size: 12px;
   margin-top: 15px;
   text-align: center;
 }
@@ -5060,7 +4795,7 @@ main {
 }
 .tab-demo-panel p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 12px;
 }
 .breadcrumbs {
@@ -5068,7 +4803,7 @@ main {
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted);
 }
 .breadcrumbs > span {
@@ -5095,7 +4830,7 @@ main {
   display: flex;
   align-items: center;
   gap: 7px;
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .stepper > button > span {
@@ -5107,7 +4842,7 @@ main {
   border-radius: 50%;
   background: var(--subtle);
   border: 1px solid var(--border);
-  font-size: 10px;
+  font-size: 12px;
 }
 .stepper .step-active {
   color: var(--primary);
@@ -5189,7 +4924,7 @@ main {
 }
 .empty-state p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .empty-state .f-button {
   margin-top: 4px;
@@ -5210,7 +4945,7 @@ main {
   color: var(--primary);
   padding: 20px 10px;
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   border-radius: 5px;
 }
 .layout-demo > div:first-child,
@@ -5245,7 +4980,7 @@ main {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 9px;
+  font-size: 12px;
   font-weight: 500;
   margin-bottom: 16px;
 }
@@ -5274,7 +5009,7 @@ main {
   background: var(--surface);
 }
 .kanban-card > p {
-  font-size: 10px;
+  font-size: 12px;
   margin: 8px 0 14px;
   line-height: 1.6;
 }
@@ -5284,7 +5019,7 @@ main {
 .kanban-card .avatar {
   width: 21px;
   height: 21px;
-  font-size: 8px;
+  font-size: 12px;
 }
 /* Guides and patterns */
 .welcome-banner {
@@ -5310,7 +5045,7 @@ main {
 }
 .welcome-banner p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 15px;
   max-width: 440px;
 }
@@ -5331,7 +5066,7 @@ main {
 }
 .step-number {
   font-family: "IBM Plex Mono", monospace;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   padding-top: 3px;
 }
@@ -5340,7 +5075,7 @@ main {
 }
 .getting-steps p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin: 12px 0 15px;
   max-width: 560px;
 }
@@ -5412,7 +5147,7 @@ main {
 }
 .auth-pattern > p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 10px;
   text-align: center;
 }
@@ -5445,7 +5180,7 @@ main {
   border-radius: 9px;
 }
 .dashboard-stats span {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .dashboard-stats strong {
@@ -5458,7 +5193,7 @@ main {
 .dashboard-stats small {
   display: block;
   margin-top: 10px;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--success);
 }
 .dashboard-pattern > .chart-demo {
@@ -5503,7 +5238,7 @@ main {
 }
 .system-page p {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 14px;
 }
 .system-page a {
   display: inline-flex;
@@ -5534,7 +5269,7 @@ main {
   gap: 15px;
 }
 .release time {
-  font-size: 10px;
+  font-size: 12px;
   color: var(--muted);
 }
 .release h2 {
@@ -5543,12 +5278,12 @@ main {
 }
 .release > p {
   margin-top: 15px;
-  font-size: 13px;
+  font-size: 15px;
   color: var(--muted);
 }
 .release ul {
   padding-left: 18px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--muted);
   margin-top: 25px;
   line-height: 2.4;
@@ -5567,7 +5302,7 @@ main {
 .dialog-content:has(.command-search) > .dialog-description {
   padding: 0 25px;
   margin-bottom: 20px;
-  font-size: 11px;
+  font-size: 14px;
 }
 .command-input {
   display: flex;
@@ -5582,7 +5317,7 @@ main {
   width: 100%;
   background: transparent;
   padding: 5px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text);
   outline: none;
 }
@@ -5601,7 +5336,7 @@ main {
   gap: 12px;
   padding: 10px 12px;
   border-radius: 7px;
-  font-size: 12px;
+  font-size: 14px;
 }
 .command-results > a.selected {
   background: var(--soft);
@@ -5622,7 +5357,7 @@ main {
 }
 .command-results small {
   display: block;
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   margin-top: 3px;
 }
@@ -5635,7 +5370,7 @@ main {
   align-items: center;
   padding: 11px 22px;
   border-top: 1px solid var(--border);
-  font-size: 9px;
+  font-size: 12px;
   color: var(--muted);
   background: var(--subtle);
 }
@@ -5653,10 +5388,10 @@ main {
   color: var(--muted);
 }
 .command-empty > p {
-  font-size: 14px;
+  font-size: 16px;
 }
 .command-empty > span {
-  font-size: 11px;
+  font-size: 13px;
 }
 .toast-region {
   position: fixed;
@@ -5677,7 +5412,7 @@ main {
   padding: 15px 16px;
   box-shadow: 0 8px 40px #0002;
   animation: toast-in 0.25s ease-out;
-  font-size: 11px;
+  font-size: 13px;
   max-width: 440px;
 }
 .toast > span {
@@ -5821,11 +5556,11 @@ main {
     gap: 13px;
   }
   .hero-guide-link {
-    font-size: 9px;
+    font-size: 12px;
   }
   .hero-meta {
     gap: 9px;
-    font-size: 7px;
+    font-size: 12px;
   }
   .system-stats > div {
     padding: 0 15px;
@@ -5835,7 +5570,7 @@ main {
     display: none;
   }
   .system-stats div > span:last-child {
-    font-size: 8px;
+    font-size: 12px;
   }
   .foundation-visual {
     height: 145px;
@@ -5845,17 +5580,17 @@ main {
     gap: 7px;
   }
   .foundation-card-copy h3 {
-    font-size: 11px;
+    font-size: 13px;
   }
   .foundation-card-copy p {
-    font-size: 7px;
+    font-size: 12px;
   }
   .tokens-visual {
     padding-left: 18px;
     padding-right: 18px;
   }
   .token-type-row > .mono {
-    font-size: 6px;
+    font-size: 12px;
   }
   .components-visual {
     padding-left: 16px;
@@ -5882,7 +5617,7 @@ main {
     padding: 25px 18px;
   }
   .demo-buttons .button-md {
-    font-size: 9px;
+    font-size: 12px;
     padding: 0 11px;
   }
   .palette-grid {
@@ -5909,7 +5644,7 @@ main {
     padding: 15px;
   }
   .catalog-card-info h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
   .component-thumbnail {
     padding: 15px;
@@ -5948,7 +5683,7 @@ main {
     font-size: 41px;
   }
   .hero-copy > p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .hero-art {
     transform: scale(0.77);
@@ -5961,7 +5696,7 @@ main {
     gap: 12px;
   }
   .hero-guide-link {
-    font-size: 9px;
+    font-size: 12px;
   }
   .hero-meta {
     gap: 12px;
@@ -5976,7 +5711,7 @@ main {
     display: none;
   }
   .foundation-card-copy h3 {
-    font-size: 10px;
+    font-size: 12px;
   }
   .foundation-card-copy p {
     line-height: 1.5;
@@ -6013,14 +5748,14 @@ main {
     top: 29px;
   }
   .components-visual .mini-primary {
-    font-size: 8px;
+    font-size: 12px;
     gap: 7px;
     padding: 0 8px;
   }
   .mini-input {
     width: 132px;
     padding: 6px;
-    font-size: 7px;
+    font-size: 12px;
     margin-top: 7px;
   }
   .mini-avatar {
@@ -6031,7 +5766,7 @@ main {
   }
   .mini-badge {
     right: 11px;
-    font-size: 6px;
+    font-size: 12px;
   }
   .section-aside {
     display: none;
@@ -6041,7 +5776,7 @@ main {
   }
   .demo-buttons .button-md {
     padding: 0 10px;
-    font-size: 8px;
+    font-size: 12px;
     gap: 5px;
     min-height: 33px;
     height: 33px;
@@ -6060,7 +5795,7 @@ main {
     text-align: left;
   }
   .bottom-callout h3 {
-    font-size: 13px;
+    font-size: 15px;
   }
   .component-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -6100,7 +5835,7 @@ main {
   .shadow-example h3 {
     font-size: 17px;
   }
-  .brand-hero-flower {
+  .brand-hero-mark {
     right: 30px;
     opacity: 0.7;
   }
@@ -6133,7 +5868,7 @@ main {
     font-size: 39px;
   }
   .page-title-row > .f-button {
-    font-size: 9px;
+    font-size: 12px;
     padding: 0 12px;
   }
 }
@@ -6193,7 +5928,7 @@ main {
     transform: scale(0.88);
   }
   .hero-copy > p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .hero-meta > span:last-child {
     display: flex;
@@ -6202,7 +5937,7 @@ main {
     gap: 12px;
   }
   .hero-guide-link {
-    font-size: 10px;
+    font-size: 12px;
   }
   .overview-hero {
     min-height: 330px;
@@ -6211,10 +5946,10 @@ main {
     height: 145px;
   }
   .foundation-card-copy h3 {
-    font-size: 12px;
+    font-size: 14px;
   }
   .foundation-card-copy p {
-    font-size: 8px;
+    font-size: 12px;
     min-height: auto;
   }
   .mini-input {
@@ -6228,7 +5963,7 @@ main {
     top: 35px;
   }
   .mini-badge {
-    font-size: 7px;
+    font-size: 12px;
     bottom: 25px;
     right: 18px;
   }
@@ -6242,7 +5977,7 @@ main {
   }
   .token-type-row > .mono {
     display: inline;
-    font-size: 6px;
+    font-size: 12px;
   }
   .tokens-visual {
     padding: 30px 18px;
@@ -6251,7 +5986,7 @@ main {
     margin-top: 18px;
   }
   .demo-buttons .button-md {
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 13px;
     min-height: 37px;
     height: 37px;
@@ -6303,10 +6038,10 @@ main {
     display: none;
   }
   .foundation-card-copy h3 {
-    font-size: 11px;
+    font-size: 13px;
   }
   .foundation-card-copy p {
-    font-size: 7px;
+    font-size: 12px;
   }
   .foundation-visual {
     height: 130px;
@@ -6324,7 +6059,7 @@ main {
   .mini-badge {
     right: 10px;
     bottom: 21px;
-    font-size: 6px;
+    font-size: 12px;
   }
   .mini-avatar {
     bottom: 16px;
@@ -6372,7 +6107,7 @@ main {
   .brand-hero {
     padding: 32px;
   }
-  .brand-hero-flower {
+  .brand-hero-mark {
     width: 150px;
     right: 10px;
     top: 76px;
@@ -6409,16 +6144,16 @@ main {
     padding: 24px;
   }
   .font-pair p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .font-weights {
     gap: 10px;
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 @media (max-width: 540px) {
   body {
-    font-size: 13px;
+    font-size: 15px;
   }
   .page-content {
     padding: 24px 20px 0;
@@ -6438,7 +6173,7 @@ main {
     gap: 5px;
   }
   .topbar-page {
-    font-size: 12px;
+    font-size: 14px;
   }
   .topbar-actions {
     gap: 6px;
@@ -6446,21 +6181,21 @@ main {
   .topbar .export-button {
     height: 30px;
     padding: 0 8px;
-    font-size: 9px;
+    font-size: 12px;
     gap: 5px;
   }
   .topbar .icon-control {
     width: 30px;
   }
   .overview-heading .overline {
-    font-size: 7px;
+    font-size: 12px;
   }
   .release-link {
     font-size: 0;
     gap: 6px;
   }
   .release-link .badge {
-    font-size: 7px;
+    font-size: 12px;
   }
   .overview-hero {
     grid-template-columns: 1fr;
@@ -6472,7 +6207,7 @@ main {
   }
   .hero-copy > p {
     max-width: 340px;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 18px;
   }
   .hero-actions {
@@ -6481,13 +6216,13 @@ main {
   }
   .hero-actions > .f-button {
     height: 40px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .hero-guide-link {
-    font-size: 10px;
+    font-size: 12px;
   }
   .hero-meta {
-    font-size: 8px;
+    font-size: 12px;
     margin-top: 20px;
     gap: 15px;
   }
@@ -6514,7 +6249,7 @@ main {
     right: -2px;
     bottom: -2px;
   }
-  .hero-flower {
+  .hero-mark {
     right: -4px;
     bottom: 46px;
   }
@@ -6545,7 +6280,7 @@ main {
     font-size: 27px;
   }
   .system-stats div > span:last-child {
-    font-size: 9px;
+    font-size: 12px;
     max-width: 90px;
   }
   .stats-infinity {
@@ -6559,10 +6294,10 @@ main {
     font-size: 25px;
   }
   .section-heading-row .overline {
-    font-size: 7px;
+    font-size: 12px;
   }
   .section-heading-row > .text-link {
-    font-size: 9px;
+    font-size: 12px;
     max-width: 95px;
     gap: 5px;
     text-align: right;
@@ -6591,12 +6326,12 @@ main {
     align-items: center;
   }
   .foundation-card-copy h3 {
-    font-size: 15px;
+    font-size: 17px;
     line-height: 1.35;
     padding-right: 5px;
   }
   .foundation-card-copy p {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.6;
     margin-top: 8px;
   }
@@ -6605,7 +6340,7 @@ main {
   }
   .foundation-card-copy .card-index {
     display: inline-block;
-    font-size: 8px;
+    font-size: 12px;
     position: absolute;
     top: 10px;
     right: 12px;
@@ -6621,13 +6356,13 @@ main {
     height: 25px;
   }
   .visual-caption {
-    font-size: 4px;
+    font-size: 12px;
     bottom: 28px;
   }
   .star-one {
     left: 12px;
     top: 13px;
-    font-size: 13px;
+    font-size: 15px;
   }
   .star-two {
     right: 16px;
@@ -6646,7 +6381,7 @@ main {
     padding: 24px 11px;
   }
   .components-visual .mini-primary {
-    font-size: 7px;
+    font-size: 12px;
     height: 26px;
     padding: 0 7px;
     gap: 4px;
@@ -6661,7 +6396,7 @@ main {
   }
   .mini-input {
     width: 120px;
-    font-size: 6px;
+    font-size: 12px;
     padding: 6px;
   }
   .mini-input > svg {
@@ -6671,7 +6406,7 @@ main {
   .mini-badge {
     right: 8px;
     bottom: 15px;
-    font-size: 6px;
+    font-size: 12px;
     padding: 2px 4px;
   }
   .mini-checkbox {
@@ -6685,7 +6420,7 @@ main {
     left: 34px;
     width: 20px;
     height: 20px;
-    font-size: 7px;
+    font-size: 12px;
   }
   .playground-toolbar {
     padding: 0 14px;
@@ -6695,7 +6430,7 @@ main {
     gap: 16px;
   }
   .playground-toolbar .tabs > button {
-    font-size: 9px;
+    font-size: 12px;
   }
   .code-toggle {
     padding: 5px 0 5px 7px;
@@ -6710,7 +6445,7 @@ main {
     padding: 30px 20px;
   }
   .demo-buttons .button-md {
-    font-size: 10px;
+    font-size: 12px;
     min-height: 37px;
     height: 37px;
     padding: 0 14px;
@@ -6734,7 +6469,7 @@ main {
   }
   .playground-caption {
     padding: 12px;
-    font-size: 7px;
+    font-size: 12px;
     gap: 10px;
   }
   .playground-caption > a {
@@ -6750,18 +6485,18 @@ main {
     gap: 12px;
   }
   .bottom-callout h3 {
-    font-size: 13px;
+    font-size: 15px;
   }
   .bottom-callout p {
     max-width: 210px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .bottom-callout > button {
     max-width: none;
     margin-left: 47px;
-    font-size: 10px;
+    font-size: 12px;
   }
-  .callout-flower > svg {
+  .callout-mark > svg {
     height: 30px;
     width: 30px;
   }
@@ -6769,7 +6504,7 @@ main {
     margin-top: 30px;
     padding-bottom: 23px;
     gap: 20px;
-    font-size: 8px;
+    font-size: 12px;
   }
   .page-footer > a {
     gap: 6px;
@@ -6787,7 +6522,7 @@ main {
     margin-bottom: 25px;
   }
   .page-intro > .overline {
-    font-size: 8px;
+    font-size: 12px;
   }
   .page-title-row {
     flex-wrap: wrap;
@@ -6798,7 +6533,7 @@ main {
     font-size: 37px;
   }
   .page-title-row p {
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 14px;
   }
   .page-title-row > .badge {
@@ -6815,7 +6550,7 @@ main {
     display: block;
     max-width: none;
     text-align: left;
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 8px;
   }
   .palette-grid {
@@ -6830,10 +6565,10 @@ main {
     margin-bottom: 8px;
   }
   .color-swatch > code {
-    font-size: 9px;
+    font-size: 12px;
   }
   .color-swatch > strong {
-    font-size: 11px;
+    font-size: 13px;
   }
   .principle-note {
     padding: 20px;
@@ -6846,7 +6581,7 @@ main {
     margin-top: 3px;
   }
   .principle-note > p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .font-pair {
     grid-template-columns: 1fr;
@@ -6861,20 +6596,20 @@ main {
   }
   .font-weights {
     gap: 20px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .font-pair p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .sample-input {
     gap: 13px;
     padding: 13px;
   }
   .sample-input > span {
-    font-size: 7px;
+    font-size: 12px;
   }
   .sample-input > input {
-    font-size: 11px;
+    font-size: 13px;
   }
   .type-scale > div {
     gap: 16px;
@@ -6884,10 +6619,10 @@ main {
     width: 72px;
   }
   .type-scale strong {
-    font-size: 10px;
+    font-size: 12px;
   }
   .type-scale code {
-    font-size: 8px;
+    font-size: 12px;
   }
   .token-card {
     padding: 23px;
@@ -6896,7 +6631,7 @@ main {
     font-size: 20px;
   }
   .token-card p {
-    font-size: 12px;
+    font-size: 14px;
   }
   .spacing-table {
     padding: 7px 15px;
@@ -6906,11 +6641,11 @@ main {
   }
   .spacing-table code:first-child {
     width: 65px;
-    font-size: 9px;
+    font-size: 12px;
     flex-shrink: 0;
   }
   .spacing-table code:last-child {
-    font-size: 9px;
+    font-size: 12px;
   }
   .spacing-bar {
     max-width: 45%;
@@ -6921,7 +6656,7 @@ main {
     padding: 10px;
   }
   .responsive-grid-example span {
-    font-size: 7px;
+    font-size: 12px;
   }
   .data-list > div {
     display: flex;
@@ -6938,7 +6673,7 @@ main {
     min-width: 130px;
   }
   .data-list code {
-    font-size: 10px;
+    font-size: 12px;
   }
   .effect-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -6971,11 +6706,11 @@ main {
     margin-top: 35px;
   }
   .brand-hero > .overline {
-    font-size: 6px;
+    font-size: 12px;
     position: relative;
     z-index: 1;
   }
-  .brand-hero-flower {
+  .brand-hero-mark {
     opacity: 0.4;
     width: 145px;
     right: -19px;
@@ -6987,7 +6722,7 @@ main {
     scrollbar-width: none;
   }
   .tabs > button {
-    font-size: 10px;
+    font-size: 12px;
   }
   .logo-grid {
     grid-template-columns: 1fr;
@@ -7022,10 +6757,10 @@ main {
     max-width: 77%;
   }
   .catalog-search > span {
-    font-size: 9px;
+    font-size: 12px;
   }
   .catalog-search .input-shell input {
-    font-size: 10px;
+    font-size: 12px;
   }
   .category-filters {
     gap: 6px;
@@ -7033,7 +6768,7 @@ main {
   }
   .category-filters > a {
     padding: 6px 9px;
-    font-size: 9px;
+    font-size: 12px;
     gap: 6px;
   }
   .component-grid {
@@ -7048,7 +6783,7 @@ main {
     height: 27px;
     gap: 5px;
     padding: 0 7px;
-    font-size: 7px;
+    font-size: 12px;
   }
   .component-thumbnail .mini-primary > svg {
     width: 10px;
@@ -7057,19 +6792,19 @@ main {
     padding: 14px 11px;
   }
   .catalog-card-info h3 {
-    font-size: 12px;
+    font-size: 14px;
   }
   .catalog-card-info > div > svg {
     width: 12px;
   }
   .catalog-card-info > p {
-    font-size: 9px;
+    font-size: 12px;
     line-height: 1.6;
     min-height: 43px;
     margin-top: 7px;
   }
   .catalog-card-info > span {
-    font-size: 7px;
+    font-size: 12px;
     gap: 5px;
     margin-top: 12px;
   }
@@ -7089,7 +6824,7 @@ main {
     padding: 4px;
   }
   .thumbnail-checkbox {
-    font-size: 7px;
+    font-size: 12px;
     gap: 5px;
   }
   .thumbnail-checkbox > svg {
@@ -7097,20 +6832,20 @@ main {
     height: 17px;
   }
   .component-thumbnail .badge {
-    font-size: 6px;
+    font-size: 12px;
     padding: 2px 4px;
     gap: 3px;
   }
   .component-thumbnail .avatar {
     width: 26px;
     height: 26px;
-    font-size: 8px;
+    font-size: 12px;
   }
   .component-thumbnail .mini-palette {
     height: 37px;
   }
   .component-thumbnail .thumbnail-input {
-    font-size: 7px;
+    font-size: 12px;
     padding: 8px;
   }
   .thumbnail-rating {
@@ -7123,10 +6858,10 @@ main {
   }
   .component-stage-footer {
     padding: 10px 12px;
-    font-size: 7px;
+    font-size: 12px;
   }
   .component-stage-footer .mono {
-    font-size: 7px;
+    font-size: 12px;
   }
   .variant-panel {
     grid-template-columns: repeat(2, 1fr);
@@ -7137,7 +6872,7 @@ main {
     grid-column: 1 / -1;
   }
   .variant-panel > .switch-label {
-    font-size: 10px;
+    font-size: 12px;
     margin-top: 0;
   }
   .component-stage > .p-5 {
@@ -7145,7 +6880,7 @@ main {
   }
   .code-block pre {
     padding: 16px;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1.9;
   }
   .related-components {
@@ -7160,7 +6895,7 @@ main {
   }
   .variant-chips > button {
     padding: 7px 10px;
-    font-size: 9px;
+    font-size: 12px;
   }
   .demo-field {
     max-width: 100%;
@@ -7171,7 +6906,7 @@ main {
     justify-content: center;
   }
   .component-preview .button-sm {
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 10px;
   }
   .otp-fields {
@@ -7194,10 +6929,10 @@ main {
     max-width: 170px;
   }
   .table-toolbar input {
-    font-size: 9px;
+    font-size: 12px;
   }
   .table-toolbar .badge {
-    font-size: 7px;
+    font-size: 12px;
   }
   .table-demo {
     width: calc(100% + 10px);
@@ -7210,7 +6945,7 @@ main {
     gap: 7px;
   }
   .stepper > button {
-    font-size: 8px;
+    font-size: 12px;
     gap: 5px;
   }
   .stepper i {
@@ -7220,7 +6955,7 @@ main {
   .stepper > button > span {
     width: 22px;
     height: 22px;
-    font-size: 8px;
+    font-size: 12px;
   }
   .chart-demo {
     padding: 18px;
@@ -7237,10 +6972,10 @@ main {
     padding: 14px;
   }
   .kanban h4 {
-    font-size: 11px;
+    font-size: 13px;
   }
   .kanban-card > p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .kanban-card > svg {
     display: none;
@@ -7265,7 +7000,7 @@ main {
     font-size: 28px;
   }
   .welcome-banner p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .getting-steps {
     padding: 0 22px;
@@ -7278,10 +7013,10 @@ main {
     font-size: 18px;
   }
   .getting-steps p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .step-number {
-    font-size: 10px;
+    font-size: 12px;
   }
   .accessibility-playground {
     padding: 22px;
@@ -7318,7 +7053,7 @@ main {
   }
   .dashboard-stats small {
     margin: 0 0 0 auto;
-    font-size: 8px;
+    font-size: 12px;
   }
   .settings-pattern h2 {
     font-size: 27px;
@@ -7327,11 +7062,11 @@ main {
     font-size: 25px;
   }
   .system-page > a {
-    font-size: 10px;
+    font-size: 12px;
     padding: 0 14px;
   }
   .system-page p {
-    font-size: 11px;
+    font-size: 13px;
   }
   .release {
     padding: 25px;
@@ -7341,7 +7076,7 @@ main {
   }
   .release ul {
     line-height: 1.9;
-    font-size: 11px;
+    font-size: 13px;
   }
   .release li {
     margin-bottom: 10px;
@@ -7354,7 +7089,7 @@ main {
     margin-right: 10px;
   }
   .dialog-description {
-    font-size: 11px;
+    font-size: 14px;
   }
   .dialog-content:has(.command-search) {
     padding-top: 24px;
@@ -7369,22 +7104,22 @@ main {
     gap: 8px;
   }
   .command-input > input {
-    font-size: 10px;
+    font-size: 12px;
   }
   .command-results {
     max-height: 48dvh;
   }
   .command-results > a {
     padding: 9px;
-    font-size: 11px;
+    font-size: 13px;
   }
   .command-footer {
     padding: 11px 15px;
     gap: 10px;
-    font-size: 8px;
+    font-size: 12px;
   }
   .command-footer kbd {
-    font-size: 8px;
+    font-size: 12px;
   }
   .toast-region {
     right: 15px;
@@ -7394,7 +7129,7 @@ main {
   .toast {
     padding: 13px;
     gap: 9px;
-    font-size: 10px;
+    font-size: 12px;
   }
   .toast > button {
     margin-left: 0;

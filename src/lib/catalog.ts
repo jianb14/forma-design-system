@@ -171,7 +171,7 @@ export const components: ComponentEntry[] = [
     "Selection",
     "The right option, without the noise.",
     ["Default", "Native", "Grouped", "Disabled"],
-    "Prefer a native select for short lists. Provide a visible label and a useful initial option.",
+    "Custom options support keyboard navigation and selected checkmarks. Provide a visible label; use NativeSelect when you need a native HTML select.",
   ),
   item(
     "combobox",
@@ -428,7 +428,32 @@ export const components: ComponentEntry[] = [
     ["Board", "Move controls", "Status"],
     "Move controls offer a keyboard-accessible alternative to dragging.",
   ),
+  item("toggle", "Toggle", "Actions", "A button that remembers its selected state.", ["Default", "Pressed", "Disabled"], "Use a stable label. The pressed state is announced with aria-pressed."),
+  item("toggle-group", "Toggle group", "Actions", "A single choice, kept within easy reach.", ["Single selection", "Disabled option"], "Give the group a visible label and keep option names short."),
+  item("number-input", "Number input", "Forms", "Numbers with familiar native controls.", ["Default", "Min / max", "Stepped"], "Use min, max and step to express valid values. Keep a persistent label."),
+  item("field", "Field", "Forms", "One place for a label, hint and error.", ["Hint", "Error", "Required"], "Wrap one form control to connect its label and descriptive text."),
+  item("label", "Label", "Forms", "A clear name for every form control.", ["Default", "Required"], "Connect labels to inputs with matching htmlFor and id values."),
+  item("separator", "Separator", "Layout", "A quiet division between related sections.", ["Horizontal", "Vertical"], "Use a semantic separator only when the division conveys structure."),
+  item("collapsible", "Collapsible", "Display", "Extra detail, one deliberate click away.", ["Closed", "Open"], "Native disclosure behavior supports keyboard interaction and expanded state."),
+  item("scroll-area", "Scroll area", "Layout", "Long content within a considered frame.", ["Vertical", "Overflow"], "Keep the scroll region keyboard accessible and give it a useful label."),
+  item("aspect-ratio", "Aspect ratio", "Layout", "A consistent frame as the page changes size.", ["Landscape", "Square", "Portrait"], "Choose a ratio that fits the content and provide meaningful image alternatives."),
+  item("kbd", "Keyboard key", "Display", "Make keyboard shortcuts easy to recognise.", ["Single key", "Shortcut"], "Use kbd for input instructions. Displaying a shortcut does not register it."),
+  item("typography", "Typography", "Display", "Headings and text with a readable rhythm.", ["Heading", "Body", "Muted"], "Choose heading levels for document structure. The library inherits your app's font."),
+  item("toolbar", "Toolbar", "Navigation", "Related tools with a shared purpose.", ["Default", "With actions"], "Give each toolbar an accessible label and keep every action keyboard reachable."),
+  item("navbar", "Navbar", "Navigation", "A familiar home for the main destinations.", ["Default", "With actions"], "Use real links, a descriptive navigation label, and aria-current for the active destination."),
+  item("sidebar", "Sidebar", "Navigation", "A clear path through a larger workspace.", ["Default", "Grouped"], "Keep destination names explicit and mark the current page. Mobile disclosure belongs to your app."),
+  item("button-link", "Button link", "Actions", "The presence of a button, the behavior of a link.", ["Primary", "Outline", "Ghost"], "Use a link for navigation and a button for an action. Provide a real href."),
+  item("alert-dialog", "Alert dialog", "Overlays", "An explicit choice before an important action.", ["Confirmation", "Destructive"], "Focus starts on Cancel. Clicking outside does not dismiss the dialog. Escape cancels without confirming."),
+  item("input-group", "Input group", "Forms", "Inputs, icons, and actions in one shared control.", ["Search", "Prefix", "Action"], "Give the input a visible label or aria-label. Addons do not replace the input's accessible name."),
+  item("item", "Item", "Display", "Flexible rows for files, people, and useful details.", ["Default", "Outline", "Muted"], "Place Item inside ItemGroup for native list semantics. Use real links and buttons in ItemActions."),
+  item("simple-table", "Table", "Display", "A simple, composable table for your own data.", ["Default", "With caption"], "Use TableHead for column or row headers. Set scope=\"row\" for row headers and provide a caption. Use DataTable for sorting, filtering and pagination."),
 ];
+export const newComponentIds = new Set([
+  "toggle", "toggle-group", "number-input", "field", "label", "separator",
+  "collapsible", "scroll-area", "aspect-ratio", "kbd", "typography", "toolbar",
+  "navbar", "sidebar", "button-link",
+  "alert-dialog", "input-group", "item", "simple-table",
+]);
 export const categories = [...new Set(components.map((c) => c.category))];
 export const variantCount = components.reduce(
   (n, c) => n + c.variants.length,
@@ -436,13 +461,17 @@ export const variantCount = components.reduce(
 );
 export const navGroups = [
   {
+    label: "BUILD WITH HULMIO",
+    links: [{ id: "using-hulmio", label: "Using Hulmio", icon: "book" }],
+  },
+  {
     label: "THE COLLECTION",
     links: [{ id: "overview", label: "Overview", icon: "home" }],
   },
   {
     label: "THE FOUNDATIONS",
     links: [
-      { id: "branding", label: "Brand identity", icon: "flower" },
+      { id: "branding", label: "Brand identity", icon: "brand" },
       { id: "colors", label: "Colors", icon: "palette" },
       { id: "typography", label: "Typography", icon: "type" },
       { id: "spacing", label: "Spacing & layout", icon: "grid" },
